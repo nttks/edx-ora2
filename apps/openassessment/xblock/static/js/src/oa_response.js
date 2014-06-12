@@ -198,8 +198,8 @@ OpenAssessment.ResponseView.prototype = {
             if (enabled) {
                 window.onbeforeunload = function() {
                     return (
-                        "If you leave this page without saving or submitting your response, " +
-                        "you'll lose any work you've done on the response."
+                        gettext("If you leave this page without saving or submitting your response, ") +
+                        gettext("you'll lose any work you've done on the response.")
                     );
                 };
             }
@@ -388,8 +388,8 @@ OpenAssessment.ResponseView.prototype = {
     **/
     confirmSubmission: function() {
         var msg = (
-            "You're about to submit your response for this assignment. " +
-            "After you submit this response, you can't change it or submit a new response."
+            gettext("You're about to submit your response for this assignment. ") +
+            gettext("After you submit this response, you can't change it or submit a new response.")
         );
         // TODO -- UI for confirmation dialog instead of JS confirm
         return $.Deferred(function(defer) {
