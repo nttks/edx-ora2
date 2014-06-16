@@ -14,14 +14,14 @@
                 <span class="step__deadline">{% trans "available" %}
                     <span class="date">
                         {{ self_start|utc|date:"N j, Y H:i e" }}
-                        (in {{ self_start|timeuntil }})
+                        ({{ self_start|timeuntil }})
                     </span>
                 </span>
                 {% elif self_due %}
-                <span class="step__deadline">due
+                <span class="step__deadline">{% trans "due" %}
                     <span class="date">
                         {{ self_due|utc|date:"N j, Y H:i e" }}
-                        (in {{ self_due|timeuntil }})
+                        ({{ self_due|timeuntil }})
                     </span>
                 </span>
                 {% endif %}
