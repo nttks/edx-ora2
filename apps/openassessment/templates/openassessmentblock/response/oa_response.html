@@ -11,17 +11,17 @@
             <span class="wrapper--copy">
                 <span class="step__label">{% trans "Your Response" %}</span>
                 {% if submission_start %}
-                <span class="step__deadline">available
+                <span class="step__deadline">{% trans "available" %}
                     <span class="date">
                         {{ submission_start|utc|date:"N j, Y H:i e" }}
-                        (in {{ submission_start|timeuntil }})
+                        ({{ submission_start|timeuntil }})
                     </span>
                 </span>
                 {% elif submission_due %}
-                <span class="step__deadline">due
+                <span class="step__deadline">{% trans "due" %}
                     <span class="date">
                         {{ submission_due|utc|date:"N j, Y H:i e" }}
-                        (in {{ submission_due|timeuntil }})
+                        ({{ submission_due|timeuntil }})
                     </span>
                 </span>
                 {% endif %}

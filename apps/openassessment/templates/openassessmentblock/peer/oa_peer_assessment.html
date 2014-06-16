@@ -14,14 +14,14 @@
                 <span class="step__deadline">{% trans "available" %}
                     <span class="date">
                         {{ peer_start|utc|date:"N j, Y H:i e" }}
-                        (in {{ peer_start|timeuntil }})
+                        ({{ peer_start|timeuntil }})
                     </span>
                 </span>
                 {% elif peer_due %}
                 <span class="step__deadline">{% trans "due" %}
                     <span class="date">
                         {{ peer_due|utc|date:"N j, Y H:i e" }}
-                        (in {{ peer_due|timeuntil }})
+                        ({{ peer_due|timeuntil }})
                     </span>
                 </span>
                 {% endif %}
