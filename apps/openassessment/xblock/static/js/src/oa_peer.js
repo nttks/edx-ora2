@@ -27,7 +27,7 @@ OpenAssessment.PeerView.prototype = {
             function(html) {
                 // Load the HTML and install event handlers
                 $('#openassessment__peer-assessment', view.element).replaceWith(html);
-                view.installHandlers();
+                view.installHandlers(false);
             }
         ).fail(function(errMsg) {
             view.showLoadError('peer-assessment');
@@ -42,69 +42,49 @@ OpenAssessment.PeerView.prototype = {
     **/
     loadContinuedAssessment: function() {
         var view = this;
+        view.continueAssessmentEnabled(false);
         this.server.renderContinuedPeer().done(
             function(html) {
                 // Load the HTML and install event handlers
                 $('#openassessment__peer-assessment', view.element).replaceWith(html);
-                view.installHandlersForContinuedAssessment();
+                view.installHandlers(true);
             }
         ).fail(function(errMsg) {
             view.showLoadError('peer-assessment');
+            view.continueAssessmentEnabled(true);
         });
+    },
+
+    /**
+    Enable and disable the continue assessment button.
+
+    Args:
+        enabled (bool): If specified, sets the button as enabled or disabled.
+            if not specified, return the current value.
+
+    Returns:
+        A boolean. TRUE if the continue assessment button is enabled.
+
+    **/
+    continueAssessmentEnabled: function(enabled) {
+        var button = $('#peer-assessment__continue__grading', this.element);
+        if (typeof enabled === 'undefined') {
+            return !button.hasClass('is--disabled');
+        } else {
+            button.toggleClass('is--disabled', !enabled);
+        }
     },
 
     /**
     Install event handlers for the view.
     **/
-    installHandlers: function() {
-        var sel = $('#openassessment__peer-assessment', this.element);
-        var view = this;
-
-        // Install a click handler for collapse/expand
-        this.baseView.setUpCollapseExpand(sel, $.proxy(view.loadContinuedAssessment, view));
-
-        // Install a change handler for rubric options to enable/disable the submit button
-        sel.find("#peer-assessment--001__assessment").change(
-            function() {
-                var numChecked = $('input[type=radio]:checked', this).length;
-                var numAvailable = $('.field--radio.assessment__rubric__question', this).length;
-                view.peerSubmitEnabled(numChecked == numAvailable);
-            }
-        );
-
-        // Install a click handler for assessment
-        sel.find('#peer-assessment--001__assessment__submit').click(
-            function(eventObject) {
-                // Override default form submission
-                eventObject.preventDefault();
-
-                // Handle the click
-                view.peerAssess();
-            }
-        );
-    },
-
-    /**
-    Install event handlers for the continued grading version of the view.
-    **/
-    installHandlersForContinuedAssessment: function() {
+    installHandlers: function(isContinuedAssessment) {
         var sel = $('#openassessment__peer-assessment', this.element);
         var view = this;
 
         // Install a click handler for collapse/expand
         this.baseView.setUpCollapseExpand(sel);
 
-        // Install a click handler for assessment
-        sel.find('#peer-assessment--001__assessment__submit').click(
-            function(eventObject) {
-                // Override default form submission
-                eventObject.preventDefault();
-
-                // Handle the click
-                view.continuedPeerAssess();
-            }
-        );
-
         // Install a change handler for rubric options to enable/disable the submit button
         sel.find("#peer-assessment--001__assessment").change(
             function() {
@@ -113,6 +93,27 @@ OpenAssessment.PeerView.prototype = {
                 view.peerSubmitEnabled(numChecked == numAvailable);
             }
         );
+
+        // Install a click handler for assessment
+        sel.find('#peer-assessment--001__assessment__submit').click(
+            function(eventObject) {
+                // Override default form submission
+                eventObject.preventDefault();
+
+                // Handle the click
+                if (!isContinuedAssessment) { view.peerAssess(); }
+                else { view.continuedPeerAssess(); }
+            }
+        );
+
+        // Install a click handler for continued assessment
+        sel.find('#peer-assessment__continue__grading').click(
+            function(eventObject) {
+                eventObject.preventDefault();
+                view.loadContinuedAssessment();
+            }
+        );
+
     },
 
     /**

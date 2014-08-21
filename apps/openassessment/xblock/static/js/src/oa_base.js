@@ -40,18 +40,11 @@ OpenAssessment.BaseView.prototype = {
 
     Args:
         parentSel (JQuery selector): CSS selector for the container element.
-        onExpand (function): Function to execute when expanding (if provided).  Accepts no args.
     **/
-    setUpCollapseExpand: function(parentSel, onExpand) {
+    setUpCollapseExpand: function(parentSel) {
         parentSel.find('.ui-toggle-visibility__control').click(
             function(eventData) {
                 var sel = $(eventData.target).closest('.ui-toggle-visibility');
-
-                // If we're expanding and have an `onExpand` callback defined, execute it.
-                if (sel.hasClass('is--collapsed') && onExpand !== undefined) {
-                    onExpand();
-                }
-
                 sel.toggleClass('is--collapsed');
             }
         );
@@ -67,7 +60,7 @@ OpenAssessment.BaseView.prototype = {
         // Set up expand/collapse for course staff debug, if available
         courseStaffDebug = $('.wrapper--staff-info');
         if (courseStaffDebug.length > 0) {
-            this.setUpCollapseExpand(courseStaffDebug, function() {});
+            this.setUpCollapseExpand(courseStaffDebug);
         }
     },
 
