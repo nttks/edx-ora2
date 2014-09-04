@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import logging
 from itertools import izip_longest
 from unicodedata import east_asian_width
@@ -246,6 +247,47 @@ def get_workflow_info(submission_uuid, oa_item):
     return workflow_api.get_workflow_for_submission(submission_uuid, requirements)
 
 
+# Note: modified from apps/openassessment/assessment/models/base.py Assessment.scores_by_criterion()
+def scores_by_criterion(assessments):
+    """Create a dictionary of lists for scores associated with criterion
+
+    Create a key value in a dict with a list of values, for every criterion
+    found in an assessment.
+
+    Iterate over every part of every assessment. Each part is associated with
+    a criterion name, which becomes a key in the score dictionary, with a list
+    of scores.
+
+    Args:
+        assessments (list): List of assessments to sort scores by their
+            associated criteria.
+
+    Examples:
+        >>> assessments = Assessment.objects.all()
+        >>> scores_by_criterion(assessments)
+        {
+            "foo": [1, 2, 3],
+            "bar": [6, 7, 8]
+        }
+    """
+    assessments = list(assessments)  # Force us to read it all
+    if not assessments:
+        return []
+
+    scores = OrderedDict()
+
+    for assessment in assessments:
+        for part in assessment.parts.all().select_related("option__criterion").order_by('option__criterion__order_num'):
+            criterion_name = part.option.criterion.name
+            # Note: modified because non-ascii key makes defaultdict out of order.
+            if criterion_name not in scores:
+                scores[criterion_name] = [part.option.points]
+            else:
+                scores[criterion_name].append(part.option.points)
+
+    return scores
+
+
 def print_summary(course_id, oa_item, anonymous_student_id):
     # Print submission
     submission = get_submission(course_id, oa_item.id, anonymous_student_id)
@@ -257,7 +299,7 @@ def print_summary(course_id, oa_item, anonymous_student_id):
     print "Scored assessment(s):"
     if scored_items:
         scored_assessments = [scored_item.assessment for scored_item in scored_items]
-        scored_scores = Assessment.scores_by_criterion(scored_assessments)
+        scored_scores = scores_by_criterion(scored_assessments)
         median_score_dict = Assessment.get_median_score_dict(scored_scores)
         print_peerworkflowitem(scored_items, scored_scores)
     else:
@@ -269,7 +311,7 @@ def print_summary(course_id, oa_item, anonymous_student_id):
     print "Not-scored assessment(s):"
     if not_scored_items:
         not_scored_assessments = [not_scored_item.assessment for not_scored_item in not_scored_items]
-        not_scored_scores = Assessment.scores_by_criterion(not_scored_assessments)
+        not_scored_scores = scores_by_criterion(not_scored_assessments)
         print_peerworkflowitem(not_scored_items, not_scored_scores)
     else:
         print "... No record was found."
