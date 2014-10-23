@@ -21,3 +21,7 @@ msgstr ""
 #: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "File size must be 4MB or less."
 msgstr "ファイルサイズは4MB以下である必要があります。"
+
+#: openassessment/xblock/static/js/src/oa_server.js
+msgid "Could not upload file. Try again later."
+msgstr "アップロードできませんでした。しばらしく時間をおいてから再操作してください。"
