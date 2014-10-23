@@ -13,6 +13,7 @@ OpenAssessment.ResponseView = function(element, server, fileUploader, baseView) 
     this.element = element;
     this.server = server;
     this.fileUploader = fileUploader;
+    this.fileUploadAllowed = false;
     this.baseView = baseView;
     this.savedResponse = [];
     this.files = null;
@@ -48,6 +49,10 @@ OpenAssessment.ResponseView.prototype = {
                 view.installHandlers();
                 // Note(yokose): Disable autoSave to avoid overwriting state
                 //view.setAutoSaveEnabled(true);
+                // Set flag to determine whether image attachments are allowed
+                if ($('#submission__answer__image', view.element).size() != 0) {
+                    view.fileUploadAllowed = true;
+                }
             }
         ).fail(function(errMsg) {
             view.baseView.showLoadError('response');
@@ -112,7 +117,6 @@ OpenAssessment.ResponseView.prototype = {
             function(eventObject) {
                 // Override default form submission
                 eventObject.preventDefault();
-                $('.submission__answer__display__image', view.element).removeClass('is--hidden');
                 view.fileUpload();
             }
         );
@@ -324,7 +328,9 @@ OpenAssessment.ResponseView.prototype = {
         var isNotBlank = !this.response().every(function(element, index, array) {
                 return $.trim(element) == '';
             });
-        this.submitEnabled(isNotBlank);
+        // If image attachments are allowed, need to check whether file is already uploaded
+        var isUploaded = (!this.fileUploadAllowed || this.imageUrl() != '');
+        this.submitEnabled(isNotBlank && isUploaded);
 
         // Update the save button, save status, and "unsaved changes" warning
         // only if the response has changed
@@ -364,11 +370,6 @@ OpenAssessment.ResponseView.prototype = {
             // ... but update the UI based on what the user may have entered
             // since hitting the save button.
             var currentResponse = view.response();
-            var currentResponseIsEmpty = currentResponse.every(function(element, index, array) {
-                return element == '';
-            });
-            view.submitEnabled(!currentResponseIsEmpty);
-
             var currentResponseEqualsSaved = currentResponse.every(function(element, index, array) {
                 return element === savedResponse[index];
             });
@@ -515,7 +516,10 @@ OpenAssessment.ResponseView.prototype = {
                 var image = view.files[0];
                 view.fileUploader.upload(url, image)
                     .done(function() {
-                        view.imageUrl();
+                        view.server.getDownloadUrl().done(function(url) {
+                            view.imageUrl(url);
+                            view.handleResponseChanged();
+                        });
                         view.baseView.toggleActionError('upload', null);
                     })
                     .fail(handleError);
@@ -526,13 +530,13 @@ OpenAssessment.ResponseView.prototype = {
     /**
      Set the image URL, or retrieve it.
      **/
-    imageUrl: function() {
-        var view = this;
-        var image = $('#submission__answer__image', view.element);
-        view.server.getDownloadUrl().done(function(url) {
-            image.attr('src', url);
-            return url;
-        });
+    imageUrl: function(url) {
+        var sel = $('#submission__answer__image', this.element);
+        if (typeof url === 'undefined') {
+            return sel.attr('src');
+        } else {
+            sel.attr('src', url);
+        }
     }
 
 };
