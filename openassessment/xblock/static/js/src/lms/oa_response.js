@@ -111,15 +111,6 @@ OpenAssessment.ResponseView.prototype = {
                 MathJax.Hub.Queue(['Typeset', MathJax.Hub, preview_container[0]]);
             }
         );
-
-        // Install a click handler for the save button
-        sel.find('#file__upload').click(
-            function(eventObject) {
-                // Override default form submission
-                eventObject.preventDefault();
-                view.fileUpload();
-            }
-        );
     },
 
     /**
@@ -486,8 +477,8 @@ OpenAssessment.ResponseView.prototype = {
         } else {
             this.baseView.toggleActionError('upload', null);
             this.files = files;
+            this.fileUpload();
         }
-        $("#file__upload").toggleClass("is--disabled", this.files === null);
     },
 
 
@@ -496,12 +487,11 @@ OpenAssessment.ResponseView.prototype = {
      **/
     fileUpload: function() {
         var view = this;
-        var fileUpload = $("#file__upload");
-        fileUpload.addClass("is--disabled");
+        view.submitEnabled(false);
 
         var handleError = function(errMsg) {
             view.baseView.toggleActionError('upload', errMsg);
-            fileUpload.removeClass("is--disabled");
+            view.handleResponseChanged();
         };
 
         // Upload image file via ora2 server
@@ -509,7 +499,10 @@ OpenAssessment.ResponseView.prototype = {
             function(url) {
                 view.imageUrl(url);
                 view.baseView.toggleActionError('upload', null);
-                view.handleResponseChanged();
+                // Enable submit button after loading image
+                $('#submission__answer__image', view.element).load(function() {
+                    view.handleResponseChanged();
+                });
             }
         ).fail(handleError);
     },
