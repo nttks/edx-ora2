@@ -2,6 +2,9 @@ import json
 import logging
 from webob import Response
 
+from django.conf import settings
+import magic
+
 from xblock.core import XBlock
 
 from submissions import api
@@ -207,7 +210,12 @@ class SubmissionMixin(object):
             logger.exception("No file was found in POST data.")
             return json_response({'success': False, 'msg': self._(u"Error uploading file.")})
         file = data.POST.get('file').file
-        content_type = file.content_type
+
+        if hasattr(settings, 'FEATURES') and settings.FEATURES.get('ENABLE_ORA2_FILE_TYPE_STRICT_CHECK', False):
+            content_type = magic.from_buffer(file.read(), mime=True)
+            file.seek(0)
+        else:
+            content_type = file.content_type
 
         if not content_type.startswith('image/'):
             return json_response({'success': False, 'msg': self._(u"contentType must be an image.")})
