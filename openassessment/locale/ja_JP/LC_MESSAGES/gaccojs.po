@@ -19,6 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "Your browser does not support file upload feature."
+msgstr "このブラウザはファイルアップロード機能に対応しておりません。申し訳ありませんが、他のブラウザをお使いください。"
+
+#: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "File size must be 4MB or less."
 msgstr "ファイルサイズは4MB以下である必要があります。"
 
