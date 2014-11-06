@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: edx-platform\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-11 17:02-0400\n"
-"PO-Revision-Date: 2014-10-08 09:25+0000\n"
+"PO-Revision-Date: 2014-11-06 06:58+0000\n"
 "Last-Translator: watcafe\n"
 "Language-Team: Japanese (Japan) (http://www.transifex.com/projects/p/edx-platform/language/ja_JP/)\n"
 "MIME-Version: 1.0\n"
@@ -507,7 +507,7 @@ msgstr "あなたが提出した画像"
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html:53
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html:58
 msgid "The image associated with your submission."
-msgstr "この画像はあなたの課題にヒモ付けられています。"
+msgstr "ここにアップロードされた画像が表示されます。"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html:47
 msgid "Assessments of Your Response"
@@ -711,7 +711,7 @@ msgstr "%(num_points)s 点"
 #: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html:77
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html:61
 msgid "The image associated with your peer's submission."
-msgstr "このイメージはあなたの相互採点課題にヒモ付けられています。"
+msgstr "ここにアップロードされた画像が表示されます。"
 
 #: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_waiting.html:15
 msgid ""
@@ -938,7 +938,7 @@ msgstr "\n採点（必須%(num_must_grade)s回中%(review_number)s回目）"
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html:56
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html:53
 msgid "Associated Image"
-msgstr "ヒモづけられた画像"
+msgstr "提出された画像"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html:92
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html:146
@@ -1080,7 +1080,7 @@ msgstr "提出するまではレポートを編集することができます。
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html:68
 msgid "We could not upload this image"
-msgstr "この画像のアップロードに失敗しました。"
+msgstr "画像のアップロードに失敗しました。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html:72
 msgid "Select an image to upload for this submission."
@@ -1285,7 +1285,7 @@ msgstr "受講者の回答"
 
 #: openassessment/templates/openassessmentblock/staff_debug/student_info.html:20
 msgid "The image associated with this response"
-msgstr "この画像はこの回答にヒモ付けられています。"
+msgstr "ここにアップロードされた画像が表示されます。"
 
 #: openassessment/templates/openassessmentblock/staff_debug/student_info.html:29
 msgid "Peer Assessments for This Student"
@@ -1622,11 +1622,11 @@ msgstr "このレポートは提出されませんでした。"
 
 #: openassessment/xblock/submission_mixin.py:189
 msgid "Must specify contentType."
-msgstr "contentTypeの特定が必要です。"
+msgstr "ファイル形式が不明です。"
 
 #: openassessment/xblock/submission_mixin.py:193
 msgid "contentType must be an image."
-msgstr "contentTypeはimageである必要があります。"
+msgstr "ファイルは画像形式である必要があります。"
 
 #: openassessment/xblock/submission_mixin.py:201
 msgid "Error retrieving upload URL."
