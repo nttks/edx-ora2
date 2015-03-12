@@ -45,7 +45,7 @@ class TestGrade(XBlockHandlerTestCase):
         },
     ]
 
-    SUBMISSION = u'ՇﻉรՇ รપ๒๓ٱรรٱѻก'
+    SUBMISSION = (u'ՇﻉรՇ', u'รપ๒๓ٱรรٱѻก')
 
     STEPS = ['peer', 'self']
 
@@ -152,7 +152,6 @@ class TestGrade(XBlockHandlerTestCase):
             xblock, self.SUBMISSION, [], [], None, waiting_for_peer=True
         )
         resp = self.request(xblock, 'render_grade', json.dumps(dict()))
-
         # Verify that feedback from each scorer appears in the view
         self.assertNotIn(u'єאςєɭɭєภՇ', resp.decode('utf-8'))
         self.assertIn(u'Poor', resp.decode('utf-8'))
