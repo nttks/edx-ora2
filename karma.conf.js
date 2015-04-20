@@ -12,6 +12,7 @@ module.exports = function(config) {
       'karma-jasmine',
       'karma-chrome-launcher',
       'karma-phantomjs-launcher',
+      'karma-junit-reporter'
     ],
 
     // frameworks to use
@@ -57,12 +58,26 @@ module.exports = function(config) {
 
 
     // test results reporter to use
-    // possible values: 'dots', 'progress'
+    // possible values: 'dots', 'progress', 'coverage', 'junit'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress','coverage','junit'],
 
     coverageReporter: {
-        type : 'text'
+      reporters: [
+        {
+          type : 'text'
+        },
+        {
+          dir : 'coverage',
+          type : 'cobertura',
+          file : 'coverage.xml'
+        }
+      ]
+    },
+
+    junitReporter: {
+        outputFile : 'xunit.xml',
+        suite : 'JavaScript'
     },
 
     // web server port
