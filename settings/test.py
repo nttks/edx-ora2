@@ -19,6 +19,7 @@ NOSE_ARGS = [
     '--cover-package=' + ",".join(TEST_APPS),
     '--cover-branches',
     '--cover-erase',
+    '--with-xunit',
     ]
 
 DATABASES = {
