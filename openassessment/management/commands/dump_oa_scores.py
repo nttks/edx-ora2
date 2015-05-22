@@ -177,7 +177,7 @@ class Command(BaseCommand):
 
         # Create csv file
         header.extend(sorted(set(header_extra), key=header_extra.index))
-        csv_filename = 'oa_scores-%s-#%d.csv' % (course_id.to_deprecated_string().replace('/', '.'), selected_oa_item)
+        csv_filename = 'oa_scores-%s-#%d.csv' % ('-'.join([course_id.org, course_id.course, course_id.run]), selected_oa_item)
         csv_filepath = os.path.join(dump_dir, csv_filename)
         write_csv(csv_filepath, header, rows)
         # Upload to S3
@@ -206,7 +206,7 @@ class Command(BaseCommand):
                     print "WARN: Could not download file from S3 [%s]" % file_key
                     continue
             # Compress and upload to S3
-            tar_filename = 'oa_scores-%s-#%d.tar.gz' % (course_id.to_deprecated_string().replace('/', '.'), selected_oa_item)
+            tar_filename = 'oa_scores-%s-#%d.tar.gz' % ('-'.join([course_id.org, course_id.course, course_id.run]), selected_oa_item)
             tar_filepath = os.path.join(dump_dir, tar_filename)
             tar = tarfile.open(tar_filepath, 'w:gz')
             tar.add(temp_dir, arcname=tar_filename)
