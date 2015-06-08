@@ -49,6 +49,9 @@ config.codekit
 # PyCharm
 .idea
 
+### Internationalization artifacts
+*.mo
+
 # node
 node_modules
 npm-debug.log
