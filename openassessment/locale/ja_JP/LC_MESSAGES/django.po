@@ -1771,7 +1771,3 @@ msgstr "受講生用トレーニング、そして凡例準拠採点課題では
 #: openassessment/xblock/validation.py
 msgid "Leaderboard number is invalid."
 msgstr "上位成績者表示数が不正です。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "Error uploading file."
-msgstr "ファイルアップロードに失敗しました。"
