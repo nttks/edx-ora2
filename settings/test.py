@@ -48,3 +48,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'storage/test')
 import warnings
 from django.core.cache import CacheKeyWarning
 warnings.simplefilter("ignore", CacheKeyWarning)
+
+FEATURES = {}
