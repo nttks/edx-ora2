@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import boto
+from boto.exception import S3ResponseError
 from boto.s3.key import Key
 import ddt
 
@@ -10,13 +11,14 @@ import shutil
 import tempfile
 
 from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.core.urlresolvers import reverse
 
 from moto import mock_s3
 from mock import patch
-from nose.tools import raises
+from nose.tools import raises, assert_raises
 
 from openassessment.fileupload import api
 from openassessment.fileupload import exceptions
@@ -26,6 +28,31 @@ from openassessment.fileupload.backends.filesystem import get_cache as get_files
 
 @ddt.ddt
 class TestFileUploadService(TestCase):
+
+    @mock_s3
+    @override_settings(
+        AWS_ACCESS_KEY_ID='foobar',
+        AWS_SECRET_ACCESS_KEY='bizbaz',
+        FILE_UPLOAD_STORAGE_BUCKET_NAME="mybucket",
+    )
+    def test_upload_file(self):
+        conn = boto.connect_s3()
+        conn.create_bucket('mybucket')
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        downloadUrl = api.upload_file("foo", file)
+        self.assertIn("https://mybucket.s3.amazonaws.com/submissions_attachments/foo", downloadUrl)
+
+    @override_settings(
+        AWS_ACCESS_KEY_ID='foobar',
+        AWS_SECRET_ACCESS_KEY='bizbaz',
+        FILE_UPLOAD_STORAGE_BUCKET_NAME="mybucket",
+    )
+    @patch.object(boto, 'connect_s3')
+    @raises(exceptions.FileUploadInternalError)
+    def test_upload_file_error(self, mock_s3):
+        mock_s3.side_effect = Exception("Oh noes")
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        api.upload_file("foo", file)
 
     @mock_s3
     @override_settings(
@@ -277,3 +304,78 @@ class TestFileUploadServiceWithFilesystemBackend(TestCase):
 
         self.assertEqual(200, upload_response.status_code)
         self.assertEqual(200, download_response.status_code)
+
+
+@override_settings(
+    AWS_ACCESS_KEY_ID='foobar',
+    AWS_SECRET_ACCESS_KEY='bizbaz',
+    FILE_UPLOAD_STORAGE_BUCKET_NAME="mybucket",
+    ORA2_WAF_VIRUS_DETECTION_KEYWORD='virus exists',
+)
+@patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_WAF_PROXY': True})
+class TestFileUploadServiceWithWAFProxy(TestCase):
+    """
+    Test open assessment file upload to s3 with WAF proxy.
+    """
+
+    @override_settings(
+        ORA2_WAF_PROXY_SERVER_IP='100.0.0.1',
+        ORA2_WAF_PROXY_SERVER_PORT='9900',
+    )
+    @patch('openassessment.fileupload.backends.s3.Key')
+    @patch.object(boto, 'connect_s3')
+    def test_upload_file_when_waf_proxy_enabled(self, mock_s3, mock_key):
+        expected_url = "https://mybucket.s3.amazonaws.com/submissions_attachments/foo"
+        mock_key.return_value.generate_url.return_value = expected_url
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        downloadUrl = api.upload_file("foo", file)
+        self.assertIn(expected_url, downloadUrl)
+
+    @override_settings(ORA2_WAF_PROXY_SERVER_PORT='9900')
+    def test_upload_file_when_waf_proxy_enabled_and_waf_proxy_ip_not_configured(self):
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        with assert_raises(exceptions.FileUploadInternalError) as cm:
+            api.upload_file("foo", file)
+        ex = cm.exception
+        expected_ex = Exception("WAF proxy feature for ORA2 file upload is enabled, but WAF server ip or port is not configured.")
+        self.assertEqual(str(expected_ex), str(ex))
+
+    @override_settings(ORA2_WAF_PROXY_SERVER_IP='100.0.0.1')
+    def test_upload_file_when_waf_proxy_enabled_and_waf_proxy_port_not_configured(self):
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        with assert_raises(exceptions.FileUploadInternalError) as cm:
+            api.upload_file("foo", file)
+        ex = cm.exception
+        expected_ex = Exception("WAF proxy feature for ORA2 file upload is enabled, but WAF server ip or port is not configured.")
+        self.assertEqual(str(expected_ex), str(ex))
+
+    @override_settings(
+        ORA2_WAF_PROXY_SERVER_IP='100.0.0.1',
+        ORA2_WAF_PROXY_SERVER_PORT='9900',
+    )
+    @patch('openassessment.fileupload.backends.s3.Key')
+    @patch.object(boto, 'connect_s3')
+    def test_upload_file_when_virus_is_detected(self, mock_s3, mock_key):
+        s3_ex = S3ResponseError(403, 'Forbidden')
+        s3_ex.message = 'A virus exists in the file.'
+        mock_key.return_value.set_contents_from_file.side_effect = s3_ex
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        with assert_raises(exceptions.FileUploadRequestError) as cm:
+            api.upload_file("foo", file)
+        ex = cm.exception
+        self.assertEqual(str(s3_ex), str(ex))
+
+    @override_settings(
+        ORA2_WAF_PROXY_SERVER_IP='100.0.0.1',
+        ORA2_WAF_PROXY_SERVER_PORT='9900',
+    )
+    @patch('openassessment.fileupload.backends.s3.Key')
+    @patch.object(boto, 'connect_s3')
+    def test_upload_file_when_raises_s3_response_error(self, mock_s3, mock_key):
+        s3_ex = S3ResponseError(403, 'Forbidden')
+        mock_key.return_value.set_contents_from_file.side_effect = s3_ex
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        with assert_raises(exceptions.FileUploadInternalError) as cm:
+            api.upload_file("foo", file)
+        ex = cm.exception
+        self.assertEqual(str(s3_ex), str(ex))

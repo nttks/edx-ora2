@@ -13,6 +13,7 @@ OpenAssessment.ResponseView = function(element, server, fileUploader, baseView) 
     this.element = element;
     this.server = server;
     this.fileUploader = fileUploader;
+    this.fileUploadAllowed = false;
     this.baseView = baseView;
     this.savedResponse = [];
     this.files = null;
@@ -32,8 +33,8 @@ OpenAssessment.ResponseView.prototype = {
     // before we can autosave.
     AUTO_SAVE_WAIT: 30000,
 
-    // Maximum file size (5 MB) for an attached file.
-    MAX_FILE_SIZE: 5242880,
+    // Maximum file size (4 MB) for an attached file.
+    MAX_FILE_SIZE: 4194304,
 
     /**
     Load the response (submission) view.
@@ -48,6 +49,10 @@ OpenAssessment.ResponseView.prototype = {
                 view.installHandlers();
                 // Note(yokose): Disable autoSave to avoid overwriting state
                 //view.setAutoSaveEnabled(true);
+                // Set flag to determine whether image attachments are allowed
+                if ($('#submission__answer__image', view.element).size() != 0) {
+                    view.fileUploadAllowed = true;
+                }
             }
         ).fail(function(errMsg) {
             view.baseView.showLoadError('response');
@@ -104,16 +109,6 @@ OpenAssessment.ResponseView.prototype = {
                 // Render in mathjax
                 sel.find('#submission__preview__item').show();
                 MathJax.Hub.Queue(['Typeset', MathJax.Hub, preview_container[0]]);
-            }
-        );
-
-        // Install a click handler for the save button
-        sel.find('#file__upload').click(
-            function(eventObject) {
-                // Override default form submission
-                eventObject.preventDefault();
-                $('.submission__answer__display__image', view.element).removeClass('is--hidden');
-                view.fileUpload();
             }
         );
     },
@@ -324,7 +319,9 @@ OpenAssessment.ResponseView.prototype = {
         var isNotBlank = !this.response().every(function(element, index, array) {
                 return $.trim(element) == '';
             });
-        this.submitEnabled(isNotBlank);
+        // If image attachments are allowed, need to check whether file is already uploaded
+        var isUploaded = (!this.fileUploadAllowed || this.imageUrl() != '');
+        this.submitEnabled(isNotBlank && isUploaded);
 
         // Update the save button, save status, and "unsaved changes" warning
         // only if the response has changed
@@ -364,11 +361,6 @@ OpenAssessment.ResponseView.prototype = {
             // ... but update the UI based on what the user may have entered
             // since hitting the save button.
             var currentResponse = view.response();
-            var currentResponseIsEmpty = currentResponse.every(function(element, index, array) {
-                return element == '';
-            });
-            view.submitEnabled(!currentResponseIsEmpty);
-
             var currentResponseEqualsSaved = currentResponse.every(function(element, index, array) {
                 return element === savedResponse[index];
             });
@@ -472,11 +464,18 @@ OpenAssessment.ResponseView.prototype = {
 
      **/
     prepareUpload: function(files) {
+        // Check for File API & HTML5 support
+        if (typeof files === 'undefined' || !(window.File && window.FileReader) || !window.FormData) {
+            this.baseView.toggleActionError(
+                'upload', gettext("Your browser does not support file upload feature.")
+            );
+            return false;
+        }
         this.files = null;
         this.imageType = files[0].type;
         if (files[0].size > this.MAX_FILE_SIZE) {
             this.baseView.toggleActionError(
-                'upload', gettext("File size must be 5MB or less.")
+                'upload', gettext("File size must be 4MB or less.")
             );
         } else if (this.imageType.substring(0,6) != 'image/') {
             this.baseView.toggleActionError(
@@ -485,40 +484,32 @@ OpenAssessment.ResponseView.prototype = {
         } else {
             this.baseView.toggleActionError('upload', null);
             this.files = files;
+            this.fileUpload();
         }
-        $("#file__upload").toggleClass("is--disabled", this.files === null);
     },
 
 
     /**
-     Manages file uploads for submission attachments. Retrieves a one-time
-     upload URL from the server, and uses it to upload images to a designated
-     location.
-
+     Manages file uploads for submission attachments.
      **/
     fileUpload: function() {
         var view = this;
-        var fileUpload = $("#file__upload");
-        fileUpload.addClass("is--disabled");
+        view.submitEnabled(false);
 
         var handleError = function(errMsg) {
             view.baseView.toggleActionError('upload', errMsg);
-            fileUpload.removeClass("is--disabled");
+            view.handleResponseChanged();
         };
 
-        // Call getUploadUrl to get the one-time upload URL for this file. Once
-        // completed, execute a sequential AJAX call to upload to the returned
-        // URL. This request requires appropriate CORS configuration for AJAX
-        // PUT requests on the server.
-        this.server.getUploadUrl(view.imageType).done(
+        // Upload image file via ora2 server
+        this.server.uploadFile(view.files[0]).done(
             function(url) {
-                var image = view.files[0];
-                view.fileUploader.upload(url, image)
-                    .done(function() {
-                        view.imageUrl();
-                        view.baseView.toggleActionError('upload', null);
-                    })
-                    .fail(handleError);
+                view.imageUrl(url);
+                view.baseView.toggleActionError('upload', null);
+                // Enable submit button after loading image
+                $('#submission__answer__image', view.element).load(function() {
+                    view.handleResponseChanged();
+                });
             }
         ).fail(handleError);
     },
@@ -526,13 +517,13 @@ OpenAssessment.ResponseView.prototype = {
     /**
      Set the image URL, or retrieve it.
      **/
-    imageUrl: function() {
-        var view = this;
-        var image = $('#submission__answer__image', view.element);
-        view.server.getDownloadUrl().done(function(url) {
-            image.attr('src', url);
-            return url;
-        });
+    imageUrl: function(url) {
+        var sel = $('#submission__answer__image', this.element);
+        if (typeof url === 'undefined') {
+            return sel.attr('src');
+        } else {
+            sel.attr('src', url);
+        }
     }
 
 };
