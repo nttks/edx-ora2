@@ -119,7 +119,7 @@ msgstr "このレポートに対する採点を完了し、次のステップへ
 #: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py:216
 #: openassessment/xblock/peer_assessment_mixin.py:216
 msgid "Submit your assessment & move to response #{response_number}"
-msgstr "このレポートに対する採点を完了し、次のレポートの採点を行う #{response_number}"
+msgstr "このレポートに対する採点を完了し、{response_number}回目のレポートの採点を行う"
 
 #: build/lib.linux-x86_64-2.7/openassessment/xblock/resolve_dates.py:49
 #: openassessment/xblock/resolve_dates.py:49
@@ -963,7 +963,7 @@ msgstr "ここにアップロードされた画像が表示されます。"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html:47
 msgid "Assessments of Your Response"
-msgstr "あなたのレポートを採点する"
+msgstr "採点結果を確認する"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html:58
 msgid "Overall Grade"
@@ -1029,7 +1029,7 @@ msgstr "採点者"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html:201
 msgid "Additional comments on your response"
-msgstr "あなたのレポートへの追加コメント"
+msgstr "あなたのレポートへの講評"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html:211
 msgid "Peer assessor"
@@ -1243,7 +1243,7 @@ msgstr "相互採点はまだ開始されていません"
 #: openassessment/templates/openassessmentblock/message/oa_message_peer.html:10
 #: openassessment/templates/openassessmentblock/message/oa_message_self.html:8
 msgid "Your Response Has Been Submitted For Peer Assessment"
-msgstr "あなたのレポートは提出され相互採点されます"
+msgstr "あなたのレポートは提出後、相互採点のステップに進みます"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_peer.html:16
 #: openassessment/templates/openassessmentblock/message/oa_message_self.html:16
@@ -1455,7 +1455,7 @@ msgstr "採点すべきレポートを割り当てることができませんで
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_complete.html:37
 msgid "Continue Assessing Peers"
-msgstr "採点を続ける　"
+msgstr "採点を続ける"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html:19
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode_waiting.html:15
@@ -1534,7 +1534,7 @@ msgstr "記入途中のレポート一時保存して後から提出すること
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html:48
 msgid "After you submit your response, you cannot edit it"
-msgstr "レポートを提出した後は編集したり新たに提出することはできません"
+msgstr "レポートを提出した後は編集したり新たに提出することはできません。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html:58
 msgid "The prompt for this section."

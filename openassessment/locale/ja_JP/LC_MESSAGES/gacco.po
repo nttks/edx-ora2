@@ -20,3 +20,40 @@ msgstr ""
 #: openassessment/xblock/submission_mixin.py
 msgid "Error uploading file."
 msgstr "ファイルアップロードに失敗しました。"
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "Enter your response to the question above."
+msgstr "課題に対するレポートを入力してください。"
+
+#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
+#: openassessment/templates/openassessmentblock/response/oa_response_graded.html
+#: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
+#: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+msgid "Your response to the question above:"
+msgstr "あなたの回答："
+
+#: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_show.html
+#: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html
+#: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html
+msgid "Your peer's response to the question above:"
+msgstr "他の受講者の回答："
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "The student's response to the question above:"
+msgstr "受講者の回答："
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Assess Peers' Responses"
+msgstr "他の受講者のレポートを採点する"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Learn to Assess"
+msgstr "採点方法の学習"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Your Grade:"
+msgstr "あなたの得点"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Leaderboard"
+msgstr "上位成績者"

@@ -93,7 +93,7 @@ msgstr "投稿は採点プールから削除することはできません。"
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_base.js:148
 msgid "Unable to Load"
-msgstr "読み込みできません"
+msgstr "エラー"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:224
