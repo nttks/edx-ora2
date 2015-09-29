@@ -847,7 +847,7 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"%(start_tag)s自己採点%(end_tag)sのステップを完了した後に、あなたは採点結果を受け取ることになります。"
+"%(start_tag)s相互採点%(end_tag)sのステップを完了した後に、あなたは採点結果を受け取ることになります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_self.html
 msgid "The Period For Self Evaluation Has Not Started"
@@ -1186,7 +1186,7 @@ msgid ""
 "                    "
 msgstr ""
 "\n"
-"何名かの他の受講者からの採点を得た上、%(start_tag)s自己採点%(end_tag)sのステップを完了後にあなたの得点が表示されます。"
+"何名かの他の受講者からの採点を得た上、%(start_tag)s相互採点%(end_tag)sのステップを完了後にあなたの得点が表示されます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 msgid ""
