@@ -4,7 +4,7 @@
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 # 
 # Translators:
-# h_yoshida <h_yoshida@matsumo-sys.com>, 2014
+# h_yoshida <h_yoshida@matsumo-sys.com>, 2014-2015
 # Takashi Nagai <ngi644@gmail.com>, 2014
 # #-#-#-#-#  gaccojs.po (edx-ora2)  #-#-#-#-#
 # edX translation file.
@@ -93,6 +93,12 @@ msgid "Could not retrieve download url."
 msgstr "ダウンロードURLが見つかりませんでした"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
+#: openassessment/xblock/static/js/openassessment-studio.min.js
+#: openassessment/xblock/static/js/src/oa_server.js
+msgid "The submission could not be removed from the grading pool."
+msgstr "投稿は採点プールから削除することはできません。"
+
+#: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_base.js
 msgid "Unable to Load"
 msgstr "読み込みできません"
@@ -128,6 +134,13 @@ msgstr "このレポートは一時保存されていますが提出されてい
 #: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "Error"
 msgstr "エラー"
+
+#: openassessment/xblock/static/js/openassessment-lms.min.js
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+msgid ""
+"You're about to submit your response for this assignment. After you submit "
+"this response, you can't change it or submit a new response."
+msgstr "課題に対する回答を投稿しようとしています。回答を投稿した後は変更したり、新しく回答することはできません。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js
@@ -225,7 +238,13 @@ msgid ""
 msgstr "課題の項目として選択されていないステップの修正は保存されません。"
 
 #: openassessment/xblock/static/js/src/lms/oa_response.js
-msgid ""
-"You're about to submit your response for this assignment. After you submit "
-"this response, you can't change it or submit a new response."
-msgstr "あなたのレポートを提出します。 提出後はレポートを編集したり新たに提出することはできません。"
+msgid "Your browser does not support file upload feature."
+msgstr "このブラウザはファイルアップロード機能に対応しておりません。申し訳ありませんが、他のブラウザをお使いください。"
+
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "File size must be 4MB or less."
+msgstr "ファイルサイズは4MB以下である必要があります。"
+
+#: openassessment/xblock/static/js/src/oa_server.js
+msgid "Could not upload file. Try again later."
+msgstr "アップロードできませんでした。しばらしく時間をおいてから再操作してください。"
