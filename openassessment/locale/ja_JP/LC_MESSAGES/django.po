@@ -7,7 +7,7 @@
 # watcafe, 2014
 # ayokose <ayokose.gacco@gmail.com>, 2014
 # Yuta_Michiyabu <bii01143190417@yahoo.co.jp>, 2014
-# h_yoshida <h_yoshida@matsumo-sys.com>, 2014
+# h_yoshida <h_yoshida@matsumo-sys.com>, 2014-2015
 # Takashi Nagai <ngi644@gmail.com>, 2014
 # #-#-#-#-#  gacco.po (edx-ora2)  #-#-#-#-#
 # edX translation file.
@@ -28,6 +28,432 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja_JP\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/grade_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/leaderboard_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/self_assessment_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/student_training_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/student_training_mixin.py
+#: openassessment/xblock/grade_mixin.py
+#: openassessment/xblock/leaderboard_mixin.py
+#: openassessment/xblock/self_assessment_mixin.py
+#: openassessment/xblock/student_training_mixin.py
+#: openassessment/xblock/student_training_mixin.py
+msgid "An unexpected error occurred."
+msgstr "予期せぬエラーが発生しました。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/grade_mixin.py
+#: openassessment/xblock/grade_mixin.py
+msgid "Peer Assessment"
+msgstr "相互採点"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/grade_mixin.py
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+#: openassessment/xblock/grade_mixin.py
+msgid "Self Assessment"
+msgstr "自己採点"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/grade_mixin.py
+#: openassessment/xblock/grade_mixin.py
+msgid "Assessment feedback could not be saved."
+msgstr "採点のコメントが保存できません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/grade_mixin.py
+#: openassessment/xblock/grade_mixin.py
+msgid "Feedback saved."
+msgstr "コメントが保存されました。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid "Must provide options selected in the assessment"
+msgstr "採点を選択してください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/self_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/self_assessment_mixin.py
+msgid "Must provide overall feedback in the assessment"
+msgstr "全てのコメントを書いてください"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/self_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/self_assessment_mixin.py
+msgid "Must provide feedback for criteria in the assessment"
+msgstr "評価観点のコメントを書いてください"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid "You must submit a response before you can peer-assess."
+msgstr "相互採点を行う前にレポートを提出してください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid ""
+"This feedback has already been submitted or the submission has been "
+"cancelled."
+msgstr "このフィードバックはすでに送信されているか、投稿がキャンセルされています。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid "Your peer assessment could not be submitted."
+msgstr "採点ができませんでした。ブラウザを更新して、次のレポートの採点をしてください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/student_training_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/student_training_mixin.py
+msgid "Could not update workflow status."
+msgstr "ワークフローステータスを更新できませんでした。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid "Could not load peer assessment."
+msgstr "他の受講者の採点が読み込みできませんでした。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid "Submit your assessment & review another response"
+msgstr "このレポートに対する採点を完了し、次のレポートの採点を行う"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid "Submit your assessment & move onto next step"
+msgstr "このレポートに対する採点を完了し、次のステップへ進む"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
+#: openassessment/xblock/peer_assessment_mixin.py
+msgid "Submit your assessment & move to response #{response_number}"
+msgstr "このレポートに対する採点を完了し、次のレポートの採点を行う #{response_number}"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/resolve_dates.py
+#: openassessment/xblock/resolve_dates.py
+msgid ""
+"'{date}' is an invalid date format. Make sure the date is formatted as YYYY-"
+"MM-DDTHH:MM:SS."
+msgstr "'{date}' は無効な日付フォーマットです。 フォーマットは YYYY-MM-DDTHH:MM:SS 記述してください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/resolve_dates.py
+#: openassessment/xblock/resolve_dates.py
+msgid "'{date}' must be a date string or datetime"
+msgstr "'{date}' は日付の文字列またはdatetimeで記述してください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/resolve_dates.py
+#: openassessment/xblock/resolve_dates.py
+msgid ""
+"This step's start date '{start}' cannot be earlier than the previous step's "
+"start date '{prev}'."
+msgstr "このステップの開始日時 '{start}' は前のステップの開始日時 '{prev}' よりも後でなければなりません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/resolve_dates.py
+#: openassessment/xblock/resolve_dates.py
+msgid ""
+"This step's due date '{due}' cannot be later than the next step's due date "
+"'{prev}'."
+msgstr "このステップの期限 '{due}' は次のステップの期限 '{prev}' の前でなければなりません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/resolve_dates.py
+#: openassessment/xblock/resolve_dates.py
+msgid "The start date '{start}' cannot be later than the due date '{due}'"
+msgstr "このステップの開始日時 '{start}' は期限 '{due}' の前でなければなりません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/self_assessment_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/student_training_mixin.py
+#: openassessment/xblock/self_assessment_mixin.py
+#: openassessment/xblock/student_training_mixin.py
+msgid "Missing options_selected key in request"
+msgstr "option_selected キーがありません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/self_assessment_mixin.py
+#: openassessment/xblock/self_assessment_mixin.py
+msgid "You must submit a response before you can perform a self-assessment."
+msgstr "あなたは自己採点を行う前にレポートを提出する必要があります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/self_assessment_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/self_assessment_mixin.py
+#: openassessment/xblock/self_assessment_mixin.py
+#: openassessment/xblock/self_assessment_mixin.py
+msgid "Your self assessment could not be submitted."
+msgstr "あなたの自己採点は提出できませんでした。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "You do not have permission to schedule training"
+msgstr "トレーニングをスケジューリングする権限がありません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "You do not have permission to reschedule tasks."
+msgstr "タスクの再スケジューリングをするための権限がありません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "You do not have permission to access staff information"
+msgstr "スタッフ情報を見るアクセス権がありません"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "You do not have permission to access student information."
+msgstr "受講者情報を見るアクセス権がありません"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "Training scheduled with new Workflow UUID: {uuid}"
+msgstr "次の新しいワークフローUUIDでトレーニングをスケジューリングする：{uuid}"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "An error occurred scheduling classifier training: {error}"
+msgstr "分類のトレーニングでエラーが発生しました：{error}"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "Example Based Assessment is not configured for this location."
+msgstr "凡例準拠採点はこのロケーションには設定されていません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "Error finding assessment workflow cancellation."
+msgstr "課題ワークフローキャンセルでエラーが発生しました。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid ""
+"All AI tasks associated with this item have been rescheduled successfully."
+msgstr "このアイテムにヒモ付けられたAIタスクの再スケジューリングは全て成功しました。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "An error occurred while rescheduling tasks: {}"
+msgstr "再スケジューリング中にエラーが発生しました：{}"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+#: openassessment/xblock/staff_info_mixin.py
+msgid "Please enter valid reason to remove the submission."
+msgstr "投稿を削除する有効な理由を入力してください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/staff_info_mixin.py
+msgid ""
+"Student submission was removed from the peer grading pool. If you'd like to "
+"allow the student to submit a new response, please also reset the student "
+"state of the problem from the Instructor Dashboard."
+msgstr ""
+"受講者の投稿は相互採点プールから削除されました。受講者に新しい回答をさせたい場合は、講師用ダッシュボードから受講者の問題の状態をリセットしてください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/student_training_mixin.py
+#: openassessment/xblock/student_training_mixin.py
+msgid "options_selected must be a dictionary"
+msgstr "option_selectedはdictionaryである必要があります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/student_training_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/student_training_mixin.py
+#: openassessment/xblock/student_training_mixin.py
+#: openassessment/xblock/student_training_mixin.py
+msgid "Your scores could not be checked."
+msgstr "あなたの得点は確認できません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/studio_mixin.py
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/studio_mixin.py
+#: openassessment/xblock/studio_mixin.py openassessment/xblock/studio_mixin.py
+msgid "Error updating XBlock configuration"
+msgstr "XBlock設定の更新エラー"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/studio_mixin.py
+#: openassessment/xblock/studio_mixin.py
+msgid ""
+"Validation error: There was an error in the XML definition of the examples "
+"provided by the user. Please correct the XML definition before saving."
+msgstr "検証エラー：ユーザーによって提供されたXML設定例にエラーがあります。保存前にXML定義を修正してください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/studio_mixin.py
+#: openassessment/xblock/studio_mixin.py
+msgid ""
+"Validation error: No examples were provided for example based assessment."
+msgstr "検証エラー：凡例準拠採点に必要なサンプルが提供されていません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/studio_mixin.py
+#: openassessment/xblock/studio_mixin.py
+msgid "Validation error: {error}"
+msgstr "検証エラー：{error}"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/studio_mixin.py
+#: openassessment/xblock/studio_mixin.py
+msgid "Successfully updated OpenAssessment XBlock"
+msgstr "OpenAssessment XBlockの更新に成功しました"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "\"submission\" required to submit answer."
+msgstr "\"課題\"には回答が必要です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "To submit a response, view this component in Preview or Live mode."
+msgstr "レポートを提出するにはこのアイテムをプレビューまたはライブ表示で行ってください。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "Multiple submissions are not allowed."
+msgstr "複数回の提出は許可されていません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "API returned unclassified exception."
+msgstr "APIが分類されていない例外を返しました。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "This response could not be saved."
+msgstr "このレポートを一時保存することができませんした"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "This response was not submitted."
+msgstr "このレポートは提出されませんでした。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "Must specify contentType."
+msgstr "ファイル形式が不明です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "contentType must be an image."
+msgstr "ファイルは画像形式である必要があります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "Error retrieving upload URL."
+msgstr "アップロードURLの取得に失敗しました。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "This response has been saved but not submitted."
+msgstr "このレポートは一時保存されていますが提出されていません"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/submission_mixin.py
+#: openassessment/xblock/submission_mixin.py
+msgid "This response has not been saved."
+msgstr "このレポートは一時保存されていません"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "This problem must include at least one assessment."
+msgstr "この課題は１つ以上の評価が含まれる必要があります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "The assessment order you selected is invalid."
+msgstr "この課題に設定された順序が不正です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "In peer assessment, the \"Must Grade\" value must be a positive integer."
+msgstr "相互採点における必須採点数は整数であることが必要です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "In peer assessment, the \"Graded By\" value must be a positive integer."
+msgstr "相互採点における被採点数は整数であることが必要です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid ""
+"In peer assessment, the \"Must Grade\" value must be greater than or equal "
+"to the \"Graded By\" value."
+msgstr "相互採点における必須採点数は、被採点数と同様もしくは大きい値であることが必要です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "You must provide at least one example response for student training."
+msgstr "受講者のトレーニング用の課題提出例を最低一つは提供する必要があります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Each example response for student training must be unique."
+msgstr "受講生のトレーニング用の課題提出例は、それぞれ別個のものである必要があります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "The \"algorithm_id\" value must be set to \"ease\" or \"fake\""
+msgstr "\"algorithm_id\"キーに対するvalueは\"ease\"もしくは\"fake\"を設定する必要があります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid ""
+"The number of assessments cannot be changed after the problem has been "
+"released."
+msgstr "課題がリリースされた後には、評価の数は変更することができません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid ""
+"The assessment type cannot be changed after the problem has been released."
+msgstr "採点方法は課題がリリースされた後には変更することができません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "This rubric definition is not valid."
+msgstr "このルーブリック設定は不正です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Criteria duplicate name(s): {duplicates}"
+msgstr "重複した評価基準名(複数個の場合あり)： {duplicates}"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Options in '{criterion}' have duplicate name(s): {duplicates}"
+msgstr "'{criterion}'の選択肢にて重複した項目(複数の場合あり)：{duplicates}"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Criteria with no options must require written feedback."
+msgstr "評価段階をもたない評価基準はフィードバックの記入が必須となります。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Example-based assessments cannot have duplicate point values."
+msgstr "凡例基準採点では重複した評点を設定できません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Prompts cannot be created or deleted after a problem is released."
+msgstr "問題がリリースされた後は入力枠は追加したり削除したりできません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "The number of criteria cannot be changed after a problem is released."
+msgstr "課題が公開されると、評価基準の数は変更できません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Criteria names cannot be changed after a problem is released"
+msgstr "評価項目名は問題のリリース後、変更できません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "The number of options cannot be changed after a problem is released."
+msgstr "課題がリリースされた後には、評価段階の数は変更することができません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Point values cannot be changed after a problem is released."
+msgstr "課題がリリースされた後には、評点を変更することができません。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid ""
+"Student training and example-based assessments must have at least one "
+"training example"
+msgstr "受講生用トレーニング、そして凡例準拠採点課題では最低一つのトレーニング例が必要です。"
+
+#: build/lib.linux-x86_64-2.7/openassessment/xblock/validation.py
+#: openassessment/xblock/validation.py
+msgid "Leaderboard number is invalid."
+msgstr "上位成績者表示数が不正です。"
 
 #: openassessment/assessment/api/student_training.py
 msgid "Could not parse serialized rubric"
@@ -58,24 +484,12 @@ msgid "Example {example_number} is missing an option for \"{criterion_name}\""
 msgstr "例 {example_number} は \"{criterion_name}\" にオプションが足りません。"
 
 #: openassessment/templates/openassessmentblock/oa_base.html
-msgid "Skip to a specific step"
-msgstr "特定のステップをスキップする"
-
-#: openassessment/templates/openassessmentblock/oa_base.html
-msgid "Your grade for this problem"
-msgstr "あなたのこの課題に対する評価"
-
-#: openassessment/templates/openassessmentblock/oa_base.html
 msgid ""
 "This assignment has several steps. In the first step, you'll provide a "
 "response to the question. The other steps appear below the Your Response "
 "field."
 msgstr ""
 "この課題にはいくつかのステップがあります。はじめにあなたのレポートを提出します。その後、次のステップがあなたのレポート欄の下に表示されます。"
-
-#: openassessment/templates/openassessmentblock/oa_base.html
-msgid "The prompt for this assignment"
-msgstr "入力の割り当て"
 
 #: openassessment/templates/openassessmentblock/oa_base.html
 msgid "This step's status:"
@@ -105,6 +519,10 @@ msgstr "点"
 msgid "Comments"
 msgstr "コメント"
 
+#: openassessment/templates/openassessmentblock/oa_submission_answer.html
+msgid "The question for this section."
+msgstr "この章の問題。"
+
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "Open Response Assessment"
 msgstr "ORA"
@@ -118,6 +536,7 @@ msgid "Rubric"
 msgstr "ルーブリック"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
+#: openassessment/templates/openassessmentblock/edit/oa_edit_prompt.html
 msgid "Prompt"
 msgstr "入力枠"
 
@@ -249,10 +668,11 @@ msgstr "基準"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html
 msgid "You cannot delete a criterion after the assignment has been released."
-msgstr ""
+msgstr "課題がリリースされた後は評価観点は削除できません。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html
 #: openassessment/templates/openassessmentblock/edit/oa_edit_option.html
+#: openassessment/templates/openassessmentblock/edit/oa_edit_prompt.html
 #: openassessment/templates/openassessmentblock/edit/oa_training_example.html
 msgid "Remove"
 msgstr "削除"
@@ -384,6 +804,20 @@ msgstr "〆切時間"
 msgid "Enter the date and time when all peer assessments must be complete."
 msgstr "相互採点を完了せねばならない日付および時間を入力してください。"
 
+#: openassessment/templates/openassessmentblock/edit/oa_edit_prompt.html
+msgid "You cannot delete a prompt after the assignment has been released."
+msgstr "課題がリリースされた後は、入力枠を削除することはできません。"
+
+#: openassessment/templates/openassessmentblock/edit/oa_edit_prompts.html
+msgid ""
+"Prompts. Replace the sample text with your own text. For more information, "
+"see the ORA documentation."
+msgstr "入力枠。サンプルの文字列を自分の文字列で置き換えてください。詳細情報はORAのドキュメントを参照してください。"
+
+#: openassessment/templates/openassessmentblock/edit/oa_edit_prompts.html
+msgid "Add Prompt"
+msgstr "プロンプトを追加"
+
 #: openassessment/templates/openassessmentblock/edit/oa_edit_rubric.html
 msgid ""
 "Rubrics are made up of criteria, which usually contain one or more options. "
@@ -476,6 +910,7 @@ msgstr "回答"
 msgid "Not Selected"
 msgstr "未選択"
 
+#: openassessment/templates/openassessmentblock/grade/oa_grade_cancelled.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_closed.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
@@ -484,6 +919,20 @@ msgstr "未選択"
 #: openassessment/templates/openassessmentblock/grade/oa_grade_waiting.html
 msgid "Your Grade"
 msgstr "あなたの得点"
+
+#: openassessment/templates/openassessmentblock/grade/oa_grade_cancelled.html
+msgid ""
+"\n"
+"                                    %(points_earned)s out of %(points_possible)s\n"
+"                                "
+msgstr ""
+"\n"
+"                                    %(points_earned)s / %(points_possible)s\n"
+"                                "
+
+#: openassessment/templates/openassessmentblock/grade/oa_grade_cancelled.html
+msgid "Your submission has been cancelled."
+msgstr "投稿はキャンセルされました。"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_closed.html
 #: openassessment/templates/openassessmentblock/response/oa_response_closed.html
@@ -509,6 +958,7 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/response/oa_response.html
+#: openassessment/templates/openassessmentblock/response/oa_response_cancelled.html
 #: openassessment/templates/openassessmentblock/response/oa_response_graded.html
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
@@ -916,6 +1366,7 @@ msgid "due <span class=\"date\">%(due_date)s (in %(time_until)s)</span>"
 msgstr "期限 <span class=\"date\">%(due_date)s (あと %(time_until)s)</span>"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html
+#: openassessment/templates/openassessmentblock/peer/oa_peer_cancelled.html
 #: openassessment/templates/openassessmentblock/peer/oa_peer_closed.html
 #: openassessment/templates/openassessmentblock/peer/oa_peer_complete.html
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html
@@ -923,15 +1374,18 @@ msgstr "期限 <span class=\"date\">%(due_date)s (あと %(time_until)s)</span>"
 #: openassessment/templates/openassessmentblock/peer/oa_peer_unavailable.html
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html
 #: openassessment/templates/openassessmentblock/response/oa_response.html
+#: openassessment/templates/openassessmentblock/response/oa_response_cancelled.html
 #: openassessment/templates/openassessmentblock/response/oa_response_closed.html
 #: openassessment/templates/openassessmentblock/response/oa_response_graded.html
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 #: openassessment/templates/openassessmentblock/response/oa_response_unavailable.html
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+#: openassessment/templates/openassessmentblock/self/oa_self_cancelled.html
 #: openassessment/templates/openassessmentblock/self/oa_self_closed.html
 #: openassessment/templates/openassessmentblock/self/oa_self_complete.html
 #: openassessment/templates/openassessmentblock/self/oa_self_unavailable.html
 #: openassessment/templates/openassessmentblock/student_training/student_training.html
+#: openassessment/templates/openassessmentblock/student_training/student_training_cancelled.html
 #: openassessment/templates/openassessmentblock/student_training/student_training_closed.html
 #: openassessment/templates/openassessmentblock/student_training/student_training_complete.html
 #: openassessment/templates/openassessmentblock/student_training/student_training_unavailable.html
@@ -973,6 +1427,13 @@ msgstr "提出された画像"
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
 msgid "We could not submit your assessment"
 msgstr "採点することができません"
+
+#: openassessment/templates/openassessmentblock/peer/oa_peer_cancelled.html
+#: openassessment/templates/openassessmentblock/response/oa_response_cancelled.html
+#: openassessment/templates/openassessmentblock/self/oa_self_cancelled.html
+#: openassessment/templates/openassessmentblock/student_training/student_training_cancelled.html
+msgid "Cancelled"
+msgstr "キャンセルされました"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_closed.html
 msgid ""
@@ -1088,7 +1549,6 @@ msgid "In Progress"
 msgstr "実施中"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
-#: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Enter your response to the question."
 msgstr "課題に対するレポートを入力してください。"
 
@@ -1108,8 +1568,12 @@ msgid "After you submit your response, you cannot edit it"
 msgstr "レポートを提出した後は編集したり新たに提出することはできません"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
-msgid "You may continue to work on your response until you submit it."
-msgstr "提出するまではレポートを編集することができます。"
+msgid "The prompt for this section."
+msgstr "この章のプロンプト"
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "Your response to the question above."
+msgstr "上記の問題に対するあなたの回答。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "We could not upload this image"
@@ -1122,6 +1586,10 @@ msgstr "このレポートでアップロードする画像を選択してくだ
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Upload your image"
 msgstr "画像をアップロード"
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "You may continue to work on your response until you submit it."
+msgstr "提出するまではレポートを編集することができます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "We could not save your progress"
@@ -1150,6 +1618,30 @@ msgstr "レポートを提出することができませんでした"
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Submit your response and move to the next step"
 msgstr "次のステップに進む（レポートを提出する）"
+
+#: openassessment/templates/openassessmentblock/response/oa_response_cancelled.html
+msgid "Submission Cancelled"
+msgstr "投稿がキャンセルされました"
+
+#: openassessment/templates/openassessmentblock/response/oa_response_cancelled.html
+msgid ""
+"\n"
+"                        Your submission has been cancelled by %(removed_by_username)s on %(removed_datetime)s\n"
+"                    "
+msgstr ""
+"\n"
+"                        %(removed_datetime)s にあなたの投稿は %(removed_by_username)s によってキャンセルされました。\n"
+"                    "
+
+#: openassessment/templates/openassessmentblock/response/oa_response_cancelled.html
+msgid ""
+"\n"
+"                        Comments: %(comments)s\n"
+"                    "
+msgstr ""
+"\n"
+"                       コメント： %(comments)s\n"
+"                    "
 
 #: openassessment/templates/openassessmentblock/response/oa_response_closed.html
 msgid ""
@@ -1320,8 +1812,44 @@ msgid "Student Response"
 msgstr "受講者の回答"
 
 #: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid ""
+"\n"
+"                            Student submission removed by %(removed_by_username)s on %(removed_datetime)s\n"
+"                        "
+msgstr ""
+"\n"
+"                            %(removed_datetime)s に受講者の投稿は %(removed_by_username)s により削除されました。\n"
+"                        "
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid ""
+"\n"
+"                            Comments: %(comments)s\n"
+"                        "
+msgstr ""
+"\n"
+"                            コメント： %(comments)s\n"
+"                        "
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
 msgid "The image associated with this response"
 msgstr "ここにアップロードされた画像が表示されます。"
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "Remove submission from peer grading"
+msgstr "相互採点から投稿を削除する"
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "Caution: Removing a student's submission cannot be undone."
+msgstr "注意：受講者の投稿の削除は元には戻りません。"
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "Comments:"
+msgstr "コメント："
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "Remove submission"
+msgstr "投稿の削除"
 
 #: openassessment/templates/openassessmentblock/staff_debug/student_info.html
 msgid "Peer Assessments for This Student"
@@ -1364,11 +1892,6 @@ msgstr "この受講者による相互採点"
 #: openassessment/templates/openassessmentblock/staff_debug/student_info.html
 msgid "Student's Self Assessment"
 msgstr "受講者の自己採点"
-
-#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
-#: openassessment/xblock/grade_mixin.py
-msgid "Self Assessment"
-msgstr "自己採点"
 
 #: openassessment/templates/openassessmentblock/staff_debug/student_info.html
 msgid "Example Based Assessment"
@@ -1460,314 +1983,17 @@ msgstr "受講者のトレーニング例の読み込みに失敗。"
 msgid "We couldn't load the student training step of this assignment."
 msgstr "この課題のトレーニングステップの読み込みに失敗しました。"
 
-#: openassessment/xblock/grade_mixin.py
-#: openassessment/xblock/leaderboard_mixin.py
-#: openassessment/xblock/self_assessment_mixin.py
-#: openassessment/xblock/student_training_mixin.py
-#: openassessment/xblock/student_training_mixin.py
-msgid "An unexpected error occurred."
-msgstr "予期せぬエラーが発生しました。"
-
-#: openassessment/xblock/grade_mixin.py
-msgid "Peer Assessment"
-msgstr "相互採点"
-
-#: openassessment/xblock/grade_mixin.py
-msgid "Assessment feedback could not be saved."
-msgstr "採点のコメントが保存できません。"
-
-#: openassessment/xblock/grade_mixin.py
-msgid "Feedback saved."
-msgstr "コメントが保存されました。"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "Must provide options selected in the assessment"
-msgstr "採点を選択してください。"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-#: openassessment/xblock/self_assessment_mixin.py
-msgid "Must provide overall feedback in the assessment"
-msgstr "全てのコメントを書いてください"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-#: openassessment/xblock/self_assessment_mixin.py
-msgid "Must provide feedback for criteria in the assessment"
-msgstr "評価観点のコメントを書いてください"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "You must submit a response before you can peer-assess."
-msgstr "相互採点を行う前にレポートを提出してください。"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "This feedback has already been submitted."
-msgstr ""
-
-#: openassessment/xblock/peer_assessment_mixin.py
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "Your peer assessment could not be submitted."
-msgstr "採点ができませんでした。ブラウザを更新して、次のレポートの採点をしてください。"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-#: openassessment/xblock/student_training_mixin.py
-msgid "Could not update workflow status."
-msgstr "ワークフローステータスを更新できませんでした。"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "Could not load peer assessment."
-msgstr "他の受講者の採点が読み込みできませんでした。"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "Submit your assessment & review another response"
-msgstr "このレポートに対する採点を完了し、次のレポートの採点を行う"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "Submit your assessment & move onto next step"
-msgstr "このレポートに対する採点を完了し、次のステップへ進む"
-
-#: openassessment/xblock/peer_assessment_mixin.py
-msgid "Submit your assessment & move to response #{response_number}"
-msgstr "このレポートに対する採点を完了し、次のレポートの採点を行う #{response_number}"
-
-#: openassessment/xblock/resolve_dates.py
-msgid ""
-"'{date}' is an invalid date format. Make sure the date is formatted as YYYY-"
-"MM-DDTHH:MM:SS."
-msgstr "'{date}' は無効な日付フォーマットです。 フォーマットは YYYY-MM-DDTHH:MM:SS 記述してください。"
-
-#: openassessment/xblock/resolve_dates.py
-msgid "'{date}' must be a date string or datetime"
-msgstr "'{date}' は日付の文字列またはdatetimeで記述してください。"
-
-#: openassessment/xblock/resolve_dates.py
-msgid ""
-"This step's start date '{start}' cannot be earlier than the previous step's "
-"start date '{prev}'."
-msgstr "このステップの開始日時 '{start}' は前のステップの開始日時 '{prev}' よりも後でなければなりません。"
-
-#: openassessment/xblock/resolve_dates.py
-msgid ""
-"This step's due date '{due}' cannot be later than the next step's due date "
-"'{prev}'."
-msgstr "このステップの期限 '{due}' は次のステップの期限 '{prev}' の前でなければなりません。"
-
-#: openassessment/xblock/resolve_dates.py
-msgid "The start date '{start}' cannot be later than the due date '{due}'"
-msgstr "このステップの開始日時 '{start}' は期限 '{due}' の前でなければなりません。"
-
-#: openassessment/xblock/self_assessment_mixin.py
-#: openassessment/xblock/student_training_mixin.py
-msgid "Missing options_selected key in request"
-msgstr "option_selected キーがありません。"
-
-#: openassessment/xblock/self_assessment_mixin.py
-msgid "You must submit a response before you can perform a self-assessment."
-msgstr "あなたは自己採点を行う前にレポートを提出する必要があります。"
-
-#: openassessment/xblock/self_assessment_mixin.py
-#: openassessment/xblock/self_assessment_mixin.py
-msgid "Your self assessment could not be submitted."
-msgstr "あなたの自己採点は提出できませんでした。"
-
-#: openassessment/xblock/staff_info_mixin.py
-msgid "You do not have permission to schedule training"
-msgstr "トレーニングをスケジューリングする権限がありません。"
-
-#: openassessment/xblock/staff_info_mixin.py
-msgid "You do not have permission to reschedule tasks."
-msgstr "タスクの再スケジューリングをするための権限がありません。"
-
-#: openassessment/xblock/staff_info_mixin.py
-msgid "You do not have permission to access staff information"
-msgstr "スタッフ情報を見るアクセス権がありません"
-
-#: openassessment/xblock/staff_info_mixin.py
-msgid "You do not have permission to access student information."
-msgstr "受講者情報を見るアクセス権がありません"
-
-#: openassessment/xblock/staff_info_mixin.py
-msgid "Training scheduled with new Workflow UUID: {uuid}"
-msgstr "次の新しいワークフローUUIDでトレーニングをスケジューリングする：{uuid}"
-
-#: openassessment/xblock/staff_info_mixin.py
-msgid "An error occurred scheduling classifier training: {error}"
-msgstr "分類のトレーニングでエラーが発生しました：{error}"
-
-#: openassessment/xblock/staff_info_mixin.py
-msgid "Example Based Assessment is not configured for this location."
-msgstr "凡例準拠採点はこのロケーションには設定されていません。"
-
 #: openassessment/xblock/staff_info_mixin.py
 msgid ""
-"All AI tasks associated with this item have been rescheduled successfully."
-msgstr "このアイテムにヒモ付けられたAIタスクの再スケジューリングは全て成功しました。"
+"The student submission has been removed from peer assessment. The student "
+"receives a grade of zero unless you reset the student's attempts for the "
+"problem to allow them to resubmit a response."
+msgstr "受講者の投稿は相互採点から削除されました。受講者はあなたが実施内容をリセットし、再度投稿させない限り０点となります。"
 
-#: openassessment/xblock/staff_info_mixin.py
-msgid "An error occurred while rescheduling tasks: {}"
-msgstr "再スケジューリング中にエラーが発生しました：{}"
-
-#: openassessment/xblock/student_training_mixin.py
-msgid "options_selected must be a dictionary"
-msgstr "option_selectedはdictionaryである必要があります。"
-
-#: openassessment/xblock/student_training_mixin.py
-#: openassessment/xblock/student_training_mixin.py
-msgid "Your scores could not be checked."
-msgstr "あなたの得点は確認できません。"
-
-#: openassessment/xblock/studio_mixin.py openassessment/xblock/studio_mixin.py
-msgid "Error updating XBlock configuration"
-msgstr "XBlock設定の更新エラー"
-
-#: openassessment/xblock/studio_mixin.py
-msgid ""
-"Validation error: There was an error in the XML definition of the examples "
-"provided by the user. Please correct the XML definition before saving."
-msgstr "検証エラー：ユーザーによって提供されたXML設定例にエラーがあります。保存前にXML定義を修正してください。"
-
-#: openassessment/xblock/studio_mixin.py
-msgid ""
-"Validation error: No examples were provided for example based assessment."
-msgstr "検証エラー：凡例準拠採点に必要なサンプルが提供されていません。"
-
-#: openassessment/xblock/studio_mixin.py
-msgid "Validation error: {error}"
-msgstr "検証エラー：{error}"
-
-#: openassessment/xblock/studio_mixin.py
-msgid "Successfully updated OpenAssessment XBlock"
-msgstr "OpenAssessment XBlockの更新に成功しました"
+#: openassessment/xblock/validation.py
+msgid "The submission format is invalid."
+msgstr "投稿フォーマットが無効です。"
 
 #: openassessment/xblock/submission_mixin.py
-msgid "\"submission\" required to submit answer."
-msgstr "\"課題\"には回答が必要です。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "To submit a response, view this component in Preview or Live mode."
-msgstr "レポートを提出するにはこのアイテムをプレビューまたはライブ表示で行ってください。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "Multiple submissions are not allowed."
-msgstr "複数回の提出は許可されていません。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "API returned unclassified exception."
-msgstr "APIが分類されていない例外を返しました。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "This response could not be saved."
-msgstr "このレポートを一時保存することができませんした"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "This response was not submitted."
-msgstr "このレポートは提出されませんでした。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "Must specify contentType."
-msgstr "ファイル形式が不明です。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "contentType must be an image."
-msgstr "ファイルは画像形式である必要があります。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "Error retrieving upload URL."
-msgstr "アップロードURLの取得に失敗しました。"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "This response has been saved but not submitted."
-msgstr "このレポートは一時保存されていますが提出されていません"
-
-#: openassessment/xblock/submission_mixin.py
-msgid "This response has not been saved."
-msgstr "このレポートは一時保存されていません"
-
-#: openassessment/xblock/validation.py
-msgid "This problem must include at least one assessment."
-msgstr "この課題は１つ以上の評価が含まれる必要があります。"
-
-#: openassessment/xblock/validation.py
-msgid "The assessment order you selected is invalid."
-msgstr "この課題に設定された順序が不正です。"
-
-#: openassessment/xblock/validation.py
-msgid "In peer assessment, the \"Must Grade\" value must be a positive integer."
-msgstr "相互採点における必須採点数は整数であることが必要です。"
-
-#: openassessment/xblock/validation.py
-msgid "In peer assessment, the \"Graded By\" value must be a positive integer."
-msgstr "相互採点における被採点数は整数であることが必要です。"
-
-#: openassessment/xblock/validation.py
-msgid ""
-"In peer assessment, the \"Must Grade\" value must be greater than or equal "
-"to the \"Graded By\" value."
-msgstr "相互採点における必須採点数は、被採点数と同様もしくは大きい値であることが必要です。"
-
-#: openassessment/xblock/validation.py
-msgid "You must provide at least one example response for student training."
-msgstr "受講者のトレーニング用の課題提出例を最低一つは提供する必要があります。"
-
-#: openassessment/xblock/validation.py
-msgid "Each example response for student training must be unique."
-msgstr "受講生のトレーニング用の課題提出例は、それぞれ別個のものである必要があります。"
-
-#: openassessment/xblock/validation.py
-msgid "The \"algorithm_id\" value must be set to \"ease\" or \"fake\""
-msgstr "\"algorithm_id\"キーに対するvalueは\"ease\"もしくは\"fake\"を設定する必要があります。"
-
-#: openassessment/xblock/validation.py
-msgid ""
-"The number of assessments cannot be changed after the problem has been "
-"released."
-msgstr "課題がリリースされた後には、評価の数は変更することができません。"
-
-#: openassessment/xblock/validation.py
-msgid ""
-"The assessment type cannot be changed after the problem has been released."
-msgstr "採点方法は課題がリリースされた後には変更することができません。"
-
-#: openassessment/xblock/validation.py
-msgid "This rubric definition is not valid."
-msgstr "このルーブリック設定は不正です。"
-
-#: openassessment/xblock/validation.py
-msgid "Criteria duplicate name(s): {duplicates}"
-msgstr "重複した評価基準名(複数個の場合あり)： {duplicates}"
-
-#: openassessment/xblock/validation.py
-msgid "Options in '{criterion}' have duplicate name(s): {duplicates}"
-msgstr "'{criterion}'の選択肢にて重複した項目(複数の場合あり)：{duplicates}"
-
-#: openassessment/xblock/validation.py
-msgid "Criteria with no options must require written feedback."
-msgstr "評価段階をもたない評価基準はフィードバックの記入が必須となります。"
-
-#: openassessment/xblock/validation.py
-msgid "Example-based assessments cannot have duplicate point values."
-msgstr "凡例基準採点では重複した評点を設定できません。"
-
-#: openassessment/xblock/validation.py
-msgid "The number of criteria cannot be changed after a problem is released."
-msgstr "課題が公開されると、評価基準の数は変更できません。"
-
-#: openassessment/xblock/validation.py
-msgid "Criteria names cannot be changed after a problem is released"
-msgstr "評価項目名は問題のリリース後、変更できません。"
-
-#: openassessment/xblock/validation.py
-msgid "The number of options cannot be changed after a problem is released."
-msgstr "課題がリリースされた後には、評価段階の数は変更することができません。"
-
-#: openassessment/xblock/validation.py
-msgid "Point values cannot be changed after a problem is released."
-msgstr "課題がリリースされた後には、評点を変更することができません。"
-
-#: openassessment/xblock/validation.py
-msgid ""
-"Student training and example-based assessments must have at least one "
-"training example"
-msgstr "受講生用トレーニング、そして凡例準拠採点課題では最低一つのトレーニング例が必要です。"
-
-#: openassessment/xblock/validation.py
-msgid "Leaderboard number is invalid."
-msgstr "上位成績者表示数が不正です。"
+msgid "Error uploading file."
+msgstr "ファイルアップロードに失敗しました。"
