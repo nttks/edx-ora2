@@ -126,7 +126,7 @@ msgstr "このレポートに対する採点を完了し、次のステップへ
 #: build/lib.linux-x86_64-2.7/openassessment/xblock/peer_assessment_mixin.py
 #: openassessment/xblock/peer_assessment_mixin.py
 msgid "Submit your assessment & move to response #{response_number}"
-msgstr "このレポートに対する採点を完了し、次のレポートの採点を行う #{response_number}"
+msgstr "このレポートに対する採点を完了し、{response_number}回目のレポートの採点を行う"
 
 #: build/lib.linux-x86_64-2.7/openassessment/xblock/resolve_dates.py
 #: openassessment/xblock/resolve_dates.py
@@ -981,7 +981,7 @@ msgstr "ここにアップロードされた画像が表示されます。"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Assessments of Your Response"
-msgstr "あなたのレポートを採点する"
+msgstr "採点結果を確認する"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Overall Grade"
@@ -1045,7 +1045,7 @@ msgstr "採点者"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Additional comments on your response"
-msgstr "あなたのレポートへの追加コメント"
+msgstr "あなたのレポートへの講評"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Peer assessor"
@@ -1263,7 +1263,7 @@ msgstr "相互採点はまだ開始されていません"
 #: openassessment/templates/openassessmentblock/message/oa_message_peer.html
 #: openassessment/templates/openassessmentblock/message/oa_message_self.html
 msgid "Your Response Has Been Submitted For Peer Assessment"
-msgstr "あなたのレポートは提出され相互採点されます"
+msgstr "あなたのレポートは提出後、相互採点のステップに進みます"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_peer.html
 #: openassessment/templates/openassessmentblock/message/oa_message_self.html
@@ -1483,7 +1483,7 @@ msgstr "採点すべきレポートを割り当てることができませんで
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_complete.html
 msgid "Continue Assessing Peers"
-msgstr "採点を続ける　"
+msgstr "採点を続ける"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode_waiting.html
@@ -1565,7 +1565,7 @@ msgstr "記入途中のレポート一時保存して後から提出すること
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "After you submit your response, you cannot edit it"
-msgstr "レポートを提出した後は編集したり新たに提出することはできません"
+msgstr "レポートを提出した後は編集したり新たに提出することはできません。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "The prompt for this section."
@@ -1997,3 +1997,40 @@ msgstr "投稿フォーマットが無効です。"
 #: openassessment/xblock/submission_mixin.py
 msgid "Error uploading file."
 msgstr "ファイルアップロードに失敗しました。"
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "Enter your response to the question above."
+msgstr "課題に対するレポートを入力してください。"
+
+#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
+#: openassessment/templates/openassessmentblock/response/oa_response_graded.html
+#: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
+#: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+msgid "Your response to the question above:"
+msgstr "あなたの回答："
+
+#: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_show.html
+#: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html
+#: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html
+msgid "Your peer's response to the question above:"
+msgstr "他の受講者の回答："
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "The student's response to the question above:"
+msgstr "受講者の回答："
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Assess Peers' Responses"
+msgstr "他の受講者のレポートを採点する"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Learn to Assess"
+msgstr "採点方法の学習"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Your Grade:"
+msgstr "あなたの得点"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Leaderboard"
+msgstr "上位成績者"
