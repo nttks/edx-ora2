@@ -1274,7 +1274,7 @@ msgid ""
 "\n"
 "                        You'll receive your grade after you complete the %(start_tag)speer assessment%(end_tag)s step.\n"
 "                    "
-msgstr "\n%(start_tag)s自己採点%(end_tag)sのステップを完了した後に、あなたは採点結果を受け取ることになります。"
+msgstr "\n%(start_tag)s相互採点%(end_tag)sのステップを完了した後に、あなたは採点結果を受け取ることになります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_self.html:6
 msgid "The Period For Self Evaluation Has Not Started"
@@ -1640,7 +1640,7 @@ msgid ""
 "\n"
 "                        You'll receive your grade after some of your peers have assessed your response and you complete the %(start_tag)speer assessment%(end_tag)s step.\n"
 "                    "
-msgstr "\n何名かの他の受講者からの採点を得た上、%(start_tag)s自己採点%(end_tag)sのステップを完了後にあなたの得点が表示されます。"
+msgstr "\n何名かの他の受講者からの採点を得た上、%(start_tag)s相互採点%(end_tag)sのステップを完了後にあなたの得点が表示されます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html:34
 #, python-format
