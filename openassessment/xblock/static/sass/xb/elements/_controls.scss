@@ -85,10 +85,6 @@
     display: inline-block;
     vertical-align: middle;
   }
-
-  .copy {
-    @include margin-right(($baseline-v/2));
-  }
 }
 
 %btn-pill {
