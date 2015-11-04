@@ -6,7 +6,11 @@ Test submission to the OpenAssessment XBlock.
 import json
 import datetime as dt
 import magic
+import boto
+from boto.s3.key import Key
+from django.test.utils import override_settings
 from mock import patch, Mock
+from moto import mock_s3
 import pytz
 import tempfile
 
@@ -15,6 +19,7 @@ from django.test.client import RequestFactory
 
 from submissions import api as sub_api
 from submissions.api import SubmissionRequestError, SubmissionInternalError
+from openassessment.fileupload import api
 
 from openassessment.fileupload import api as file_upload_api
 from openassessment.fileupload.exceptions import FileUploadInternalError
@@ -27,7 +32,6 @@ from xblock.django.request import django_to_webob_request
 
 
 class SubmissionTest(XBlockHandlerTestCase):
-
     SUBMISSION = json.dumps({
         "submission": ["This is my answer to the first question!", "This is my answer to the second question!"]
     })
@@ -41,7 +45,8 @@ class SubmissionTest(XBlockHandlerTestCase):
     def test_submit_answer_too_long(self, xblock):
         # Maximum answer length is 100K, once the answer has been JSON-encoded
         long_submission = json.dumps({
-            "submission": ["This is my answer to the first question!" * 100000, "This is my answer to the second question!"]
+            "submission": ["This is my answer to the first question!" * 100000,
+                           "This is my answer to the second question!"]
         })
         resp = self.request(xblock, 'submit', long_submission, response_format='json')
         self.assertFalse(resp[0])
@@ -80,7 +85,6 @@ class SubmissionTest(XBlockHandlerTestCase):
     # In Studio preview mode, the runtime sets the user ID to None
     @scenario('data/basic_scenario.xml', user_id=None)
     def test_cannot_submit_in_preview_mode(self, xblock):
-
         # The Studio runtime apparently provides an anonymous student ID,
         # even though we're running in Preview mode.  We should check the scope id
         # to determine whether we're in Preview mode or not.
@@ -169,6 +173,66 @@ class SubmissionTest(XBlockHandlerTestCase):
         self.assertEqual(resp['success'], False)
         self.assertEqual(resp['msg'], u"Error uploading file.")
 
+    @mock_s3
+    @override_settings(
+        AWS_ACCESS_KEY_ID='foobar',
+        AWS_SECRET_ACCESS_KEY='bizbaz',
+        FILE_UPLOAD_STORAGE_BUCKET_NAME="mybucket"
+    )
+    @scenario('data/file_upload_scenario.xml')
+    def test_upload_url(self, xblock):
+        """ Test generate correct upload URL """
+        xblock.xmodule_runtime = Mock(
+            course_id='test_course',
+            anonymous_student_id='test_student',
+        )
+        resp = self.request(xblock, 'upload_url', json.dumps({"contentType": "image/jpeg",
+                                                              "filename": "test.jpg"}), response_format='json')
+        self.assertTrue(resp['success'])
+        self.assertTrue(resp['url'].startswith(
+            'https://mybucket.s3.amazonaws.com/submissions_attachments/test_student/test_course/' + xblock.scope_ids.usage_id
+        ))
+
+    @mock_s3
+    @override_settings(
+        AWS_ACCESS_KEY_ID='foobar',
+        AWS_SECRET_ACCESS_KEY='bizbaz',
+        FILE_UPLOAD_STORAGE_BUCKET_NAME="mybucket"
+    )
+    @scenario('data/file_upload_scenario.xml')
+    def test_download_url(self, xblock):
+        """ Test generate correct download URL with existing file. should create a file and get the download URL """
+        conn = boto.connect_s3()
+        bucket = conn.create_bucket('mybucket')
+        key = Key(bucket)
+        key.key = "submissions_attachments/test_student/test_course/" + xblock.scope_ids.usage_id
+        key.set_contents_from_string("How d'ya do?")
+        download_url = api.get_download_url("test_student/test_course/" + xblock.scope_ids.usage_id)
+
+        xblock.xmodule_runtime = Mock(
+            course_id='test_course',
+            anonymous_student_id='test_student',
+        )
+
+        resp = self.request(xblock, 'download_url', json.dumps(dict()), response_format='json')
+
+        self.assertTrue(resp['success'])
+        self.assertEqual(download_url, resp['url'])
+
+    @mock_s3
+    @override_settings(
+        AWS_ACCESS_KEY_ID='foobar',
+        AWS_SECRET_ACCESS_KEY='bizbaz',
+        FILE_UPLOAD_STORAGE_BUCKET_NAME="mybucket"
+    )
+    @scenario('data/file_upload_scenario.xml')
+    def test_download_url_non_existing_file(self, xblock):
+        """ Test generate a download URL for non-existing file, should return empty string """
+        resp = self.request(xblock, 'download_url', json.dumps(dict()), response_format='json')
+
+        self.assertTrue(resp['success'])
+        self.assertEqual(u'', resp['url'])
+
 
 class SubmissionRenderTest(XBlockHandlerTestCase):
     """
@@ -185,7 +249,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         self._assert_path_and_context(
             xblock, 'openassessmentblock/response/oa_response_unavailable.html',
             {
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'submission_start': dt.datetime(4999, 4, 1).replace(tzinfo=pytz.utc),
                 'has_peer': True,
                 'has_self': True,
@@ -208,7 +272,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
             xblock, 'openassessmentblock/response/oa_response_submitted.html',
             {
                 'student_submission': create_submission_dict(submission, xblock.prompts),
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'has_peer': True,
                 'has_self': True,
                 'allow_latex': False,
@@ -220,7 +284,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         self._assert_path_and_context(
             xblock, 'openassessmentblock/response/oa_response.html',
             {
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'saved_response': create_submission_dict({
                     'answer': prepare_submission_for_serialization(
                         ("", "")
@@ -240,7 +304,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         self._assert_path_and_context(
             xblock, 'openassessmentblock/response/oa_response.html',
             {
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'saved_response': create_submission_dict({
                     'answer': prepare_submission_for_serialization(
                         ("", "")
@@ -264,7 +328,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         self._assert_path_and_context(
             xblock, 'openassessmentblock/response/oa_response.html',
             {
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'saved_response': create_submission_dict({
                     'answer': prepare_submission_for_serialization(
                         ('A man must have a code', 'A man must have an umbrella too.')
@@ -289,7 +353,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         self._assert_path_and_context(
             xblock, 'openassessmentblock/response/oa_response.html',
             {
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'saved_response': create_submission_dict({
                     'answer': prepare_submission_for_serialization(
                         ('An old format response.',)
@@ -303,6 +367,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
                 'allow_latex': False,
             }
         )
+
     @scenario('data/submission_open.xml', user_id="Bob")
     def test_open_submitted(self, xblock):
         submission = xblock.create_submission(
@@ -314,7 +379,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
             {
                 'submission_due': dt.datetime(2999, 5, 6).replace(tzinfo=pytz.utc),
                 'student_submission': create_submission_dict(submission, xblock.prompts),
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'has_peer': True,
                 'has_self': True,
                 'allow_latex': False,
@@ -345,7 +410,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         self._assert_path_and_context(
             xblock, 'openassessmentblock/response/oa_response_cancelled.html',
             {
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'allow_latex': False,
                 'has_peer': True,
                 'has_self': True,
@@ -378,7 +443,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
                 'student_submission': {"answer": {"parts": [
                     {"prompt": {'description': 'One prompt.'}, "text": "An old format response."}
                 ]}},
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'has_peer': True,
                 'has_self': True,
                 'allow_latex': False,
@@ -390,7 +455,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         self._assert_path_and_context(
             xblock, 'openassessmentblock/response/oa_response_closed.html',
             {
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'submission_due': dt.datetime(2014, 4, 5).replace(tzinfo=pytz.utc),
                 'has_peer': False,
                 'has_self': True,
@@ -409,7 +474,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
             {
                 'submission_due': dt.datetime(2014, 4, 5).replace(tzinfo=pytz.utc),
                 'student_submission': create_submission_dict(submission, xblock.prompts),
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'has_peer': False,
                 'has_self': True,
                 'allow_latex': False,
@@ -435,7 +500,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
             {
                 'submission_due': dt.datetime(2999, 5, 6).replace(tzinfo=pytz.utc),
                 'student_submission': create_submission_dict(submission, xblock.prompts),
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'has_peer': True,
                 'has_self': True,
                 'allow_latex': False,
@@ -461,7 +526,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
             {
                 'submission_due': dt.datetime(2014, 4, 5).replace(tzinfo=pytz.utc),
                 'student_submission': create_submission_dict(submission, xblock.prompts),
-                'allow_file_upload': False,
+                'file_upload_type': None,
                 'has_peer': False,
                 'has_self': True,
                 'allow_latex': False,

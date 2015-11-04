@@ -1,6 +1,7 @@
 """
 UI-level acceptance tests for OpenAssessment.
 """
+import ddt
 import os
 import unittest
 import time
@@ -58,6 +59,9 @@ class OpenAssessmentTest(WebAppTest):
         'student_training':
             u'courses/{test_course_id}/courseware/'
             u'676026889c884ac1827688750871c825/5663e9b038434636977a4226d668fe02/'.format(test_course_id=TEST_COURSE_ID),
+        'file_upload':
+            u'courses/{test_course_id}/courseware/'
+            u'57a3f9d51d424f6cb922f0d69cba868d/bb563abc989340d8806920902f267ca3/'.format(test_course_id=TEST_COURSE_ID),
     }
 
     SUBMISSION = u"This is a test submission."
@@ -204,6 +208,106 @@ class StudentTrainingTest(OpenAssessmentTest):
             self.student_training_page.wait_for_complete()
         except BrokenPromise:
             self.fail("Student training was not marked complete.")
+
+
+class StaffAreaTest(OpenAssessmentTest):
+    """
+    Test the staff area.
+    """
+
+    def setUp(self):
+        super(StaffAreaTest, self).setUp('peer_only', staff=True)
+        self.staff_area_page = StaffAreaPage(self.browser, self.problem_loc)
+
+    @retry()
+    @attr('acceptance')
+    def test_staff_area_buttons(self):
+        """
+        Scenario: the staff area buttons should behave correctly
+
+        Given I am viewing the staff area of an ORA problem
+        Then none of the buttons should be active
+        When I click the "Staff Tools" button
+        Then only the "Staff Tools" button should be active
+        When I click the "Staff Info" button
+        Then only the "Staff Info" button should be active
+        When I click the "Staff Info" button again
+        Then none of the buttons should be active
+        """
+        self.auto_auth_page.visit()
+        self.staff_area_page.visit()
+        self.assertEqual(self.staff_area_page.selected_button_names, [])
+        self.staff_area_page.click_staff_toolbar_button("staff-tools")
+        self.assertEqual(self.staff_area_page.selected_button_names, ["STAFF TOOLS"])
+        self.staff_area_page.click_staff_toolbar_button("staff-info")
+        self.assertEqual(self.staff_area_page.selected_button_names, ["STAFF INFO"])
+        self.staff_area_page.click_staff_toolbar_button("staff-info")
+        self.assertEqual(self.staff_area_page.selected_button_names, [])
+
+    @retry()
+    @attr('acceptance')
+    @ddt.data(
+        ("staff-tools", "STAFF TOOLS"),
+        ("staff-info", "STAFF INFO"),
+    )
+    @ddt.unpack
+    def test_staff_tools_panel(self, button_name, button_label):
+        """
+        Scenario: the staff tools panel should be shown correctly
+
+        Given I am viewing the staff area of an ORA problem
+        Then none of the panels should be shown
+        When I click the staff button
+        Then only the related panel should be shown
+        When I click the close button in the panel
+        Then none of the panels should be shown
+        """
+        self.auto_auth_page.visit()
+        self.staff_area_page.visit()
+
+        # Verify that there is no selected panel initially
+        self.assertEqual(self.staff_area_page.selected_button_names, [])
+        self.assertEqual(self.staff_area_page.visible_staff_panels, [])
+
+        # Click on the button and verify that the panel has opened
+        self.staff_area_page.click_staff_toolbar_button(button_name)
+        self.assertEqual(self.staff_area_page.selected_button_names, [button_label])
+        self.assertEqual(
+            self.staff_area_page.visible_staff_panels,
+            [u'openassessment__{button_name}'.format(button_name=button_name)]
+        )
+
+        # Click 'Close' and verify that the panel has been closed
+        self.staff_area_page.click_staff_panel_close_button("staff-tools")
+        self.assertEqual(self.staff_area_page.selected_button_names, [])
+        self.assertEqual(self.staff_area_page.visible_staff_panels, [])
+
+
+class FileUploadTest(OpenAssessmentTest):
+    """
+    Test file upload
+    """
+
+    def setUp(self):
+        super(FileUploadTest, self).setUp('file_upload')
+
+    @retry()
+    @attr('acceptance')
+    def test_file_upload(self):
+        self.auto_auth_page.visit()
+        # trying to upload a unacceptable file
+        self.submission_page.visit()
+        # hide django debug tool, otherwise, it will cover the button on the right side,
+        # which will cause the button non-clickable and tests to fail
+        self.submission_page.hide_django_debug_tool()
+        self.submission_page.select_file(os.path.dirname(os.path.realpath(__file__)) + '/__init__.py')
+        self.assertTrue(self.submission_page.has_file_error)
+
+        # trying to upload a acceptable file
+        self.submission_page.visit().select_file(os.path.dirname(os.path.realpath(__file__)) + '/README.rst')
+        self.assertFalse(self.submission_page.has_file_error)
+        self.submission_page.upload_file()
+        self.assertTrue(self.submission_page.has_file_uploaded)
 
 
 if __name__ == "__main__":

@@ -65,7 +65,10 @@ class StudioMixin(object):
         ).render(Context(self.editor_context()))
         frag = Fragment(rendered_template)
         frag.add_javascript(pkg_resources.resource_string(__name__, "static/js/openassessment-studio.min.js"))
-        frag.initialize_js('OpenAssessmentEditor')
+        js_context_dict = {
+            "FILE_EXT_BLACK_LIST": self.FILE_EXT_BLACK_LIST,
+        }
+        frag.initialize_js('OpenAssessmentEditor', js_context_dict)
         return frag
 
     def editor_context(self):
@@ -107,7 +110,7 @@ class StudioMixin(object):
         if not criteria:
             criteria = self.DEFAULT_CRITERIA
 
-        # To maintain backwards compatibility, if there is no 
+        # To maintain backwards compatibility, if there is no
         # feedback_default_text configured for the xblock, use the default text
         feedback_default_text = copy.deepcopy(self.rubric_feedback_default_text)
         if not feedback_default_text:
@@ -122,7 +125,8 @@ class StudioMixin(object):
             'criteria': criteria,
             'feedbackprompt': self.rubric_feedback_prompt,
             'feedback_default_text': feedback_default_text,
-            'allow_file_upload': self.allow_file_upload,
+            'file_upload_type': self.file_upload_type,
+            'white_listed_file_types': self.white_listed_file_types_string,
             'allow_latex': self.allow_latex,
             'leaderboard_show': self.leaderboard_show,
             'editor_assessments_order': [
@@ -220,7 +224,8 @@ class StudioMixin(object):
         self.rubric_feedback_default_text = data['feedback_default_text']
         self.submission_start = data['submission_start']
         self.submission_due = data['submission_due']
-        self.allow_file_upload = bool(data['allow_file_upload'])
+        self.file_upload_type = data['file_upload_type']
+        self.white_listed_file_types_string = data['white_listed_file_types']
         self.allow_latex = bool(data['allow_latex'])
         self.leaderboard_show = data['leaderboard_show']
 

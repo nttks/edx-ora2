@@ -1074,9 +1074,9 @@
 }
 
 
-.self-assessment__display__image,
-.peer-assessment__display__image,
-.submission__answer__display__image{
+.self-assessment__display__file,
+.peer-assessment__display__file,
+.submission__answer__display__file{
   @extend .submission__answer__display__content;
   max-height: 400px;
   @include text-align(left);
@@ -1086,7 +1086,7 @@
     max-width: 100%;
   }
 }
-.submission__answer__display__image
+.submission__answer__display__file
 .submission--image{
   max-height: 250px;
   max-width: 100%;

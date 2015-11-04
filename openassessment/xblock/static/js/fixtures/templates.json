@@ -110,7 +110,7 @@
             "save_status": "This response has not been saved.",
             "submit_enabled": false,
             "submission_due": "",
-            "allow_file_upload": true
+            "file_upload_type": "image"
         },
         "output": "oa_response_with_file_upload.html"
     },
