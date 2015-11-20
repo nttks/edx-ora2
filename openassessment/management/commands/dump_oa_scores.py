@@ -128,8 +128,11 @@ class Command(BaseCommand):
             user = user_by_anonymous_id(submission.student_id)
             row.append(user.username)
             # 'Submission Content'
-            raw_answer = Submission.objects.get(uuid=submission.submission_uuid).raw_answer
-            row.append(json.loads(raw_answer)['text'].replace('\n', '[\\n]'))
+            raw_answer = json.loads(Submission.objects.get(uuid=submission.submission_uuid).raw_answer)
+            # Note: 'parts' is added as top-level domain of 'raw_answer' since Cypress
+            # Currently, get only the first text from a list of answer parts
+            text = raw_answer['parts'][0]['text'] if 'parts' in raw_answer else raw_answer['text']
+            row.append(text.replace('\n', '[\\n]'))
             # 'Submission created at'
             row.append(submission.created_at)
             # 'Status'
