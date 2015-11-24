@@ -159,7 +159,7 @@ class TestPeerApi(CacheResetTest):
     Tests for the peer assessment API functions.
     """
 
-    CREATE_ASSESSMENT_NUM_QUERIES = 53
+    CREATE_ASSESSMENT_NUM_QUERIES = 54
 
     def setUp(self):
         super(TestPeerApi, self).setUp()

@@ -5,6 +5,23 @@ Tests for OpenAssessment response (submission) view.
 describe("OpenAssessment.ResponseView", function() {
 
     var FAKE_URL = "http://www.example.com";
+    var ALLOWED_IMAGE_MIME_TYPES = [
+        'image/gif',
+        'image/jpeg',
+        'image/pjpeg',
+        'image/png',
+    ];
+
+    var ALLOWED_FILE_MIME_TYPES = [
+        'application/pdf',
+        'image/gif',
+        'image/jpeg',
+        'image/pjpeg',
+        'image/png',
+    ];
+
+    var FILE_TYPE_WHITE_LIST = ['pdf', 'doc', 'docx', 'html'];
+    var FILE_EXT_BLACK_LIST = ['exe', 'msi', 'app', 'dmg'];
 
     var StubServer = function() {
 
@@ -20,15 +37,15 @@ describe("OpenAssessment.ResponseView", function() {
             function(defer) { defer.rejectWith(this, ["ERROR"]); }
         ).promise();
 
-        this.save = function(submission) {
+        this.save = function() {
             return successPromise;
         };
 
-        this.submit = function(submission) {
+        this.submit = function() {
             return successPromise;
         };
 
-        this.render = function(step) {
+        this.render = function() {
             return successPromise;
         };
 
@@ -38,7 +55,7 @@ describe("OpenAssessment.ResponseView", function() {
         };
 
         this.uploadUrlError = false;
-        this.getUploadUrl = function(contentType) {
+        this.getUploadUrl = function() {
             return this.uploadUrlError ? errorPromise : successPromiseWithUrl;
         };
 
@@ -71,15 +88,16 @@ describe("OpenAssessment.ResponseView", function() {
         this.loadAssessmentModules = function() {};
         this.peerView = { load: function() {} };
         this.gradeView = { load: function() {} };
-        this.showLoadError = function(msg) {};
-        this.toggleActionError = function(msg, step) {};
-        this.setUpCollapseExpand = function(sel) {};
+        this.showLoadError = function() {};
+        this.toggleActionError = function() {};
+        this.setUpCollapseExpand = function() {};
     };
 
     // Stubs
     var baseView = null;
     var server = null;
     var fileUploader = null;
+    var data = null;
 
     // View under test
     var view = null;
@@ -105,13 +123,19 @@ describe("OpenAssessment.ResponseView", function() {
 
         // Create stub objects
         server = new StubServer();
-        server.renderLatex = jasmine.createSpy('renderLatex')
+        server.renderLatex = jasmine.createSpy('renderLatex');
         fileUploader = new StubFileUploader();
         baseView = new StubBaseView();
+        data = {
+            "ALLOWED_IMAGE_MIME_TYPES": ALLOWED_IMAGE_MIME_TYPES,
+            "ALLOWED_FILE_MIME_TYPES": ALLOWED_FILE_MIME_TYPES,
+            "FILE_TYPE_WHITE_LIST": FILE_TYPE_WHITE_LIST,
+            "FILE_EXT_BLACK_LIST": FILE_EXT_BLACK_LIST
+        };
 
         // Create and install the view
         var el = $('#openassessment-base').get(0);
-        view = new OpenAssessment.ResponseView(el, server, fileUploader, baseView);
+        view = new OpenAssessment.ResponseView(el, server, fileUploader, baseView, data);
         view.installHandlers();
 
         // Stub the confirmation step
@@ -119,7 +143,7 @@ describe("OpenAssessment.ResponseView", function() {
         // To instead simulate the user cancelling the submission,
         // set `stubConfirm` to false.
         setStubConfirm(true);
-        spyOn(view, 'confirmSubmission').andCallFake(function() {
+        spyOn(view, 'confirmSubmission').and.callFake(function() {
             return $.Deferred(function(defer) {
                 if (stubConfirm) { defer.resolve(); }
                 else { defer.reject(); }
@@ -130,6 +154,9 @@ describe("OpenAssessment.ResponseView", function() {
     afterEach(function() {
         // Disable autosave polling (if it was enabled)
         view.setAutoSaveEnabled(false);
+
+        // Disable the unsaved page warning (if set)
+        view.unsavedWarningEnabled(false);
     });
 
     it("updates and retrieves response text correctly", function() {
@@ -166,7 +193,7 @@ describe("OpenAssessment.ResponseView", function() {
         loadFixtures('oa_response_with_file_upload.html');
         view.fileUploadAllowed = true;
         // Set download url blank
-        view.imageUrl('');
+        view.fileUrl('');
 
         // Response is blank --> submit button disabled
         view.response(['', '']);
@@ -184,7 +211,7 @@ describe("OpenAssessment.ResponseView", function() {
         loadFixtures('oa_response_with_file_upload.html');
         view.fileUploadAllowed = true;
         // Set download url
-        view.imageUrl(FAKE_URL);
+        view.fileUrl(FAKE_URL);
 
         // Response is blank --> submit button disabled
         view.response(['', '']);
@@ -236,14 +263,14 @@ describe("OpenAssessment.ResponseView", function() {
     });
 
     it("sends the saved submission to the server", function() {
-        spyOn(server, 'save').andCallThrough();
+        spyOn(server, 'save').and.callThrough();
         view.response(['Test response 1', 'Test response 2']);
         view.save();
         expect(server.save).toHaveBeenCalledWith(['Test response 1', 'Test response 2']);
     });
 
     it("submits a response to the server", function() {
-        spyOn(server, 'submit').andCallThrough();
+        spyOn(server, 'submit').and.callThrough();
         view.response(['Test response 1', 'Test response 2']);
         view.submit();
         expect(server.submit).toHaveBeenCalledWith(['Test response 1', 'Test response 2']);
@@ -252,7 +279,7 @@ describe("OpenAssessment.ResponseView", function() {
     it("allows the user to cancel before submitting", function() {
         // Simulate the user cancelling the submission
         setStubConfirm(false);
-        spyOn(server, 'submit').andCallThrough();
+        spyOn(server, 'submit').and.callThrough();
 
         // Start a submission
         view.response(['Test response 1', 'Test response 2']);
@@ -265,8 +292,8 @@ describe("OpenAssessment.ResponseView", function() {
     it("disables the submit button on submission", function() {
         // Prevent the server's response from resolving,
         // so we can see what happens before view gets re-rendered.
-        spyOn(server, 'submit').andCallFake(function() {
-            return $.Deferred(function(defer) {}).promise();
+        spyOn(server, 'submit').and.callFake(function() {
+            return $.Deferred(function() {}).promise();
         });
 
         view.response(['Test response 1', 'Test response 2']);
@@ -276,7 +303,7 @@ describe("OpenAssessment.ResponseView", function() {
 
     it("re-enables the submit button on submission error", function() {
         // Simulate a server error
-        spyOn(server, 'submit').andCallFake(function() {
+        spyOn(server, 'submit').and.callFake(function() {
             return $.Deferred(function(defer) {
                 defer.rejectWith(this, ['ENOUNKNOWN', 'Error occurred!']);
             }).promise();
@@ -292,7 +319,7 @@ describe("OpenAssessment.ResponseView", function() {
     it("re-enables the submit button after cancelling", function() {
         // Simulate the user cancelling the submission
         setStubConfirm(false);
-        spyOn(server, 'submit').andCallThrough();
+        spyOn(server, 'submit').and.callThrough();
 
         // Start a submission
         view.response(['Test response 1', 'Test response 2']);
@@ -304,7 +331,7 @@ describe("OpenAssessment.ResponseView", function() {
 
     it("moves to the next step on duplicate submission error", function() {
         // Simulate a "multiple submissions" server error
-        spyOn(server, 'submit').andCallFake(function() {
+        spyOn(server, 'submit').and.callFake(function() {
             return $.Deferred(function(defer) {
                 defer.rejectWith(this, ['ENOMULTI', 'Multiple submissions error']);
             }).promise();
@@ -354,128 +381,158 @@ describe("OpenAssessment.ResponseView", function() {
         expect(view.unsavedWarningEnabled()).toBe(false);
     });
 
-    it("autosaves after a user changes a response", function() {
-        // Disable the autosave delay after changing/saving a response
-        view.AUTO_SAVE_WAIT = -1;
+    describe("auto save", function() {
+       beforeEach(function() {
+          jasmine.clock().install();
+       });
 
-        // Check that the problem is initially unsaved
-        expect(view.saveStatus()).toContain('not been saved');
+        afterEach(function() {
+            jasmine.clock().uninstall();
+        });
 
-        // Change the response
-        view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
-        view.handleResponseChanged();
+        it("autosaves after a user changes a response", function() {
+            // Disable the autosave delay after changing/saving a response
+            view.AUTO_SAVE_WAIT = -1;
 
-        // Usually autosave would be called by a timer.
-        // For testing purposes, we disable the timer
-        // and trigger the autosave manually.
-        view.autoSave();
+            // Check that the problem is initially unsaved
+            expect(view.saveStatus()).toContain('not been saved');
 
-        // Expect that the problem has been saved
-        expect(view.saveStatus()).toContain('saved but not submitted');
+            // Change the response
+            view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
+            view.handleResponseChanged();
 
-        // Expect that the unsaved warning is disabled
-        expect(view.unsavedWarningEnabled()).toBe(false);
-    });
+            // Usually autosave would be called by a timer.
+            // For testing purposes, we disable the timer
+            // and trigger the autosave manually.
+            view.autoSave();
 
-    it("schedules autosave polling", function() {
-        runs(function() {
+            // Expect that the problem has been saved
+            expect(view.saveStatus()).toContain('saved but not submitted');
+
+            // Expect that the unsaved warning is disabled
+            expect(view.unsavedWarningEnabled()).toBe(false);
+        });
+
+        it("schedules autosave polling", function() {
             // Spy on the autosave call
-            spyOn(view, 'autoSave').andCallThrough();
+            spyOn(view, 'autoSave').and.callThrough();
 
             // Enable autosave with a short poll interval
             view.AUTO_SAVE_POLL_INTERVAL = 1;
             view.setAutoSaveEnabled(true);
+
+            // Expect that auto save has happened after the poll interval
+            jasmine.clock().tick(10);
+            expect(view.autoSave.calls.count() > 0).toBeTruthy();
         });
 
-        // Wait for autosave to be called
-        waitsFor(function() {
-            return view.autoSave.callCount > 0;
-        }, "AutoSave should have been called", 5000);
-    });
+        it("stops autosaving after a save error", function() {
+            // Disable the autosave delay after changing/saving a response
+            view.AUTO_SAVE_WAIT = -1;
 
-    it("stops autosaving after a save error", function() {
-        // Disable the autosave delay after changing/saving a response
-        view.AUTO_SAVE_WAIT = -1;
+            // Simulate a server error
+            var errorPromise = $.Deferred(function(defer) {
+                defer.rejectWith(this, ["This response could not be saved"]);
+            }).promise();
+            spyOn(server, 'save').and.callFake(function() { return errorPromise; });
 
-        // Simulate a server error
-        var errorPromise = $.Deferred(function(defer) {
-            defer.rejectWith(this, ["This response could not be saved"]);
-        }).promise();
-        spyOn(server, 'save').andCallFake(function() { return errorPromise; });
+            // Change the response and save it
+            view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
+            view.handleResponseChanged();
+            view.save();
 
-        // Change the response and save it
-        view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
-        view.handleResponseChanged();
-        view.save();
+            // Expect that the save status shows an error
+            expect(view.saveStatus()).toContain('Error');
 
-        // Expect that the save status shows an error
-        expect(view.saveStatus()).toContain('Error');
+            // Autosave (usually would be called by a timer, but we disable
+            // that for testing purposes).
+            view.autoSave();
 
-        // Autosave (usually would be called by a timer, but we disable
-        // that for testing purposes).
-        view.autoSave();
+            // The server save should have been called just once
+            // (autosave didn't call it).
+            expect(server.save.calls.count()).toEqual(1);
+        });
 
-        // The server save shoulde have been called just once
-        // (autosave didn't call it).
-        expect(server.save.callCount).toEqual(1);
-    });
+        it("waits after user changes a response to autosave", function() {
+            // Set a long autosave delay
+            view.AUTO_SAVE_WAIT = 900000;
 
-    it("waits after user changes a response to autosave", function() {
-        // Set a long autosave delay
-        view.AUTO_SAVE_WAIT = 900000;
+            // Change the response
+            view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
+            view.handleResponseChanged();
 
-        // Change the response
-        view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
-        view.handleResponseChanged();
+            // Autosave
+            view.autoSave();
 
-        // Autosave
-        view.autoSave();
+            // Expect that the problem is still unsaved
+            expect(view.saveStatus()).toContain('not been saved');
+        });
 
-        // Expect that the problem is still unsaved
-        expect(view.saveStatus()).toContain('not been saved');
-    });
+        it("does not autosave if a user hasn't changed the response", function() {
+            // Disable the autosave delay after changing/saving a response
+            view.AUTO_SAVE_WAIT = -1;
 
-    it("does not autosave if a user hasn't changed the response", function() {
-        // Disable the autosave delay after changing/saving a response
-        view.AUTO_SAVE_WAIT = -1;
+            // Autosave (usually would be called by a timer, but we disable
+            // that for testing purposes).
+            view.autoSave();
 
-        // Autosave (usually would be called by a timer, but we disable
-        // that for testing purposes).
-        view.autoSave();
+            // Since we haven't made any changes, the response should still be unsaved.
+            expect(view.saveStatus()).toContain('not been saved');
+        });
 
-        // Since we haven't made any changes, the response should still be unsaved.
-        expect(view.saveStatus()).toContain('not been saved');
     });
 
     it("selects too large of a file", function() {
-        spyOn(baseView, 'toggleActionError').andCallThrough();
-        var files = [{type: 'image/jpg', size: 6000000, name: 'huge-picture.jpg', data: ''}];
-        view.prepareUpload(files);
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 4MB or less.');
+        spyOn(baseView, 'toggleActionError').and.callThrough();
+        var files = [{type: 'image/jpeg', size: 6000000, name: 'huge-picture.jpg', data: ''}];
+        view.prepareUpload(files, 'image');
+        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 5MB or less.');
     });
 
-    it("selects the wrong file type", function() {
-        spyOn(baseView, 'toggleActionError').andCallThrough();
-        var files = [{type: 'bogus/jpg', size: 1024, name: 'picture.exe', data: ''}];
-        view.prepareUpload(files);
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File must be an image.');
+    it("selects the wrong image file type", function() {
+        spyOn(baseView, 'toggleActionError').and.callThrough();
+        var files = [{type: 'image/jpg', size: 1024, name: 'picture.exe', data: ''}];
+        view.prepareUpload(files, 'image');
+        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'You can upload files with these file types: JPG, PNG or GIF');
+    });
+
+    it("selects the wrong pdf or image file type", function() {
+        spyOn(baseView, 'toggleActionError').and.callThrough();
+        var files = [{type: 'application/exe', size: 1024, name: 'application.exe', data: ''}];
+        view.prepareUpload(files, 'pdf-and-image');
+        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'You can upload files with these file types: JPG, PNG, GIF or PDF');
+    });
+
+    it("selects the wrong file extension", function() {
+        spyOn(baseView, 'toggleActionError').and.callThrough();
+        var files = [{type: 'application/exe', size: 1024, name: 'application.exe', data: ''}];
+        view.prepareUpload(files, 'custom');
+        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'You can upload files with these file types: pdf, doc, docx, html');
+    });
+
+    it("submits a file with extension in the black list", function() {
+        spyOn(baseView, 'toggleActionError').and.callThrough();
+        view.data.FILE_TYPE_WHITE_LIST = ['exe'];
+        var files = [{type: 'application/exe', size: 1024, name: 'application.exe', data: ''}];
+        view.prepareUpload(files, 'custom');
+        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File type is not allowed.');
     });
 
     it("uploads a file via ora2 server", function() {
-        spyOn(view, 'imageUrl').andCallThrough();
+        spyOn(view, 'fileUrl').and.callThrough();
         var files = [{type: 'image/jpg', size: 1024, name: 'picture.jpg', data: ''}];
         view.prepareUpload(files);
-        expect(view.imageUrl).toHaveBeenCalledWith(FAKE_URL);
+        expect(view.fileUrl).toHaveBeenCalledWith(FAKE_URL);
     });
 
     it("displays an error if a file could not be uploaded", function() {
         // Configure the file upload server to return an error
         server.uploadError = true;
-        spyOn(baseView, 'toggleActionError').andCallThrough();
+        spyOn(baseView, 'toggleActionError').and.callThrough();
 
         // Attempt to upload a file
-        var files = [{type: 'image/jpg', size: 1024, name: 'picture.jpg', data: ''}];
-        view.prepareUpload(files);
+        var files = [{type: 'image/jpeg', size: 1024, name: 'picture.jpg', data: ''}];
+        view.prepareUpload(files, 'image');
 
         // Expect an error to be displayed
         expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'ERROR');
