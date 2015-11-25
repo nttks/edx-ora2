@@ -111,7 +111,7 @@
                                 </article>
                             </li>
                             {% endif %}
-                            {% if allow_file_upload %}
+                            {% if file_upload_type %}
                             <li class="field">
                                 <div id="upload__error">
                                     <div class="message message--inline message--error message--error-server">
@@ -124,7 +124,7 @@
                             </li>
                             <li>
                                 <div class="submission__answer__display__image">
-                                    <img id="submission__answer__image"
+                                    <img id="submission__answer__file"
                                          class="submission--image"
                                          {% if file_url %}
                                          alt="{% trans "The image associated with your submission." %}"
@@ -149,7 +149,6 @@
                         <a aria-role="button" href="#" id="step--response__submit"
                             class="action action--submit step--response__submit {{ submit_enabled|yesno:",is--disabled" }}" style="background-color:#008cba; border-color:#007095;">
                             <span class="copy">{% trans "Submit your response and move to the next step" %}</span>
-                            <i class="ico icon-caret-right"></i>
                         </a>
                     </li>
                 </ul>
