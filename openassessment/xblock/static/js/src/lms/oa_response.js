@@ -1,16 +1,16 @@
 /**
-Interface for response (submission) view.
+ Interface for response (submission) view.
 
-Args:
-    element (DOM element): The DOM element representing the XBlock.
-    server (OpenAssessment.Server): The interface to the XBlock server.
-    fileUploader (OpenAssessment.FileUploader): File uploader instance.
-    baseView (OpenAssessment.BaseView): Container view.
-    data (Object): The data object passed from XBlock backend.
+ Args:
+ element (DOM element): The DOM element representing the XBlock.
+ server (OpenAssessment.Server): The interface to the XBlock server.
+ fileUploader (OpenAssessment.FileUploader): File uploader instance.
+ baseView (OpenAssessment.BaseView): Container view.
+ data (Object): The data object passed from XBlock backend.
 
-Returns:
-    OpenAssessment.ResponseView
-**/
+ Returns:
+ OpenAssessment.ResponseView
+ **/
 OpenAssessment.ResponseView = function(element, server, fileUploader, baseView, data) {
     this.element = element;
     this.server = server;
@@ -27,7 +27,6 @@ OpenAssessment.ResponseView = function(element, server, fileUploader, baseView, 
     this.fileUploaded = false;
 };
 
-
 OpenAssessment.ResponseView.prototype = {
 
     // Milliseconds between checks for whether we should autosave.
@@ -41,8 +40,8 @@ OpenAssessment.ResponseView.prototype = {
     MAX_FILE_SIZE: 4194304,
 
     /**
-    Load the response (submission) view.
-    **/
+     Load the response (submission) view.
+     **/
     load: function() {
         var view = this;
         this.server.render('submission').done(
@@ -64,8 +63,8 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Install event handlers for the view.
-    **/
+     Install event handlers for the view.
+     **/
     installHandlers: function() {
         var sel = $('#openassessment__response', this.element);
         var view = this;
@@ -110,24 +109,24 @@ OpenAssessment.ResponseView.prototype = {
             function(eventObject) {
                 eventObject.preventDefault();
                 // extract typed-in response and replace newline with br
-                var preview_text = sel.find('.submission__answer__part__text__value').val();
-                var preview_container = sel.find('#preview_content');
-                preview_container.html(preview_text.replace(/\r\n|\r|\n/g,"<br />"));
+                var previewText = sel.find('.submission__answer__part__text__value').val();
+                var previewContainer = sel.find('#preview_content');
+                previewContainer.html(previewText.replace(/\r\n|\r|\n/g,"<br />"));
 
                 // Render in mathjax
                 sel.find('#submission__preview__item').show();
-                MathJax.Hub.Queue(['Typeset', MathJax.Hub, preview_container[0]]);
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, previewContainer[0]]);
             }
         );
     },
 
     /**
-    Enable or disable autosave polling.
+     Enable or disable autosave polling.
 
-    Args:
-        enabled (boolean): If true, start polling for whether we need to autosave.
-            Otherwise, stop polling.
-    **/
+     Args:
+     enabled (boolean): If true, start polling for whether we need to autosave.
+     Otherwise, stop polling.
+     **/
     setAutoSaveEnabled: function(enabled) {
         if (enabled) {
             if (this.autoSaveTimerId === null) {
@@ -145,20 +144,20 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Enable/disable the submit button.
-    Check that whether the submit button is enabled.
+     Enable/disable the submit button.
+     Check that whether the submit button is enabled.
 
-    Args:
-        enabled (bool): If specified, set the state of the button.
+     Args:
+     enabled (bool): If specified, set the state of the button.
 
-    Returns:
-        bool: Whether the button is enabled.
+     Returns:
+     bool: Whether the button is enabled.
 
-    Examples:
-        >> view.submitEnabled(true);  // enable the button
-        >> view.submitEnabled();  // check whether the button is enabled
-        >> true
-    **/
+     Examples:
+     >> view.submitEnabled(true);  // enable the button
+     >> view.submitEnabled();  // check whether the button is enabled
+     >> true
+     **/
     submitEnabled: function(enabled) {
         var sel = $('#step--response__submit', this.element);
         if (typeof enabled === 'undefined') {
@@ -169,23 +168,23 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Enable/disable the save button.
-    Check whether the save button is enabled.
+     Enable/disable the save button.
+     Check whether the save button is enabled.
 
-    Also enables/disables a beforeunload handler to warn
-    users about navigating away from the page with unsaved changes.
+     Also enables/disables a beforeunload handler to warn
+     users about navigating away from the page with unsaved changes.
 
-    Args:
-        enabled (bool): If specified, set the state of the button.
+     Args:
+     enabled (bool): If specified, set the state of the button.
 
-    Returns:
-        bool: Whether the button is enabled.
+     Returns:
+     bool: Whether the button is enabled.
 
-    Examples:
-        >> view.submitEnabled(true);  // enable the button
-        >> view.submitEnabled();  // check whether the button is enabled
-        >> true
-    **/
+     Examples:
+     >> view.submitEnabled(true);  // enable the button
+     >> view.submitEnabled();  // check whether the button is enabled
+     >> true
+     **/
     saveEnabled: function(enabled) {
         var sel = $('#submission__save', this.element);
         if (typeof enabled === 'undefined') {
@@ -196,10 +195,10 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Enable/disable the preview button.
+     Enable/disable the preview button.
 
-    Works exactly the same way as saveEnabled method.
-    **/
+     Works exactly the same way as saveEnabled method.
+     **/
     previewEnabled: function(enabled) {
         var sel = $('#submission__preview', this.element);
         if (typeof enabled === 'undefined') {
@@ -209,15 +208,15 @@ OpenAssessment.ResponseView.prototype = {
         }
     },
     /**
-    Set the save status message.
-    Retrieve the save status message.
+     Set the save status message.
+     Retrieve the save status message.
 
-    Args:
-        msg (string): If specified, the message to display.
+     Args:
+     msg (string): If specified, the message to display.
 
-    Returns:
-        string: The current status message.
-    **/
+     Returns:
+     string: The current status message.
+     **/
     saveStatus: function(msg) {
         var sel = $('#response__save_status h3', this.element);
         if (typeof msg === 'undefined') {
@@ -231,19 +230,19 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Enable/disable the "navigate away" warning to alert the user of unsaved changes.
+     Enable/disable the "navigate away" warning to alert the user of unsaved changes.
 
-    Args:
-        enabled (bool): If specified, set whether the warning is enabled.
+     Args:
+     enabled (bool): If specified, set whether the warning is enabled.
 
-    Returns:
-        bool: Whether the warning is enabled.
+     Returns:
+     bool: Whether the warning is enabled.
 
-    Examples:
-        >> view.unsavedWarningEnabled(true); // enable the "unsaved" warning
-        >> view.unsavedWarningEnabled();
-        >> true
-    **/
+     Examples:
+     >> view.unsavedWarningEnabled(true); // enable the "unsaved" warning
+     >> view.unsavedWarningEnabled();
+     >> true
+     **/
     unsavedWarningEnabled: function(enabled) {
         if (typeof enabled === 'undefined') {
             return (window.onbeforeunload !== null);
@@ -252,8 +251,7 @@ OpenAssessment.ResponseView.prototype = {
             if (enabled) {
                 window.onbeforeunload = function() {
                     // Keep this on one big line to avoid gettext bug: http://stackoverflow.com/a/24579117
-                    /* jshint maxlen:300 */
-                    return gettext("If you leave this page without saving or submitting your response, you'll lose any work you've done on the response.");
+                    return gettext("If you leave this page without saving or submitting your response, you'll lose any work you've done on the response.");  // jscs:ignore maximumLineLength
                 };
             }
             else {
@@ -263,15 +261,15 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Set the response texts.
-    Retrieve the response texts.
+     Set the response texts.
+     Retrieve the response texts.
 
-    Args:
-        texts (array of strings): If specified, the texts to set for the response.
+     Args:
+     texts (array of strings): If specified, the texts to set for the response.
 
-    Returns:
-        array of strings: The current response texts.
-    **/
+     Returns:
+     array of strings: The current response texts.
+     **/
     response: function(texts) {
         var sel = $('.submission__answer__part__text__value', this.element);
         if (typeof texts === 'undefined') {
@@ -286,25 +284,25 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Check whether the response texts have changed since the last save.
+     Check whether the response texts have changed since the last save.
 
-    Returns: boolean
-    **/
+     Returns: boolean
+     **/
     responseChanged: function() {
         var savedResponse = this.savedResponse;
         return this.response().some(function(element, index) {
-                return element !== savedResponse[index];
+            return element !== savedResponse[index];
         });
 
     },
 
     /**
-    Automatically save the user's response if certain conditions are met.
+     Automatically save the user's response if certain conditions are met.
 
-    Usually, this would be called by a timer (see `setAutoSaveEnabled()`).
-    For testing purposes, it's useful to disable the timer
-    and call this function synchronously.
-    **/
+     Usually, this would be called by a timer (see `setAutoSaveEnabled()`).
+     For testing purposes, it's useful to disable the timer
+     and call this function synchronously.
+     **/
     autoSave: function() {
         var timeSinceLastChange = Date.now() - this.lastChangeTime;
 
@@ -320,14 +318,14 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Enable/disable the submission and save buttons based on whether
-    the user has entered a response.
-    **/
+     Enable/disable the submission and save buttons based on whether
+     the user has entered a response.
+     **/
     handleResponseChanged: function() {
         // Enable the save/submit button only for non-blank responses
         var isNotBlank = !this.response().every(function(element) {
-                return $.trim(element) === '';
-            });
+            return $.trim(element) === '';
+        });
         // If image attachments are allowed, need to check whether file is already uploaded
         var isUploaded = (!this.fileUploadAllowed || this.fileUrl() != '');
         this.submitEnabled(isNotBlank && isUploaded);
@@ -346,8 +344,8 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Save a response without submitting it.
-    **/
+     Save a response without submitting it.
+     **/
     save: function() {
         // If there were errors on previous calls to save, forget
         // about them for now.  If an error occurs on *this* save,
@@ -389,8 +387,8 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Send a response submission to the server and update the view.
-    **/
+     Send a response submission to the server and update the view.
+     **/
     submit: function() {
         // Immediately disable the submit button to prevent multiple submission
         this.submitEnabled(false);
@@ -402,7 +400,7 @@ OpenAssessment.ResponseView.prototype = {
         // check if there is a file selected but not uploaded yet
         if (view.files !== null && !view.fileUploaded) {
             var msg = gettext('Do you want to upload your file before submitting?');
-            if(confirm(msg)) {
+            if (confirm(msg)) {
                 fileDefer = view.fileUpload();
             } else {
                 view.submitEnabled(true);
@@ -449,8 +447,8 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Transition the user to the next step in the workflow.
-    **/
+     Transition the user to the next step in the workflow.
+     **/
     moveToNextStep: function() {
         this.load();
         this.baseView.loadAssessmentModules();
@@ -461,17 +459,16 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     /**
-    Make the user confirm before submitting a response.
+     Make the user confirm before submitting a response.
 
-    Returns:
-        JQuery deferred object, which is:
-        * resolved if the user confirms the submission
-        * rejected if the user cancels the submission
-    **/
+     Returns:
+     JQuery deferred object, which is:
+     * resolved if the user confirms the submission
+     * rejected if the user cancels the submission
+     **/
     confirmSubmission: function() {
         // Keep this on one big line to avoid gettext bug: http://stackoverflow.com/a/24579117
-        /* jshint maxlen:300 */
-        var msg = gettext("You're about to submit your response for this assignment. After you submit this response, you can't change it or submit a new response.");
+        var msg = gettext("You're about to submit your response for this assignment. After you submit this response, you can't change it or submit a new response.");  // jscs:ignore maximumLineLength
         // TODO -- UI for confirmation dialog instead of JS confirm
         return $.Deferred(function(defer) {
             if (confirm(msg)) { defer.resolve(); }
@@ -485,11 +482,11 @@ OpenAssessment.ResponseView.prototype = {
      larger than the maximum file size.
 
      Args:
-        files (list): A collection of files used for upload. This function assumes
-            there is only one file being uploaded at any time. This file must
-            be less than 5 MB and an image, PDF or other allowed types.
-        uploadType (string): uploaded file type allowed, could be none, image,
-            file or custom.
+     files (list): A collection of files used for upload. This function assumes
+     there is only one file being uploaded at any time. This file must
+     be less than 5 MB and an image, PDF or other allowed types.
+     uploadType (string): uploaded file type allowed, could be none, image,
+     file or custom.
 
      **/
     prepareUpload: function(files, uploadType) {
@@ -535,7 +532,6 @@ OpenAssessment.ResponseView.prototype = {
             this.fileUpload();
         }
     },
-
 
     /**
      Manages file uploads for submission attachments.
