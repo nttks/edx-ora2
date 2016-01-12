@@ -562,6 +562,7 @@ OpenAssessment.ResponseView.prototype = {
                 } else {
                     view.handleResponseChanged();
                 }
+                $('.submission__answer__display__file.is--hidden', view.element).removeClass('is--hidden');
             }
         ).fail(handleError);
     },

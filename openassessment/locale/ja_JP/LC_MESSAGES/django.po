@@ -2034,3 +2034,109 @@ msgstr "あなたの得点"
 #: openassessment/templates/openassessmentblock/oa_base.html
 msgid "Leaderboard"
 msgstr "上位成績者"
+
+# openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid "Allow File Upload"
+msgstr "ファイルアップロードを許可する"
+
+# openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid "Image File"
+msgstr "画像ファイル"
+
+# openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid "PDF or Image File"
+msgstr "PDFもしくは画像ファイル"
+
+# openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid "Custom File Types"
+msgstr "カスタムファイルタイプ"
+
+# openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid ""
+"Specify whether learners can submit a file along with their text response. "
+"Select Image to allow JPG, GIF, or PNG files. Select PDF or Image to allow "
+"PDF files and images. Select Custom File Types to allow files with "
+"extensions that you specify below. (Use this option with caution.)"
+msgstr ""
+"受講者がレポートと一緒にファイルを送信できるかどうかを指定します。画像はJPG、GIF、またはPNGファイルを可能にします。PDFや画像は、PDF、画像を可能にします。カスタムファイルタイプは指定した拡張子を許可します。（このオプションは慎重に使用してください）"
+
+# openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid "File Types"
+msgstr "許可する拡張子"
+
+# openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid ""
+"Enter the file extensions, separated by commas, that you want learners to be"
+" able to upload. For example: pdf,doc,docx."
+msgstr "受講者にアップロードを許可する拡張子拡張子を指定します。例：pdf,doc,docx"
+
+# openassessment/templates/openassessmentblock/oa_uploaded_file.html
+msgid "The image associated with this submission."
+msgstr "提出ファイル"
+
+# openassessment/templates/openassessmentblock/oa_uploaded_file.html
+msgid "View the file associated with this submission."
+msgstr "ファイルを表示する"
+
+# openassessment/templates/openassessmentblock/oa_uploaded_file.html
+msgid ""
+"(Caution: This file was uploaded by another course learner and has not been "
+"verified, screened, approved, reviewed or endorsed by edX. If you decide to "
+"access it, you do so at your own risk.)"
+msgstr ""
+"（注意：このファイルは、他受講者によってアップロードされ、検証スクリーニング、承認、レビューや承認されていません。あなたがそれにアクセスすることを決定した場合は、ご自身の責任で行ってください。）"
+
+# openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
+msgid "Your Upload"
+msgstr "提出ファイル"
+
+# openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html
+# openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html
+# openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+msgid "Associated File"
+msgstr "提出ファイル"
+
+# openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "We could not upload this file"
+msgstr "フィアルアップロードできませんでした。"
+
+# openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "Select a file to upload for this submission."
+msgstr "アップロードするファイルを選択してください。"
+
+# openassessment/templates/openassessmentblock/response/oa_response_graded.html
+# openassessment/templates/openassessmentblock/response/oa_response_submitted.html
+msgid "Your Uploaded File"
+msgstr "提出ファイル"
+
+# openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "The file associated with this response."
+msgstr "提出ファイル"
+
+# openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid ""
+"Caution: This file was uploaded by another course learner and has not been "
+"verified, screened, approved, reviewed or endorsed by edX. If you decide to "
+"access it, you do so at your own risk."
+msgstr ""
+"注意：このファイルは、他のコースの学習者によってアップロードされたとEDXにより、検証スクリーニング、承認、レビューや承認されていません。あなたがそれにアクセスすることを決定した場合は、ご自身の責任で行ってください。"
+
+# openassessment/xblock/submission_mixin.py
+msgid "There was an error uploading your file."
+msgstr "ファイルのアップロードに失敗しました。"
+
+# openassessment/xblock/submission_mixin.py
+msgid "Content type must be GIF, PNG or JPG."
+msgstr "画像ファイルを指定してください。GIF, PNG または JPG"
+
+# openassessment/xblock/submission_mixin.py
+msgid "Content type must be PDF, GIF, PNG or JPG."
+msgstr "PDFもしくは画像ファイルを指定してください。GIF, PNG または JPG"
+
+# openassessment/xblock/submission_mixin.py
+msgid "File type must be one of the following types: "
+msgstr "次に示すファイルを指定してください。"
+
+# openassessment/xblock/submission_mixin.py
+msgid "File type is not allowed."
+msgstr "指定されたファイルは不正です。"

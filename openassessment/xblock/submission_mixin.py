@@ -35,7 +35,9 @@ class SubmissionMixin(object):
 
     ALLOWED_IMAGE_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/png']
 
-    ALLOWED_FILE_MIME_TYPES = ['application/pdf'] + ALLOWED_IMAGE_MIME_TYPES
+    ALLOWED_PDF_MIME_TYPES = ['application/pdf']
+
+    ALLOWED_FILE_MIME_TYPES = ALLOWED_PDF_MIME_TYPES + ALLOWED_IMAGE_MIME_TYPES
 
     # taken from http://www.howtogeek.com/137270/50-file-extensions-that-are-potentially-dangerous-on-windows/
     # and http://pcsupport.about.com/od/tipstricks/a/execfileext.htm
@@ -234,9 +236,24 @@ class SubmissionMixin(object):
         else:
             content_type = file.content_type
 
-        # TODO FIX
-        #if not content_type.startswith('image/'):
-        #    return json_response({'success': False, 'msg': self._(u"contentType must be an image.")})
+        if self.file_upload_type == 'image' and content_type not in self.ALLOWED_IMAGE_MIME_TYPES:
+            return json_response({'success': False, 'msg': self._(u"Content type must be GIF, PNG or JPG.")})
+
+        if self.file_upload_type == 'pdf-and-image' and content_type not in self.ALLOWED_FILE_MIME_TYPES:
+            return json_response({'success': False, 'msg': self._(u"Content type must be PDF, GIF, PNG or JPG.")})
+
+        file_name_parts = file.name.split('.')
+        file_ext = file_name_parts[-1] if len(file_name_parts) > 1 else None
+        if self.file_upload_type == 'custom' and file_ext not in self.white_listed_file_types:
+            return json_response({'success': False, 'msg': self._(u"File type must be one of the following types: {}").format(
+                ', '.join(self.white_listed_file_types))})
+
+        # validate content type for only pdf file
+        if self.file_upload_type == 'custom' and self.white_listed_file_types == ['pdf'] and content_type not in self.ALLOWED_PDF_MIME_TYPES:
+            return json_response({'success': False, 'msg': self._(u"Content type must be PDF.")})
+
+        if file_ext in self.FILE_EXT_BLACK_LIST:
+            return json_response({'success': False, 'msg': self._(u"File type is not allowed.")})
 
         try:
             key = self._get_student_item_key()

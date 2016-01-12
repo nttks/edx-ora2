@@ -145,7 +145,7 @@ msgstr "課題に対する回答を投稿しようとしています。回答を
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "File size must be 5MB or less."
-msgstr "ファイルサイズは5MB以下である必要があります"
+msgstr "ファイルサイズは5MB以下である必要があります。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js
@@ -241,10 +241,26 @@ msgstr "課題の項目として選択されていないステップの修正は
 msgid "Your browser does not support file upload feature."
 msgstr "このブラウザはファイルアップロード機能に対応しておりません。申し訳ありませんが、他のブラウザをお使いください。"
 
-#: openassessment/xblock/static/js/src/lms/oa_response.js
-msgid "File size must be 4MB or less."
-msgstr "ファイルサイズは4MB以下である必要があります。"
-
 #: openassessment/xblock/static/js/src/oa_server.js
 msgid "Could not upload file. Try again later."
 msgstr "アップロードできませんでした。しばらしく時間をおいてから再操作してください。"
+
+# openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "Do you want to upload your file before submitting?"
+msgstr "レポート提出前にファイルをアップロードしますか？"
+
+# openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "You can upload files with these file types: "
+msgstr "次に示すファイルを指定してください。"
+
+# openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "File type is not allowed."
+msgstr "指定されたファイルは不正です。"
+
+# openassessment/xblock/static/js/src/studio/oa_edit_settings.js
+msgid "File types can not be empty."
+msgstr "ファイルタイプを指定してください。"
+
+# openassessment/xblock/static/js/src/studio/oa_edit_settings.js
+msgid "The following file types are not allowed: "
+msgstr "次に示す不正なファイルタイプが含まれています。"
