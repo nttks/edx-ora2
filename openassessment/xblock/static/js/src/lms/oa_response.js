@@ -505,7 +505,7 @@ OpenAssessment.ResponseView.prototype = {
         if (files[0].size > this.MAX_FILE_SIZE) {
             this.baseView.toggleActionError(
                 'upload',
-                gettext("File size must be 5MB or less.")
+                gettext("File size must be 4MB or less.")
             );
         } else if (uploadType === "image" && this.data.ALLOWED_IMAGE_MIME_TYPES.indexOf(this.fileType) === -1) {
             this.baseView.toggleActionError(

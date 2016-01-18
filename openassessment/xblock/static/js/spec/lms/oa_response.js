@@ -473,9 +473,9 @@ describe("OpenAssessment.ResponseView", function() {
 
     it("selects too large of a file", function() {
         spyOn(baseView, 'toggleActionError').andCallThrough();
-        var files = [{type: 'image/jpeg', size: 6000000, name: 'huge-picture.jpg', data: ''}];
+        var files = [{type: 'image/jpeg', size: 5000000, name: 'huge-picture.jpg', data: ''}];
         view.prepareUpload(files, 'image');
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 5MB or less.');
+        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 4MB or less.');
     });
 
     it("selects the wrong file type", function() {
