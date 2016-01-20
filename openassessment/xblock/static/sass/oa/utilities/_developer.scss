@@ -1086,10 +1086,46 @@
     max-width: 100%;
   }
 }
-.submission__answer__display__file
-.submission--image{
-  max-height: 250px;
-  max-width: 100%;
+.self-assessment__display__file,
+.peer-assessment__display__file,
+.submission__answer__display__file{
+  .submission--image{
+    max-height: 250px;
+    max-width: 100%;
+  }
+  .submission--file{
+    .fa-file-pdf-o::before{
+      color: #c00;
+      vertical-align: sub;
+      font-size: 1.5rem;
+    }
+    .file--button{
+      @extend %action-2;
+      @extend %btn--secondary;
+      margin-left: 5px;
+      background-color: #43ac6a;
+      padding: 5px 15px;
+      &:hover, &:focus{
+        background-color: lighten(#43ac6a, 10%);
+      }
+    }
+  }
+}
+.peer-assessment__display__file{
+  .submission--file{
+    .fa-file-pdf-o::before{
+      font-size: 2rem;
+    }
+    .file--button{
+      margin-left: 10px;
+      padding: 8px 20px;
+      font-size: 1.2rem;
+    }
+  }
+  .submission_file_warning{
+    margin-top: 10px;
+    color: #C00;
+  }
 }
 
 // Developer SASS for Continued Grading.

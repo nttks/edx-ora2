@@ -518,10 +518,18 @@ OpenAssessment.ResponseView.prototype = {
                 gettext("You can upload files with these file types: ") + "JPG, PNG, GIF or PDF"
             );
         } else if (uploadType === "custom" && this.data.FILE_TYPE_WHITE_LIST.indexOf(ext) === -1) {
-            this.baseView.toggleActionError(
-                'upload',
-                gettext("You can upload files with these file types: ") + this.data.FILE_TYPE_WHITE_LIST.join(", ")
-            );
+            // Check only pdf file of custom.
+            if (this.data.FILE_TYPE_WHITE_LIST.length === 1 && this.data.FILE_TYPE_WHITE_LIST[0] === 'pdf') {
+                this.baseView.toggleActionError(
+                    'upload',
+                    gettext("You can upload pdf file.")
+                );
+            } else {
+                this.baseView.toggleActionError(
+                    'upload',
+                    gettext("You can upload files with these file types: ") + this.data.FILE_TYPE_WHITE_LIST.join(", ")
+                );
+            }
         } else if (this.data.FILE_EXT_BLACK_LIST.indexOf(ext) !== -1) {
             this.baseView.toggleActionError(
                 'upload',

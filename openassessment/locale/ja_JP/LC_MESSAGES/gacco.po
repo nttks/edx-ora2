@@ -92,11 +92,11 @@ msgstr "提出ファイル"
 
 # openassessment/templates/openassessmentblock/oa_uploaded_file.html
 msgid "View the file associated with this submission."
-msgstr "ファイルを表示する"
+msgstr "内容を確認する"
 
 # openassessment/templates/openassessmentblock/oa_uploaded_file.html
 msgid "(Caution: This file was uploaded by another course learner and has not been verified, screened, approved, reviewed or endorsed by edX. If you decide to access it, you do so at your own risk.)"
-msgstr "（注意：このファイルは、他受講者によってアップロードされ、検証スクリーニング、承認、レビューや承認されていません。あなたがそれにアクセスすることを決定した場合は、ご自身の責任で行ってください。）"
+msgstr "（注意：このファイルは、他の受講者によって提出されたものです。ファイルの内容について、gaccoは関与いたしかねますことご了承ください。なお、gaccoのシステムによりウイルススキャンは実施しておりますが、お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。）"
 
 # openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Your Upload"
@@ -110,7 +110,7 @@ msgstr "提出ファイル"
 
 # openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "We could not upload this file"
-msgstr "フィアルアップロードできませんでした。"
+msgstr "ファイルアップロードできませんでした。"
 
 # openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Select a file to upload for this submission."
@@ -127,7 +127,7 @@ msgstr "提出ファイル"
 
 # openassessment/templates/openassessmentblock/staff_debug/student_info.html
 msgid "Caution: This file was uploaded by another course learner and has not been verified, screened, approved, reviewed or endorsed by edX. If you decide to access it, you do so at your own risk."
-msgstr "注意：このファイルは、他のコースの学習者によってアップロードされたとEDXにより、検証スクリーニング、承認、レビューや承認されていません。あなたがそれにアクセスすることを決定した場合は、ご自身の責任で行ってください。"
+msgstr "注意：このファイルは、他の受講者によって提出されたものです。ファイルの内容について、gaccoは関与いたしかねますことご了承ください。なお、gaccoのシステムによりウイルススキャンは実施しておりますが、お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。"
 
 # openassessment/xblock/submission_mixin.py
 msgid "There was an error uploading your file."
@@ -139,7 +139,11 @@ msgstr "画像ファイルを指定してください。GIF, PNG または JPG"
 
 # openassessment/xblock/submission_mixin.py
 msgid "Content type must be PDF, GIF, PNG or JPG."
-msgstr "PDFもしくは画像ファイルを指定してください。GIF, PNG または JPG"
+msgstr "PDFもしくは画像ファイルを指定してください。画像ファイルはGIF, PNG または JPG"
+
+# openassessment/xblock/submission_mixin.py
+msgid "Content type must be PDF."
+msgstr "PDFファイルを指定してください。"
 
 # openassessment/xblock/submission_mixin.py
 msgid "File type must be one of the following types: "
