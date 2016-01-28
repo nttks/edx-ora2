@@ -53,7 +53,7 @@ OpenAssessment.ResponseView.prototype = {
                 // Note(yokose): Disable autoSave to avoid overwriting state
                 //view.setAutoSaveEnabled(true);
                 // Set flag to determine whether image attachments are allowed
-                if ($('#submission__answer__file', view.element).size() != -1) {
+                if ($('#submission__answer__file', view.element).size() != 0) {
                     view.fileUploadAllowed = true;
                 }
             }
@@ -504,7 +504,7 @@ OpenAssessment.ResponseView.prototype = {
         if (files[0].size > this.MAX_FILE_SIZE) {
             this.baseView.toggleActionError(
                 'upload',
-                gettext("File size must be 5MB or less.")
+                gettext("File size must be 4MB or less.")
             );
         } else if (uploadType === "image" && this.data.ALLOWED_IMAGE_MIME_TYPES.indexOf(this.fileType) === -1) {
             this.baseView.toggleActionError(
@@ -517,10 +517,18 @@ OpenAssessment.ResponseView.prototype = {
                 gettext("You can upload files with these file types: ") + "JPG, PNG, GIF or PDF"
             );
         } else if (uploadType === "custom" && this.data.FILE_TYPE_WHITE_LIST.indexOf(ext) === -1) {
-            this.baseView.toggleActionError(
-                'upload',
-                gettext("You can upload files with these file types: ") + this.data.FILE_TYPE_WHITE_LIST.join(", ")
-            );
+            // Check only pdf file of custom.
+            if (this.data.FILE_TYPE_WHITE_LIST.length === 1 && this.data.FILE_TYPE_WHITE_LIST[0] === 'pdf') {
+                this.baseView.toggleActionError(
+                    'upload',
+                    gettext("You can upload pdf file.")
+                );
+            } else {
+                this.baseView.toggleActionError(
+                    'upload',
+                    gettext("You can upload files with these file types: ") + this.data.FILE_TYPE_WHITE_LIST.join(", ")
+                );
+            }
         } else if (this.data.FILE_EXT_BLACK_LIST.indexOf(ext) !== -1) {
             this.baseView.toggleActionError(
                 'upload',
@@ -550,11 +558,17 @@ OpenAssessment.ResponseView.prototype = {
             function(url) {
                 view.fileUrl(url);
                 view.baseView.toggleActionError('upload', null);
+                view.fileUploaded = true;
                 // Enable submit button after loading image
-                $('#submission__answer__file', view.element).load(function() {
+                var file = $('#submission__answer__file', view.element);
+                if (file.prop("tagName") === "IMG") {
+                    file.load(function() {
+                        view.handleResponseChanged();
+                    });
+                } else {
                     view.handleResponseChanged();
-                    view.fileUploaded = true;
-                });
+                }
+                $('.submission__answer__display__file.is--hidden', view.element).removeClass('is--hidden');
             }
         ).fail(handleError);
     },

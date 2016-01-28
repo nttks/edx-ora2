@@ -111,8 +111,8 @@ class SubmissionTest(XBlockHandlerTestCase):
         self.assertIn(expected_prompt, resp)
 
     @patch.object(file_upload_api, 'upload_file')
-    @scenario('data/basic_scenario.xml', user_id='Bob')
-    def test_upload_file(self, xblock, mock_upload_file):
+    @scenario('data/basic_scenario_image.xml', user_id='Bob')
+    def test_upload_file_image(self, xblock, mock_upload_file):
         mock_upload_file.return_value = 'dummy_download_url'
         file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
         dj_req = RequestFactory().post('/', data={'file': file})
@@ -121,7 +121,51 @@ class SubmissionTest(XBlockHandlerTestCase):
         self.assertEqual(resp['success'], True)
         self.assertEqual(resp['url'], 'dummy_download_url')
 
-    @scenario('data/basic_scenario.xml', user_id='Bob')
+    @patch.object(file_upload_api, 'upload_file')
+    @scenario('data/basic_scenario_image_and_pdf.xml', user_id='Bob')
+    def test_upload_file_image_and_pdf_as_image(self, xblock, mock_upload_file):
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.object(file_upload_api, 'upload_file')
+    @scenario('data/basic_scenario_image_and_pdf.xml', user_id='Bob')
+    def test_upload_file_image_and_pdf_as_pdf(self, xblock, mock_upload_file):
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.pdf', 'test', 'application/pdf')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.object(file_upload_api, 'upload_file')
+    @scenario('data/basic_scenario_custom.xml', user_id='Bob')
+    def test_upload_file_custom(self, xblock, mock_upload_file):
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.doc', 'test', 'application/msword')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.object(file_upload_api, 'upload_file')
+    @scenario('data/basic_scenario_custom.xml', user_id='Bob')
+    def test_upload_file_custom_pdf(self, xblock, mock_upload_file):
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.pdf', 'test', 'application/pdf')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @scenario('data/basic_scenario_image.xml', user_id='Bob')
     def test_upload_file_with_no_file(self, xblock):
         dj_req = RequestFactory().post('/', data={})
         resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
@@ -129,20 +173,47 @@ class SubmissionTest(XBlockHandlerTestCase):
         self.assertEqual(resp['success'], False)
         self.assertEqual(resp['msg'], u"Error uploading file.")
 
-    @scenario('data/basic_scenario.xml', user_id='Bob')
-    def test_upload_file_with_invalid_content_type(self, xblock):
+    @scenario('data/basic_scenario_image.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_image(self, xblock):
         file = tempfile.TemporaryFile()
         dj_req = RequestFactory().post('/', data={'file': file})
         resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
         resp = json.loads(resp.body)
         self.assertEqual(resp['success'], False)
-        self.assertEqual(resp['msg'], u"contentType must be an image.")
+        self.assertEqual(resp['msg'], u"Content type must be GIF, PNG or JPG.")
+
+    @scenario('data/basic_scenario_image_and_pdf.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_image_and_pdf(self, xblock):
+        file = tempfile.TemporaryFile()
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"Content type must be PDF, GIF, PNG or JPG.")
+
+    @scenario('data/basic_scenario_custom.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_custom(self, xblock):
+        file = tempfile.TemporaryFile()
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"File type must be one of the following types: pdf, doc, docx")
+
+    @scenario('data/basic_scenario_custom_pdf.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_custom_pdf(self, xblock):
+        file = tempfile.TemporaryFile()
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"File type must be one of the following types: pdf")
 
     @patch.object(file_upload_api, 'upload_file')
     @patch.object(magic, 'from_buffer')
     @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
-    @scenario('data/basic_scenario.xml', user_id='Bob')
-    def test_upload_file_using_strict_check(self, xblock, mock_from_buffer, mock_upload_file):
+    @scenario('data/basic_scenario_image.xml', user_id='Bob')
+    def test_upload_file_using_strict_check_image(self, xblock, mock_from_buffer, mock_upload_file):
         mock_from_buffer.return_value = 'image/jpeg'
         mock_upload_file.return_value = 'dummy_download_url'
         file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
@@ -152,18 +223,123 @@ class SubmissionTest(XBlockHandlerTestCase):
         self.assertEqual(resp['success'], True)
         self.assertEqual(resp['url'], 'dummy_download_url')
 
+    @patch.object(file_upload_api, 'upload_file')
+    @patch.object(magic, 'from_buffer')
     @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
-    @scenario('data/basic_scenario.xml', user_id='Bob')
-    def test_upload_file_with_invalid_content_type_using_strict_check(self, xblock):
+    @scenario('data/basic_scenario_image_and_pdf.xml', user_id='Bob')
+    def test_upload_file_using_strict_check_image_and_pdf_as_image(self, xblock, mock_from_buffer, mock_upload_file):
+        mock_from_buffer.return_value = 'image/jpeg'
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.object(file_upload_api, 'upload_file')
+    @patch.object(magic, 'from_buffer')
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_image_and_pdf.xml', user_id='Bob')
+    def test_upload_file_using_strict_check_image_and_pdf_as_pdf(self, xblock, mock_from_buffer, mock_upload_file):
+        mock_from_buffer.return_value = 'application/pdf'
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.pdf', 'test', 'application/pdf')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.object(file_upload_api, 'upload_file')
+    @patch.object(magic, 'from_buffer')
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_custom.xml', user_id='Bob')
+    def test_upload_file_using_strict_check_custom(self, xblock, mock_from_buffer, mock_upload_file):
+        mock_from_buffer.return_value = 'application/msword'
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.doc', 'test', 'application/msword')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.object(file_upload_api, 'upload_file')
+    @patch.object(magic, 'from_buffer')
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_custom_pdf.xml', user_id='Bob')
+    def test_upload_file_using_strict_check_custom(self, xblock, mock_from_buffer, mock_upload_file):
+        mock_from_buffer.return_value = 'application/pdf'
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.pdf', 'test', 'application/pdf')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_image.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_using_strict_check_image(self, xblock):
         file = SimpleUploadedFile('test.txt', 'test', 'text/plain')
         dj_req = RequestFactory().post('/', data={'file': file})
         resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
         resp = json.loads(resp.body)
         self.assertEqual(resp['success'], False)
-        self.assertEqual(resp['msg'], u"contentType must be an image.")
+        self.assertEqual(resp['msg'], u"Content type must be GIF, PNG or JPG.")
+
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_image_and_pdf.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_using_strict_check_image_and_pdf(self, xblock):
+        file = SimpleUploadedFile('test.txt', 'test', 'text/plain')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"Content type must be PDF, GIF, PNG or JPG.")
+
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_custom.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_using_strict_check_custom(self, xblock):
+        file = SimpleUploadedFile('test.txt', 'test', 'text/plain')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"File type must be one of the following types: pdf, doc, docx")
+
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_custom_pdf.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_using_strict_check_custom_pdf_ext(self, xblock):
+        file = SimpleUploadedFile('test.txt', 'test', 'text/plain')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"File type must be one of the following types: pdf")
+
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_custom_pdf.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_using_strict_check_custom_pdf(self, xblock):
+        file = SimpleUploadedFile('test.pdf', 'test', 'text/plain')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"Content type must be PDF.")
+
+    @scenario('data/basic_scenario_custom_exe.xml', user_id='Bob')
+    def test_upload_file_custom_exe(self, xblock):
+        file = SimpleUploadedFile('test.exe', 'test', 'foo/bar')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"File type is not allowed.")
 
     @patch.object(file_upload_api, 'upload_file')
-    @scenario('data/basic_scenario.xml', user_id='Bob')
+    @scenario('data/basic_scenario_image.xml', user_id='Bob')
     def test_upload_file_error(self, xblock, mock_upload_file):
         mock_upload_file.side_effect = FileUploadInternalError(Exception(u"Failed to upload."))
         file = SimpleUploadedFile('test.jpg', 'test', 'image/jpeg')

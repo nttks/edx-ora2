@@ -64,6 +64,29 @@ OpenAssessment.EditSettingsView = function(element, assessmentViews, data) {
         }
     );
 
+    this.fileTypeWhiteListInputField = new OpenAssessment.InputControl(
+        $("#openassessment_submission_white_listed_file_types", this.element),
+        function(value) {
+            var badExts = [];
+            var errors = [];
+            if (!value) {
+                errors.push(gettext('File types can not be empty.'));
+                return errors;
+            }
+            var whiteList = $.map(value.replace(/\./g, '').toLowerCase().split(','), $.trim);
+            $.each(whiteList, function(index, ext) {
+                if (data.FILE_EXT_BLACK_LIST.indexOf(ext) !== -1) {
+                    badExts.push(ext);
+                }
+            });
+            if (badExts.length) {
+                errors.push(gettext('The following file types are not allowed: ') + badExts.join(','));
+            }
+
+            return errors;
+        }
+    );
+
     this.initializeSortableAssessments();
 };
 
