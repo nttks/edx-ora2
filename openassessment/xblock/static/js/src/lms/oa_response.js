@@ -4,12 +4,14 @@ Interface for response (submission) view.
 Args:
     element (DOM element): The DOM element representing the XBlock.
     server (OpenAssessment.Server): The interface to the XBlock server.
+    fileUploader (OpenAssessment.FileUploader): File uploader instance.
     baseView (OpenAssessment.BaseView): Container view.
+    data (Object): The data object passed from XBlock backend.
 
 Returns:
     OpenAssessment.ResponseView
 **/
-OpenAssessment.ResponseView = function(element, server, fileUploader, baseView) {
+OpenAssessment.ResponseView = function(element, server, fileUploader, baseView, data) {
     this.element = element;
     this.server = server;
     this.fileUploader = fileUploader;
@@ -17,10 +19,12 @@ OpenAssessment.ResponseView = function(element, server, fileUploader, baseView) 
     this.baseView = baseView;
     this.savedResponse = [];
     this.files = null;
-    this.imageType = null;
+    this.fileType = null;
     this.lastChangeTime = Date.now();
     this.errorOnLastSave = false;
     this.autoSaveTimerId = null;
+    this.data = data;
+    this.fileUploaded = false;
 };
 
 
@@ -50,7 +54,7 @@ OpenAssessment.ResponseView.prototype = {
                 // Note(yokose): Disable autoSave to avoid overwriting state
                 //view.setAutoSaveEnabled(true);
                 // Set flag to determine whether image attachments are allowed
-                if ($('#submission__answer__image', view.element).size() != 0) {
+                if ($('#submission__answer__file', view.element).size() != 0) {
                     view.fileUploadAllowed = true;
                 }
             }
@@ -65,6 +69,10 @@ OpenAssessment.ResponseView.prototype = {
     installHandlers: function() {
         var sel = $('#openassessment__response', this.element);
         var view = this;
+        var uploadType = '';
+        if (sel.find('.submission__answer__display__file').length) {
+            uploadType = sel.find('.submission__answer__display__file').data('upload-type');
+        }
 
         // Install a click handler for collapse/expand
         this.baseView.setUpCollapseExpand(sel);
@@ -74,9 +82,9 @@ OpenAssessment.ResponseView.prototype = {
         var handleChange = function(eventData) { view.handleResponseChanged(); };
         sel.find('.submission__answer__part__text__value').on('change keyup drop paste', handleChange);
 
-        var handlePrepareUpload = function(eventData) { view.prepareUpload(eventData.target.files); };
+        var handlePrepareUpload = function(eventData) { view.prepareUpload(eventData.target.files, uploadType); };
         sel.find('input[type=file]').on('change', handlePrepareUpload);
-        // keep the preview as display none at first 
+        // keep the preview as display none at first
         sel.find('#submission__preview__item').hide();
 
         // Install a click handler for submission
@@ -320,7 +328,7 @@ OpenAssessment.ResponseView.prototype = {
                 return $.trim(element) == '';
             });
         // If image attachments are allowed, need to check whether file is already uploaded
-        var isUploaded = (!this.fileUploadAllowed || this.imageUrl() != '');
+        var isUploaded = (!this.fileUploadAllowed || this.fileUrl() != '');
         this.submitEnabled(isNotBlank && isUploaded);
 
         // Update the save button, save status, and "unsaved changes" warning
@@ -388,19 +396,36 @@ OpenAssessment.ResponseView.prototype = {
 
         var view = this;
         var baseView = this.baseView;
+        var fileDefer = $.Deferred();
 
-        this.confirmSubmission()
-            // On confirmation, send the submission to the server
-            // The callback returns a promise so we can attach
-            // additional callbacks after the confirmation.
-            // NOTE: in JQuery >=1.8, `pipe()` is deprecated in favor of `then()`,
-            // but we're using JQuery 1.7 in the LMS, so for now we're stuck with `pipe()`.
+        // check if there is a file selected but not uploaded yet
+        if (view.files !== null && !view.fileUploaded) {
+            var msg = gettext('Do you want to upload your file before submitting?');
+            if(confirm(msg)) {
+                fileDefer = view.fileUpload();
+            } else {
+                view.submitEnabled(true);
+                return;
+            }
+        } else {
+            fileDefer.resolve();
+        }
+
+        fileDefer
             .pipe(function() {
-                var submission = view.response();
-                baseView.toggleActionError('response', null);
+                return view.confirmSubmission()
+                    // On confirmation, send the submission to the server
+                    // The callback returns a promise so we can attach
+                    // additional callbacks after the confirmation.
+                    // NOTE: in JQuery >=1.8, `pipe()` is deprecated in favor of `then()`,
+                    // but we're using JQuery 1.7 in the LMS, so for now we're stuck with `pipe()`.
+                    .pipe(function() {
+                        var submission = view.response();
+                        baseView.toggleActionError('response', null);
 
-                // Send the submission to the server, returning the promise.
-                return view.server.submit(submission);
+                        // Send the submission to the server, returning the promise.
+                        return view.server.submit(submission);
+                    });
             })
 
             // If the submission was submitted successfully, move to the next step
@@ -454,16 +479,18 @@ OpenAssessment.ResponseView.prototype = {
 
     /**
      When selecting a file for upload, do some quick client-side validation
-     to ensure that it is an image, and is not larger than the maximum file
-     size.
+     to ensure that it is an image, a PDF or other allowed types, and is not
+     larger than the maximum file size.
 
      Args:
         files (list): A collection of files used for upload. This function assumes
             there is only one file being uploaded at any time. This file must
-            be less than 5 MB and an image.
+            be less than 5 MB and an image, PDF or other allowed types.
+        uploadType (string): uploaded file type allowed, could be none, image,
+            file or custom.
 
      **/
-    prepareUpload: function(files) {
+    prepareUpload: function(files, uploadType) {
         // Check for File API & HTML5 support
         if (typeof files === 'undefined' || !(window.File && window.FileReader) || !window.FormData) {
             this.baseView.toggleActionError(
@@ -472,14 +499,41 @@ OpenAssessment.ResponseView.prototype = {
             return false;
         }
         this.files = null;
-        this.imageType = files[0].type;
+        this.fileType = files[0].type;
+        var ext = files[0].name.split('.').pop().toLowerCase();
+
         if (files[0].size > this.MAX_FILE_SIZE) {
             this.baseView.toggleActionError(
-                'upload', gettext("File size must be 4MB or less.")
+                'upload',
+                gettext("File size must be 4MB or less.")
             );
-        } else if (this.imageType.substring(0,6) != 'image/') {
+        } else if (uploadType === "image" && this.data.ALLOWED_IMAGE_MIME_TYPES.indexOf(this.fileType) === -1) {
             this.baseView.toggleActionError(
-                'upload', gettext("File must be an image.")
+                'upload',
+                gettext("You can upload files with these file types: ") + "JPG, PNG or GIF"
+            );
+        } else if (uploadType === "pdf-and-image" && this.data.ALLOWED_FILE_MIME_TYPES.indexOf(this.fileType) === -1) {
+            this.baseView.toggleActionError(
+                'upload',
+                gettext("You can upload files with these file types: ") + "JPG, PNG, GIF or PDF"
+            );
+        } else if (uploadType === "custom" && this.data.FILE_TYPE_WHITE_LIST.indexOf(ext) === -1) {
+            // Check only pdf file of custom.
+            if (this.data.FILE_TYPE_WHITE_LIST.length === 1 && this.data.FILE_TYPE_WHITE_LIST[0] === 'pdf') {
+                this.baseView.toggleActionError(
+                    'upload',
+                    gettext("You can upload pdf file.")
+                );
+            } else {
+                this.baseView.toggleActionError(
+                    'upload',
+                    gettext("You can upload files with these file types: ") + this.data.FILE_TYPE_WHITE_LIST.join(", ")
+                );
+            }
+        } else if (this.data.FILE_EXT_BLACK_LIST.indexOf(ext) !== -1) {
+            this.baseView.toggleActionError(
+                'upload',
+                gettext("File type is not allowed.")
             );
         } else {
             this.baseView.toggleActionError('upload', null);
@@ -504,25 +558,41 @@ OpenAssessment.ResponseView.prototype = {
         // Upload image file via ora2 server
         this.server.uploadFile(view.files[0]).done(
             function(url) {
-                view.imageUrl(url);
+                view.fileUrl(url);
                 view.baseView.toggleActionError('upload', null);
+                view.fileUploaded = true;
                 // Enable submit button after loading image
-                $('#submission__answer__image', view.element).load(function() {
+                var file = $('#submission__answer__file', view.element);
+                if (file.prop("tagName") === "IMG") {
+                    file.load(function() {
+                        view.handleResponseChanged();
+                    });
+                } else {
                     view.handleResponseChanged();
-                });
+                }
+                $('.submission__answer__display__file.is--hidden', view.element).removeClass('is--hidden');
             }
         ).fail(handleError);
     },
 
     /**
-     Set the image URL, or retrieve it.
+     Set the file URL, or retrieve it.
      **/
-    imageUrl: function(url) {
-        var sel = $('#submission__answer__image', this.element);
+    fileUrl: function(url) {
+        var view = this;
+        var file = $('#submission__answer__file', view.element);
         if (typeof url === 'undefined') {
-            return sel.attr('src');
+            if (file.prop("tagName") === "IMG") {
+                return file.attr('src');
+            } else {
+                return file.attr('href');
+            }
         } else {
-            sel.attr('src', url);
+            if (file.prop("tagName") === "IMG") {
+                file.attr('src', url);
+            } else {
+                file.attr('href', url);
+            }
         }
     }
 

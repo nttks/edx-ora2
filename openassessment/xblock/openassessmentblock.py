@@ -119,9 +119,21 @@ class OpenAssessmentBlock(
     )
 
     allow_file_upload = Boolean(
-        default=False,
+        default=None,
         scope=Scope.content,
-        help="File upload allowed with submission."
+        help="Do not use. For backwards compatibility only."
+    )
+
+    file_upload_type_raw = String(
+        default=None,
+        scope=Scope.content,
+        help="File upload to be included with submission (can be 'image', 'pdf-and-image', or 'custom')."
+    )
+
+    white_listed_file_types = List(
+        default=[],
+        scope=Scope.content,
+        help="Custom list of file types allowed with submission."
     )
 
     allow_latex = Boolean(
@@ -205,6 +217,46 @@ class OpenAssessmentBlock(
     @property
     def course_id(self):
         return self._serialize_opaque_key(self.xmodule_runtime.course_id)  # pylint:disable=E1101
+
+    @property
+    def file_upload_type(self):
+        """
+        Backward compatibility for existing block before the change from allow_file_upload to file_upload_type_raw.
+
+        This property will use new file_upload_type_raw field when available, otherwise will fall back to
+        allow_file_upload field for old blocks.
+        """
+        if self.file_upload_type_raw is not None:
+            return self.file_upload_type_raw
+        if self.allow_file_upload:
+            return 'image'
+        else:
+            return None
+
+    @file_upload_type.setter
+    def file_upload_type(self, value):
+        """
+        Setter for file_upload_type_raw
+        """
+        self.file_upload_type_raw = value
+
+    @property
+    def white_listed_file_types_string(self):
+        """
+        Join the white listed file types into comma delimited string
+        """
+        if self.white_listed_file_types:
+            return ','.join(self.white_listed_file_types)
+        else:
+            return ''
+
+    @white_listed_file_types_string.setter
+    def white_listed_file_types_string(self, value):
+        """
+        Convert comma delimited white list string into list with some clean up
+        """
+        self.white_listed_file_types = [file_type.strip().strip('.').lower()
+                                        for file_type in value.split(',')] if value else None
 
     def get_anonymous_user_id(self, username, course_id):
         """
@@ -299,9 +351,14 @@ class OpenAssessmentBlock(
             frag.add_css(load("static/css/openassessment-ltr.css"))
 
         frag.add_javascript(load("static/js/openassessment-lms.min.js"))
-        frag.initialize_js('OpenAssessmentBlock')
+        js_context_dict = {
+            "ALLOWED_IMAGE_MIME_TYPES": self.ALLOWED_IMAGE_MIME_TYPES,
+            "ALLOWED_FILE_MIME_TYPES": self.ALLOWED_FILE_MIME_TYPES,
+            "FILE_EXT_BLACK_LIST": self.FILE_EXT_BLACK_LIST,
+            "FILE_TYPE_WHITE_LIST": self.white_listed_file_types,
+        }
+        frag.initialize_js('OpenAssessmentBlock', js_context_dict)
         return frag
-
 
     @property
     def is_admin(self):
@@ -387,6 +444,22 @@ class OpenAssessmentBlock(
         """
         return [
             (
+                "OpenAssessmentBlock File Upload: Images",
+                load('static/xml/file_upload_image_only.xml')
+            ),
+            (
+                "OpenAssessmentBlock File Upload: PDF and Images",
+                load('static/xml/file_upload_pdf_and_image.xml')
+            ),
+            (
+                "OpenAssessmentBlock File Upload: Custom File Types",
+                load('static/xml/file_upload_custom.xml')
+            ),
+            (
+                "OpenAssessmentBlock File Upload: allow_file_upload compatibility",
+                load('static/xml/file_upload_compat.xml')
+            ),
+            (
                 "OpenAssessmentBlock Unicode",
                 load('static/xml/unicode.xml')
             ),
@@ -401,6 +474,10 @@ class OpenAssessmentBlock(
             (
                 "OpenAssessmentBlock Leaderboard",
                 load('static/xml/leaderboard.xml')
+            ),
+            (
+                "OpenAssessmentBlock Leaderboard with Custom File Type",
+                load('static/xml/leaderboard_custom.xml')
             ),
             (
                 "OpenAssessmentBlock (Peer Only) Rubric",
@@ -448,6 +525,8 @@ class OpenAssessmentBlock(
         block.title = config['title']
         block.prompts = config['prompts']
         block.allow_file_upload = config['allow_file_upload']
+        block.file_upload_type = config['file_upload_type']
+        block.white_listed_file_types_string = config['white_listed_file_types']
         block.allow_latex = config['allow_latex']
         block.leaderboard_show = config['leaderboard_show']
 
