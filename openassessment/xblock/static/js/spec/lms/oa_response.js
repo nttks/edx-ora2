@@ -484,16 +484,23 @@ describe("OpenAssessment.ResponseView", function() {
 
     it("selects too large of a file", function() {
         spyOn(baseView, 'toggleActionError').and.callThrough();
-        var files = [{type: 'image/jpeg', size: 6000000, name: 'huge-picture.jpg', data: ''}];
+        var files = [{type: 'image/jpeg', size: 5000000, name: 'huge-picture.jpg', data: ''}];
         view.prepareUpload(files, 'image');
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 5MB or less.');
+        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 4MB or less.');
     });
 
-    it("selects the wrong image file type", function() {
+    it("selects the wrong file type", function() {
         spyOn(baseView, 'toggleActionError').and.callThrough();
-        var files = [{type: 'image/jpg', size: 1024, name: 'picture.exe', data: ''}];
+        var files = [{type: 'bogus/jpeg', size: 1024, name: 'picture.exe', data: ''}];
         view.prepareUpload(files, 'image');
         expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'You can upload files with these file types: JPG, PNG or GIF');
+    });
+
+    it("uploads a file via ora2 server", function() {
+        spyOn(view, 'fileUrl').and.callThrough();
+        var files = [{type: 'image/jpeg', size: 1024, name: 'picture.jpg', data: ''}];
+        view.prepareUpload(files, 'image');
+        expect(view.fileUrl).toHaveBeenCalledWith(FAKE_URL);
     });
 
     it("selects the wrong pdf or image file type", function() {
@@ -516,13 +523,6 @@ describe("OpenAssessment.ResponseView", function() {
         var files = [{type: 'application/exe', size: 1024, name: 'application.exe', data: ''}];
         view.prepareUpload(files, 'custom');
         expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File type is not allowed.');
-    });
-
-    it("uploads a file via ora2 server", function() {
-        spyOn(view, 'fileUrl').and.callThrough();
-        var files = [{type: 'image/jpg', size: 1024, name: 'picture.jpg', data: ''}];
-        view.prepareUpload(files);
-        expect(view.fileUrl).toHaveBeenCalledWith(FAKE_URL);
     });
 
     it("displays an error if a file could not be uploaded", function() {
