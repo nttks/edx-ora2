@@ -1,3 +1,4 @@
+# #-#-#-#-#  openassessment.po (edx-platform)  #-#-#-#-#
 # edX translation file.
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
@@ -9,14 +10,20 @@
 # かわぐちひろふみ <h.kawaguchi@nttks.co.jp>, 2015
 # h_yoshida <h_yoshida@matsumo-sys.com>, 2014-2015
 # Takashi Nagai <ngi644@gmail.com>, 2014
+# #-#-#-#-#  gacco.po (edx-ora2)  #-#-#-#-#
+# edX translation file.
+# Copyright (C) 2014 EdX
+# This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: edx-platform\n"
+"Project-Id-Version: edx-ora2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-24 04:05+0000\n"
-"PO-Revision-Date: 2015-11-24 03:49+0000\n"
-"Last-Translator: Andy Armstrong <andya@edx.org>\n"
-"Language-Team: Japanese (Japan) (http://www.transifex.com/open-edx/edx-platform/language/ja_JP/)\n"
+"POT-Creation-Date: 2014-09-12 04:00+0900\n"
+"PO-Revision-Date: 2014-09-12 04:00+0900\n"
+"Last-Translator: \n"
+"Language-Team: Japanese (Japan) (http://www.transifex.com/projects/p/edx-platform/language/ja_JP/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -273,9 +280,6 @@ msgstr "キャンセル"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Criterion"
 msgstr "基準"
 
@@ -525,7 +529,6 @@ msgstr "未選択"
 #: openassessment/templates/openassessmentblock/grade/oa_grade_cancelled.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_closed.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_incomplete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_not_started.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_waiting.html
@@ -603,9 +606,6 @@ msgstr "総得点"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Points"
 msgstr "点"
 
@@ -613,7 +613,6 @@ msgstr "点"
 msgid "Assessor"
 msgstr "採点者"
 
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #, python-format
 msgid "Peer %(peer_num)s"
@@ -623,8 +622,6 @@ msgstr "採点者 %(peer_num)s"
 msgid "Peer's Assessment"
 msgstr "他の受講者からの評価"
 
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #, python-format
 msgid "More information about %(name)s"
@@ -639,17 +636,14 @@ msgid "Your Self Assessment"
 msgstr "自己採点結果"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Your Assessment"
 msgstr "あなたの評価"
 
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Example-Based Assessment"
 msgstr "凡例準拠採点"
 
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Additional Comments"
 msgstr "追加コメント"
@@ -671,7 +665,6 @@ msgstr "採点者"
 msgid "Peer's assessment"
 msgstr "他の受講者からの評価"
 
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Self assessment"
 msgstr "自己採点"
@@ -1554,31 +1547,21 @@ msgid "The image associated with this response"
 msgstr "ここにアップロードされた画像が表示されます。"
 
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Assessment"
 msgstr "評価"
 
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Selected Option"
 msgstr "選択されたオプション"
 
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Feedback"
 msgstr "コメント"
 
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Points Possible"
 msgstr "取得可能得点"
 
-#: openassessment/templates/openassessmentblock/staff_area/student_info.html
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Overall Feedback"
 msgstr "全てのコメント"
@@ -1616,7 +1599,6 @@ msgstr "採点方法の学習"
 msgid "available <span class=\"date\"> %(start_date)s (in %(time_until)s) </span>"
 msgstr "有効 <span class=\"date\"> %(start_date)s (あと %(time_until)s) </span>"
 
-#: openassessment/templates/openassessmentblock/student_training/student_training.html
 #: openassessment/templates/openassessmentblock/student_training/student_training.html
 msgid "Learning to Assess Responses"
 msgstr "採点方法の学習中"
@@ -1692,7 +1674,6 @@ msgstr "この課題のトレーニングステップの読み込みに失敗し
 #: openassessment/xblock/leaderboard_mixin.py
 #: openassessment/xblock/self_assessment_mixin.py
 #: openassessment/xblock/student_training_mixin.py
-#: openassessment/xblock/student_training_mixin.py
 msgid "An unexpected error occurred."
 msgstr "予期せぬエラーが発生しました。"
 
@@ -1736,7 +1717,6 @@ msgstr "このフィードバックはすでに送信されているか、投稿
 msgid "This feedback has already been submitted."
 msgstr ""
 
-#: openassessment/xblock/peer_assessment_mixin.py
 #: openassessment/xblock/peer_assessment_mixin.py
 msgid "Your peer assessment could not be submitted."
 msgstr "採点ができませんでした。ブラウザを更新して、次のレポートの採点をしてください。"
@@ -1798,7 +1778,6 @@ msgid "You must submit a response before you can perform a self-assessment."
 msgstr "あなたは自己採点を行う前にレポートを提出する必要があります。"
 
 #: openassessment/xblock/self_assessment_mixin.py
-#: openassessment/xblock/self_assessment_mixin.py
 msgid "Your self assessment could not be submitted."
 msgstr "あなたの自己採点は提出できませんでした。"
 
@@ -1859,11 +1838,10 @@ msgid "options_selected must be a dictionary"
 msgstr "option_selectedはdictionaryである必要があります。"
 
 #: openassessment/xblock/student_training_mixin.py
-#: openassessment/xblock/student_training_mixin.py
 msgid "Your scores could not be checked."
 msgstr "あなたの得点は確認できません。"
 
-#: openassessment/xblock/studio_mixin.py openassessment/xblock/studio_mixin.py
+#: openassessment/xblock/studio_mixin.py
 msgid "Error updating XBlock configuration"
 msgstr "XBlock設定の更新エラー"
 
@@ -2048,3 +2026,55 @@ msgstr "上位成績者表示数が不正です。"
 #: openassessment/xblock/validation.py
 msgid "The submission format is invalid."
 msgstr "投稿フォーマットが無効です。"
+
+#: openassessment/xblock/submission_mixin.py
+msgid "Error uploading file."
+msgstr "ファイルアップロードに失敗しました。"
+
+#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
+#: openassessment/templates/openassessmentblock/response/oa_response_graded.html
+#: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
+#: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+msgid "Your response to the question above:"
+msgstr "あなたの回答："
+
+#: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_show.html
+#: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html
+#: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html
+msgid "Your peer's response to the question above:"
+msgstr "他の受講者の回答："
+
+#: openassessment/templates/openassessmentblock/staff_debug/student_info.html
+msgid "The student's response to the question above:"
+msgstr "受講者の回答："
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Assess Peers' Responses"
+msgstr "他の受講者のレポートを採点する"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Learn to Assess"
+msgstr "採点方法の学習"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Your Grade:"
+msgstr "あなたの得点"
+
+#: openassessment/templates/openassessmentblock/oa_base.html
+msgid "Leaderboard"
+msgstr "上位成績者"
+
+# openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
+msgid "Your Upload"
+msgstr "提出ファイル"
+
+# openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html
+# openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html
+# openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+msgid "Associated File"
+msgstr "提出ファイル"
+
+# openassessment/templates/openassessmentblock/response/oa_response_graded.html
+# openassessment/templates/openassessmentblock/response/oa_response_submitted.html
+msgid "Your Uploaded File"
+msgstr "提出ファイル"

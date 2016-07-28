@@ -1,3 +1,4 @@
+# #-#-#-#-#  openassessment-js.po (edx-platform)  #-#-#-#-#
 # edX translation file.
 # Copyright (C) 2014 EdX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
@@ -6,14 +7,21 @@
 # かわぐちひろふみ <h.kawaguchi@nttks.co.jp>, 2015
 # h_yoshida <h_yoshida@matsumo-sys.com>, 2014-2015
 # Takashi Nagai <ngi644@gmail.com>, 2014
+# #-#-#-#-#  gaccojs.po (edx-ora2)  #-#-#-#-#
+# edX translation file.
+# Copyright (C) 2014 EdX
+# This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+# 
+# Translators:
+# yokose-ks <ayokose.gacco@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: edx-platform\n"
+"Project-Id-Version: edx-ora2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-24 04:05+0000\n"
-"PO-Revision-Date: 2015-11-24 03:44+0000\n"
-"Last-Translator: Andy Armstrong <andya@edx.org>\n"
-"Language-Team: Japanese (Japan) (http://www.transifex.com/open-edx/edx-platform/language/ja_JP/)\n"
+"POT-Creation-Date: 2014-09-12 04:00+0900\n"
+"PO-Revision-Date: 2014-09-12 04:00+0900\n"
+"Last-Translator: yokose-ks <ayokose.gacco@gmail.com>\n"
+"Language-Team: Japanese (Japan) (http://www.transifex.com/projects/p/edx-platform/language/ja_JP/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,8 +30,6 @@ msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/openassessment-studio.min.js
-#: openassessment/xblock/static/js/src/oa_server.js
-#: openassessment/xblock/static/js/src/oa_server.js
 #: openassessment/xblock/static/js/src/oa_server.js
 msgid "This section could not be loaded."
 msgstr "このセクションは読み込むことができませんでした"
@@ -48,9 +54,6 @@ msgstr "このフィードバックを提出することができませんでし
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/openassessment-studio.min.js
-#: openassessment/xblock/static/js/src/oa_server.js
-#: openassessment/xblock/static/js/src/oa_server.js
-#: openassessment/xblock/static/js/src/oa_server.js
 #: openassessment/xblock/static/js/src/oa_server.js
 msgid "This assessment could not be submitted."
 msgstr "この採点することができませんでした"
@@ -147,8 +150,6 @@ msgstr "ファイルサイズは4MB以下である必要があります。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js
-#: openassessment/xblock/static/js/src/lms/oa_response.js
-#: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "You can upload files with these file types: "
 msgstr "次に示すファイルを指定してください。"
 
@@ -202,7 +203,6 @@ msgstr "評価項目を追加しました。評価項目に対するオプショ
 
 #: openassessment/xblock/static/js/openassessment-studio.min.js
 #: openassessment/xblock/static/js/src/studio/oa_edit_listeners.js
-#: openassessment/xblock/static/js/src/studio/oa_edit_listeners.js
 msgid "Option Deleted"
 msgstr "オプションが削除されました"
 
@@ -255,3 +255,15 @@ msgstr "ファイルタイプを指定してください。"
 #: openassessment/xblock/static/js/src/studio/oa_edit_settings.js
 msgid "The following file types are not allowed: "
 msgstr "次に示す不正なファイルタイプが含まれています。"
+
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "Your browser does not support file upload feature."
+msgstr "このブラウザはファイルアップロード機能に対応しておりません。申し訳ありませんが、他のブラウザをお使いください。"
+
+#: openassessment/xblock/static/js/src/oa_server.js
+msgid "Could not upload file. Try again later."
+msgstr "アップロードできませんでした。しばらしく時間をおいてから再操作してください。"
+
+# openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "You can upload pdf file."
+msgstr "PDFファイルを指定してください。"
