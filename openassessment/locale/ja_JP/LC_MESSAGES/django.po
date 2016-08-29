@@ -159,7 +159,7 @@ msgstr "提出開始時刻"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "The date and time when learners can begin submitting responses."
-msgstr "受講者が回答の提出を開始できる日付および時間です。"
+msgstr "レポート提出開始日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "Response Due Date"
@@ -171,7 +171,7 @@ msgstr "提出〆切時間"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "The date and time when learners can no longer submit responses."
-msgstr "以降、受講者にて課題の提出ができなくなる日付および時間です。"
+msgstr "レポート提出締切日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "Allow File Upload"
@@ -215,7 +215,7 @@ msgstr "受講者にアップロードを許可する拡張子拡張子を指定
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "Allow LaTeX Responses"
-msgstr ""
+msgstr "LaTeX形式のレポートを許可する"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "Allow Image Responses"
@@ -231,11 +231,7 @@ msgstr "はい"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "Specify whether learners can write LaTeX formatted strings"
-msgstr "Latexフォーマットの文字列を記述することを受講者に許可するか設定する"
-
-#: openassessment/templates/openassessmentblock/edit/oa_edit.html
-msgid "Allow Latex Responses"
-msgstr "Latexのレポートを許可する"
+msgstr "LaTeX形式の文字列を受け付けるかを設定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 #: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_show.html
@@ -248,7 +244,7 @@ msgid ""
 "Specify the number of top scoring responses to display. Valid numbers are 0 "
 "to 99. If the number is 0, the Top Responses section does not appear to "
 "learners."
-msgstr "上位得点の回答を何件表示するかを設定します。0を入力した場合、上位の回答セクションは受講者に表示されません。"
+msgstr "得点上位の回答を全受講者に表示することができます。表示する件数を指定してください。表示させない場合は0を入力してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid ""
@@ -259,7 +255,7 @@ msgid ""
 "If you include a learner training step, it must precede peer and self "
 "assessment steps."
 msgstr ""
-"この課題では、受講者に相互採点、自己採点および凡例準拠採点のトレーニングを設定することができます。以下、希望するステップを選択し、また、希望の順序となるようドラッグします。凡例準拠採点を含む場合、その他全てのステップが実施されることとなります。もし、トレーニングを含む場合、相互採点および自己採点のステップが実施されることとなります。"
+"相互採点レポート課題では、受講者にトレーニング、相互採点、および自己採点のステップを踏ませることができます。どのステップをどのような順番で実施するかを設定してください。トレーニングステップは必ず先頭に設定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid ""
@@ -281,11 +277,11 @@ msgstr "キャンセル"
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html
 #: openassessment/templates/openassessmentblock/staff_area/student_info.html
 msgid "Criterion"
-msgstr "基準"
+msgstr "評価基準"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html
 msgid "You cannot delete a criterion after the assignment has been released."
-msgstr "課題がリリースされた後は評価観点は削除できません。"
+msgstr "課題公開後は評価基準を削除することができません。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html
 #: openassessment/templates/openassessmentblock/edit/oa_edit_option.html
@@ -318,7 +314,7 @@ msgstr "オプション"
 msgid ""
 "Select one of the options above. This describes whether or not the learner "
 "will have to provide criterion feedback."
-msgstr "上記の選択肢から一つを選んでください。これにより、受講者が評価項目のフィードバックを行わねばならなくなるかどうかが決定します。"
+msgstr "評価項目毎にフィードバックを実施するか設定できます。上記からひとつ選んでください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_example_based_assessment.html
 msgid "Step: Example-Based Assessment"
@@ -378,17 +374,17 @@ msgstr "評価必須数"
 msgid ""
 "Specify the number of peer assessments that each learner must complete. "
 "Valid numbers are 0 to 99."
-msgstr "それぞれの受講者が完了せねばならない相互採点数を設定してください。"
+msgstr "受講者が他の受講者を何名採点する必要があるかを設定してください。（0～99まで指定可能です）"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_peer_assessment.html
 msgid "Graded By"
-msgstr "評価者"
+msgstr "被評価数"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_peer_assessment.html
 msgid ""
 "Specify the number of learners that each response must be assessed by. Valid"
 " numbers are 0 to 99."
-msgstr "受講者が評価すべき課題の数を設定してください。"
+msgstr "受講者が何名の受講者から評価を受けなくてはならないかを指定してください。（0～99まで指定可能です）"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_peer_assessment.html
 #: openassessment/templates/openassessmentblock/edit/oa_edit_self_assessment.html
@@ -403,7 +399,7 @@ msgstr "開始時間"
 #: openassessment/templates/openassessmentblock/edit/oa_edit_peer_assessment.html
 msgid ""
 "Enter the date and time when learners can begin assessing peer responses."
-msgstr "受講者が相互採点を開始する日付および時間を入力してください。"
+msgstr "相互採点ステップの開始日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_peer_assessment.html
 #: openassessment/templates/openassessmentblock/edit/oa_edit_self_assessment.html
@@ -418,21 +414,21 @@ msgstr "〆切時間"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_peer_assessment.html
 msgid "Enter the date and time when all peer assessments must be complete."
-msgstr "相互採点を完了せねばならない日付および時間を入力してください。"
+msgstr "相互採点ステップの締切日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_prompt.html
 msgid "You cannot delete a prompt after the assignment has been released."
-msgstr "課題がリリースされた後は、入力枠を削除することはできません。"
+msgstr "課題公開後は入力枠を削除することができません。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_prompts.html
 msgid ""
 "Prompts. Replace the sample text with your own text. For more information, "
 "see the ORA documentation."
-msgstr "入力枠。サンプルの文字列を自分の文字列で置き換えてください。詳細情報はORAのドキュメントを参照してください。"
+msgstr "レポート入力枠です。サンプル文章は自由に編集してください。詳細は相互採点レポートのマニュアルを参照してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_prompts.html
 msgid "Add Prompt"
-msgstr "プロンプトを追加"
+msgstr "入力枠を追加"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_rubric.html
 msgid ""
@@ -441,7 +437,7 @@ msgid ""
 "and their options. Replace the sample text with your own text. For more "
 "information, see the ORA documentation."
 msgstr ""
-"ルーブリックは複数の評価項目にて構成されます。そして、それは通常、単一ないし複数の選択肢を持ちます。それぞれの選択肢はポイント数値を持ちます。このテンプレートでは、2つの評価項目およびそれらの選択肢を含んでいます。このサンプル文をあなた自身のテキストに置き換えましょう。さらなる情報が必要となる場合、ORAのドキュメントを参照してください。"
+"ルーブリック（評価基準）は複数の評価項目にて構成されます。評価項目には一つ又は複数の選択肢、および点数を設定することができます。サンプルでは2つの評価項目および選択肢を設定しておりますが、適宜編集してください。詳細は相互採点レポートのマニュアルをご参照ください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_rubric.html
 msgid "Add Criterion"
@@ -459,7 +455,7 @@ msgstr "フィードバックの説明"
 msgid ""
 "Encourage learners to provide feedback on the response they have graded. You"
 " can replace the sample text with your own."
-msgstr "受講者が評価した回答へフィードバックを提供することを奨励しましょう。この例文はご自身のものに置き換えることができます。"
+msgstr "他の受講者へ対し、どのような観点でフィードバックを行うべきかを記述してください。サンプル文はご自由に編集してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_rubric.html
 msgid "Default Feedback Text"
@@ -469,7 +465,7 @@ msgstr "デフォルトフィードバック"
 msgid ""
 "Enter feedback text that learners will see before they enter their own "
 "feedback. Use this text to show learners a good example peer assessment."
-msgstr "受講者が自分のフィードバックを入力する前に表示されるフィードバックを入力します。この文は良い総合採点の例を示すために使います。"
+msgstr "フィードバック入力欄にデフォルトで表示される文を設定できます。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_self_assessment.html
 msgid "Step: Self Assessment"
@@ -487,11 +483,11 @@ msgstr "自己採点を開始および終了する日時を設定してくださ
 #: openassessment/templates/openassessmentblock/edit/oa_edit_self_assessment.html
 msgid ""
 "Enter the date and time when learners can begin assessing their responses."
-msgstr "回答の評価を開始する日付および日時を入力してください。"
+msgstr "自己採点ステップの開始日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_self_assessment.html
 msgid "Enter the date and time when all self assessments must be complete."
-msgstr "自己採点を完了させねばならない日付および時間を入力してください。"
+msgstr "自己採点ステップの締切日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_student_training.html
 msgid "Step: Learner Training"
@@ -1377,15 +1373,15 @@ msgstr "このステップは終了して閉じられました。今後継続し
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Staff Tools"
-msgstr ""
+msgstr "講座スタッフツール"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Staff Info"
-msgstr ""
+msgstr "講座スタッフ情報"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Course Staff Tools"
-msgstr ""
+msgstr "講座スタッフツール"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Close"
@@ -1393,11 +1389,11 @@ msgstr "閉じる"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Enter an individual learner's username or email"
-msgstr ""
+msgstr "受講者のユーザ名またはemailを入力してください。"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Submit"
-msgstr "投稿"
+msgstr "選択"
 
 #: openassessment/templates/openassessmentblock/staff_debug/staff_debug.html
 msgid "Where are your students currently in this problem"
@@ -1457,7 +1453,7 @@ msgstr "ロケーション"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Learner Progress"
-msgstr "受講者の進捗"
+msgstr "受講者の進捗状況"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Problem Step"
@@ -1465,7 +1461,7 @@ msgstr "課題のステップ"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Active Learners in Step"
-msgstr "ステップでアクティブな受講者"
+msgstr "各ステップにおけるアクティブな受講者数"
 
 #: openassessment/templates/openassessmentblock/staff_area/staff_area.html
 msgid "Dates"
