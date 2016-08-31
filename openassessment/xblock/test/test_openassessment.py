@@ -8,7 +8,6 @@ from mock import Mock, patch, MagicMock, PropertyMock
 
 from openassessment.xblock import openassessmentblock
 from openassessment.xblock.resolve_dates import DISTANT_PAST, DISTANT_FUTURE
-from openassessment.workflow import api as workflow_api
 from openassessment.workflow.errors import AssessmentWorkflowError
 from .base import XBlockHandlerTestCase, scenario
 
@@ -43,6 +42,11 @@ class TestOpenAssessment(XBlockHandlerTestCase):
         self.assertIsNotNone(self_response)
         self.assertTrue(self_response.body.find("openassessment__peer-assessment"))
 
+        # Validate Staff Grade.
+        staff_response = xblock.render_staff_assessment(request)
+        self.assertIsNotNone(self_response)
+        self.assertTrue(staff_response.body.find("openassessment__staff-assessment"))
+
         # Validate Grading.
         grade_response = xblock.render_grade({})
         self.assertIsNotNone(grade_response)
@@ -73,7 +77,7 @@ class TestOpenAssessment(XBlockHandlerTestCase):
         with patch('openassessment.xblock.workflow_mixin.workflow_api') as mock_api:
             self.runtime.render(xblock, "student_view")
             expected_reqs = {
-                "peer": { "must_grade": 5, "must_be_graded_by": 3 }
+                "peer": {"must_grade": 5, "must_be_graded_by": 3}
             }
             mock_api.update_from_assessments.assert_called_once_with('test_submission', expected_reqs)
 
@@ -254,6 +258,7 @@ class TestOpenAssessment(XBlockHandlerTestCase):
 
         xblock.prompts = [{'description': 'Prompt 4.'}, {'description': 'Prompt 5.'}]
         self.assertEqual(xblock.prompt, '[{"description": "Prompt 4."}, {"description": "Prompt 5."}]')
+
 
 class TestDates(XBlockHandlerTestCase):
 
@@ -494,6 +499,19 @@ class TestDates(XBlockHandlerTestCase):
         self.assertTrue(xblock.is_released())
 
     @scenario('data/basic_scenario.xml')
+    def test_is_released_published_scheduled(self, xblock):
+        # The scenario doesn't provide a start date, so `is_released()`
+        # should be controlled only by the published state which defaults to True
+        xblock.runtime.modulestore = MagicMock()
+        xblock.runtime.modulestore.has_published_version.return_value = True
+
+        # Set the start date one day ahead in the future (in UTC)
+        xblock.start = dt.datetime.utcnow().replace(tzinfo=pytz.utc) + dt.timedelta(days=1)
+
+        # Check that it is not yet released
+        self.assertFalse(xblock.is_released())
+
+    @scenario('data/basic_scenario.xml')
     def test_is_released_no_ms(self, xblock):
         self.assertTrue(xblock.is_released())
 
@@ -654,3 +672,20 @@ class TestDates(XBlockHandlerTestCase):
 
         if released is not None:
             self.assertEqual(xblock.is_released(step=step), released)
+
+    @scenario('data/basic_scenario.xml')
+    def test_get_username(self, xblock):
+        user = MagicMock()
+        user.username = "Bob"
+
+        xblock.xmodule_runtime = MagicMock()
+        xblock.xmodule_runtime.get_real_user.return_value = user
+
+        self.assertEqual('Bob', xblock.get_username('anon_id'))
+
+    @scenario('data/basic_scenario.xml')
+    def test_get_username_unknown_id(self, xblock):
+        xblock.xmodule_runtime = MagicMock()
+        xblock.xmodule_runtime.get_real_user.return_value = None
+
+        self.assertIsNone(xblock.get_username('unknown_id'))

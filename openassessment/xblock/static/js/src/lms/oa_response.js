@@ -39,6 +39,8 @@ OpenAssessment.ResponseView.prototype = {
     // Maximum file size (4 MB) for an attached file.
     MAX_FILE_SIZE: 4194304,
 
+    UNSAVED_WARNING_KEY: "learner-response",
+
     /**
      Load the response (submission) view.
      **/
@@ -164,6 +166,7 @@ OpenAssessment.ResponseView.prototype = {
             return !sel.hasClass('is--disabled');
         } else {
             sel.toggleClass('is--disabled', !enabled);
+            return enabled;
         }
     },
 
@@ -218,45 +221,14 @@ OpenAssessment.ResponseView.prototype = {
      string: The current status message.
      **/
     saveStatus: function(msg) {
-        var sel = $('#response__save_status h3', this.element);
+        var sel = $('#response__save_status', this.element);
         if (typeof msg === 'undefined') {
             return sel.text();
         } else {
             // Setting the HTML will overwrite the screen reader tag,
             // so prepend it to the message.
             var label = gettext("Status of Your Response");
-            sel.html('<span class="sr">' + label + ':' + '</span>\n' + msg);
-        }
-    },
-
-    /**
-     Enable/disable the "navigate away" warning to alert the user of unsaved changes.
-
-     Args:
-     enabled (bool): If specified, set whether the warning is enabled.
-
-     Returns:
-     bool: Whether the warning is enabled.
-
-     Examples:
-     >> view.unsavedWarningEnabled(true); // enable the "unsaved" warning
-     >> view.unsavedWarningEnabled();
-     >> true
-     **/
-    unsavedWarningEnabled: function(enabled) {
-        if (typeof enabled === 'undefined') {
-            return (window.onbeforeunload !== null);
-        }
-        else {
-            if (enabled) {
-                window.onbeforeunload = function() {
-                    // Keep this on one big line to avoid gettext bug: http://stackoverflow.com/a/24579117
-                    return gettext("If you leave this page without saving or submitting your response, you'll lose any work you've done on the response.");  // jscs:ignore maximumLineLength
-                };
-            }
-            else {
-                window.onbeforeunload = null;
-            }
+            sel.html('<span class="sr">' + _.escape(label) + ':' + '</span>\n' + msg);
         }
     },
 
@@ -271,7 +243,7 @@ OpenAssessment.ResponseView.prototype = {
      array of strings: The current response texts.
      **/
     response: function(texts) {
-        var sel = $('.submission__answer__part__text__value', this.element);
+        var sel = $('.response__submission .submission__answer__part__text__value', this.element);
         if (typeof texts === 'undefined') {
             return sel.map(function() {
                 return $.trim($(this).val());
@@ -336,7 +308,11 @@ OpenAssessment.ResponseView.prototype = {
             this.saveEnabled(isNotBlank);
             this.previewEnabled(isNotBlank);
             this.saveStatus(gettext('This response has not been saved.'));
-            this.unsavedWarningEnabled(true);
+            this.baseView.unsavedWarningEnabled(
+                true,
+                this.UNSAVED_WARNING_KEY,
+                gettext("If you leave this page without saving or submitting your response, you will lose any work you have done on the response.") // jscs:ignore maximumLineLength
+            );
         }
 
         // Record the current time (used for autosave)
@@ -357,7 +333,7 @@ OpenAssessment.ResponseView.prototype = {
         this.baseView.toggleActionError('save', null);
 
         // Disable the "unsaved changes" warning
-        this.unsavedWarningEnabled(false);
+        this.baseView.unsavedWarningEnabled(false, this.UNSAVED_WARNING_KEY);
 
         var view = this;
         var savedResponse = this.response();
@@ -455,7 +431,7 @@ OpenAssessment.ResponseView.prototype = {
 
         // Disable the "unsaved changes" warning if the user
         // tries to navigate to another page.
-        this.unsavedWarningEnabled(false);
+        this.baseView.unsavedWarningEnabled(false, this.UNSAVED_WARNING_KEY);
     },
 
     /**

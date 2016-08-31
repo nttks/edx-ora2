@@ -9,7 +9,7 @@ describe("OpenAssessment.ResponseView", function() {
         'image/gif',
         'image/jpeg',
         'image/pjpeg',
-        'image/png',
+        'image/png'
     ];
 
     var ALLOWED_FILE_MIME_TYPES = [
@@ -17,7 +17,7 @@ describe("OpenAssessment.ResponseView", function() {
         'image/gif',
         'image/jpeg',
         'image/pjpeg',
-        'image/png',
+        'image/png'
     ];
 
     var FILE_TYPE_WHITE_LIST = ['pdf', 'doc', 'docx', 'html'];
@@ -76,7 +76,7 @@ describe("OpenAssessment.ResponseView", function() {
             // Store the args we were passed so we can verify them
             this.uploadArgs = {
                 url: url,
-                data: data,
+                data: data
             };
 
             // Return a promise indicating success or error
@@ -84,18 +84,9 @@ describe("OpenAssessment.ResponseView", function() {
         };
     };
 
-    var StubBaseView = function() {
-        this.loadAssessmentModules = function() {};
-        this.peerView = { load: function() {} };
-        this.gradeView = { load: function() {} };
-        this.showLoadError = function() {};
-        this.toggleActionError = function() {};
-        this.setUpCollapseExpand = function() {};
-    };
-
     // Stubs
-    var baseView = null;
     var server = null;
+    var runtime = {};
     var fileUploader = null;
     var data = null;
 
@@ -125,7 +116,6 @@ describe("OpenAssessment.ResponseView", function() {
         server = new StubServer();
         server.renderLatex = jasmine.createSpy('renderLatex');
         fileUploader = new StubFileUploader();
-        baseView = new StubBaseView();
         data = {
             "ALLOWED_IMAGE_MIME_TYPES": ALLOWED_IMAGE_MIME_TYPES,
             "ALLOWED_FILE_MIME_TYPES": ALLOWED_FILE_MIME_TYPES,
@@ -134,8 +124,9 @@ describe("OpenAssessment.ResponseView", function() {
         };
 
         // Create and install the view
-        var el = $('#openassessment-base').get(0);
-        view = new OpenAssessment.ResponseView(el, server, fileUploader, baseView, data);
+        var responseElement = $('#openassessment__response').get(0);
+        var baseView = new OpenAssessment.BaseView(runtime, responseElement, server, {});
+        view = new OpenAssessment.ResponseView(responseElement, server, fileUploader, baseView, data);
         view.installHandlers();
 
         // Stub the confirmation step
@@ -156,7 +147,7 @@ describe("OpenAssessment.ResponseView", function() {
         view.setAutoSaveEnabled(false);
 
         // Disable the unsaved page warning (if set)
-        view.unsavedWarningEnabled(false);
+        OpenAssessment.clearUnsavedChanges();
     });
 
     it("updates and retrieves response text correctly", function() {
@@ -337,48 +328,48 @@ describe("OpenAssessment.ResponseView", function() {
             }).promise();
         });
         spyOn(view, 'load');
-        spyOn(baseView, 'loadAssessmentModules');
+        spyOn(view.baseView, 'loadAssessmentModules');
 
         view.response(['Test response 1', 'Test response 2']);
         view.submit();
 
         // Expect the current and next step to have been reloaded
         expect(view.load).toHaveBeenCalled();
-        expect(baseView.loadAssessmentModules).toHaveBeenCalled();
+        expect(view.baseView.loadAssessmentModules).toHaveBeenCalled();
     });
 
     it("enables the unsaved work warning when the user changes the response text", function() {
         // Initially, the unsaved work warning should be disabled
-        expect(view.unsavedWarningEnabled()).toBe(false);
+        expect(view.baseView.unsavedWarningEnabled()).toBe(false);
 
         // Change the text, then expect the unsaved warning to be enabled.
         view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
         view.handleResponseChanged();
 
         // Expect the unsaved work warning to be enabled
-        expect(view.unsavedWarningEnabled()).toBe(true);
+        expect(view.baseView.unsavedWarningEnabled()).toBe(true);
     });
 
     it("disables the unsaved work warning when the user saves a response", function() {
         // Change the text, then expect the unsaved warning to be enabled.
         view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
         view.handleResponseChanged();
-        expect(view.unsavedWarningEnabled()).toBe(true);
+        expect(view.baseView.unsavedWarningEnabled()).toBe(true);
 
         // Save the response and expect the unsaved warning to be disabled
         view.save();
-        expect(view.unsavedWarningEnabled()).toBe(false);
+        expect(view.baseView.unsavedWarningEnabled()).toBe(false);
     });
 
     it("disables the unsaved work warning when the user submits a response", function() {
         // Change the text, then expect the unsaved warning to be enabled.
         view.response(['Lorem ipsum 1', 'Lorem ipsum 2']);
         view.handleResponseChanged();
-        expect(view.unsavedWarningEnabled()).toBe(true);
+        expect(view.baseView.unsavedWarningEnabled()).toBe(true);
 
         // Submit the response and expect the unsaved warning to be disabled
         view.submit();
-        expect(view.unsavedWarningEnabled()).toBe(false);
+        expect(view.baseView.unsavedWarningEnabled()).toBe(false);
     });
 
     describe("auto save", function() {
@@ -410,7 +401,7 @@ describe("OpenAssessment.ResponseView", function() {
             expect(view.saveStatus()).toContain('saved but not submitted');
 
             // Expect that the unsaved warning is disabled
-            expect(view.unsavedWarningEnabled()).toBe(false);
+            expect(view.baseView.unsavedWarningEnabled()).toBe(false);
         });
 
         it("schedules autosave polling", function() {
@@ -483,17 +474,19 @@ describe("OpenAssessment.ResponseView", function() {
     });
 
     it("selects too large of a file", function() {
-        spyOn(baseView, 'toggleActionError').and.callThrough();
-        var files = [{type: 'image/jpeg', size: 5000000, name: 'huge-picture.jpg', data: ''}];
+        spyOn(view.baseView, 'toggleActionError').and.callThrough();
+        var files = [{type: 'image/jpeg', size: 6000000, name: 'huge-picture.jpg', data: ''}];
         view.prepareUpload(files, 'image');
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 4MB or less.');
+        expect(view.baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File size must be 4MB or less.');
     });
 
-    it("selects the wrong file type", function() {
-        spyOn(baseView, 'toggleActionError').and.callThrough();
-        var files = [{type: 'bogus/jpeg', size: 1024, name: 'picture.exe', data: ''}];
+    it("selects the wrong image file type", function() {
+        spyOn(view.baseView, 'toggleActionError').and.callThrough();
+        var files = [{type: 'image/jpg', size: 1024, name: 'picture.exe', data: ''}];
         view.prepareUpload(files, 'image');
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'You can upload files with these file types: JPG, PNG or GIF');
+        expect(view.baseView.toggleActionError).toHaveBeenCalledWith(
+            'upload', 'You can upload files with these file types: JPG, PNG or GIF'
+        );
     });
 
     it("uploads a file via ora2 server", function() {
@@ -504,37 +497,41 @@ describe("OpenAssessment.ResponseView", function() {
     });
 
     it("selects the wrong pdf or image file type", function() {
-        spyOn(baseView, 'toggleActionError').and.callThrough();
+        spyOn(view.baseView, 'toggleActionError').and.callThrough();
         var files = [{type: 'application/exe', size: 1024, name: 'application.exe', data: ''}];
         view.prepareUpload(files, 'pdf-and-image');
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'You can upload files with these file types: JPG, PNG, GIF or PDF');
+        expect(view.baseView.toggleActionError).toHaveBeenCalledWith(
+            'upload', 'You can upload files with these file types: JPG, PNG, GIF or PDF'
+        );
     });
 
     it("selects the wrong file extension", function() {
-        spyOn(baseView, 'toggleActionError').and.callThrough();
+        spyOn(view.baseView, 'toggleActionError').and.callThrough();
         var files = [{type: 'application/exe', size: 1024, name: 'application.exe', data: ''}];
         view.prepareUpload(files, 'custom');
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'You can upload files with these file types: pdf, doc, docx, html');
+        expect(view.baseView.toggleActionError).toHaveBeenCalledWith(
+            'upload', 'You can upload files with these file types: pdf, doc, docx, html'
+        );
     });
 
     it("submits a file with extension in the black list", function() {
-        spyOn(baseView, 'toggleActionError').and.callThrough();
+        spyOn(view.baseView, 'toggleActionError').and.callThrough();
         view.data.FILE_TYPE_WHITE_LIST = ['exe'];
         var files = [{type: 'application/exe', size: 1024, name: 'application.exe', data: ''}];
         view.prepareUpload(files, 'custom');
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File type is not allowed.');
+        expect(view.baseView.toggleActionError).toHaveBeenCalledWith('upload', 'File type is not allowed.');
     });
 
     it("displays an error if a file could not be uploaded", function() {
         // Configure the file upload server to return an error
         server.uploadError = true;
-        spyOn(baseView, 'toggleActionError').and.callThrough();
+        spyOn(view.baseView, 'toggleActionError').and.callThrough();
 
         // Attempt to upload a file
         var files = [{type: 'image/jpeg', size: 1024, name: 'picture.jpg', data: ''}];
         view.prepareUpload(files, 'image');
 
         // Expect an error to be displayed
-        expect(baseView.toggleActionError).toHaveBeenCalledWith('upload', 'ERROR');
+        expect(view.baseView.toggleActionError).toHaveBeenCalledWith('upload', 'ERROR');
     });
 });
