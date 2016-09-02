@@ -183,6 +183,9 @@ describe("OpenAssessment.ResponseView", function() {
         // Set file upload feature enabled
         loadFixtures('oa_response_with_file_upload.html');
         view.fileUploadAllowed = true;
+        // Re-acquire the container element
+        var responseElement = $(view.element.id).get(0);
+        view.element = responseElement;
         // Set download url blank
         view.fileUrl('');
 
@@ -201,6 +204,9 @@ describe("OpenAssessment.ResponseView", function() {
         // Set file upload feature enabled
         loadFixtures('oa_response_with_file_upload.html');
         view.fileUploadAllowed = true;
+        // Re-acquire the container element
+        var responseElement = $(view.element.id).get(0);
+        view.element = responseElement;
         // Set download url
         view.fileUrl(FAKE_URL);
 
