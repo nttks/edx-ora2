@@ -52,6 +52,11 @@ def _parse_date(value, _):
         raise InvalidDateFormat(_("'{date}' must be a date string or datetime").format(date=value))
 
 
+def parse_date_value(date, _):
+    """ Public method for _parse_date """
+    return _parse_date(date, _)
+
+
 def resolve_dates(start, end, date_ranges, _):
     """
     Resolve date strings (including "default" dates) to datetimes.
@@ -121,8 +126,10 @@ def resolve_dates(start, end, date_ranges, _):
 
 
     Args:
-        start (str, ISO date format, or datetime): When the problem opens.  A value of None indicates that the problem is always open.
-        end (str, ISO date format, or datetime): When the problem closes.  A value of None indicates that the problem never closes.
+        start (str, ISO date format, or datetime): When the problem opens.
+            A value of None indicates that the problem is always open.
+        end (str, ISO date format, or datetime): When the problem closes.
+            A value of None indicates that the problem never closes.
         date_ranges (list of tuples): list of (start, end) ISO date string tuples indicating
             the start/end timestamps (date string or datetime) of each submission/assessment.
         _ (function): An i18n service function to use for retrieving the
