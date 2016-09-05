@@ -4,6 +4,7 @@ import json
 import datetime
 import urllib
 from mock import Mock, patch
+from unittest import skip
 from django.test.utils import override_settings
 
 from openassessment.assessment.api import peer as peer_api
@@ -774,6 +775,7 @@ class TestCourseStaff(XBlockHandlerTestCase):
             'submission_returned_uuid': submission['uuid']
         })
 
+    @skip("Until to upgrade edx-platform to Eucalyptus")
     @scenario('data/self_only_scenario.xml', user_id='Bob')
     def test_staff_delete_student_state(self, xblock):
         # Simulate that we are course staff
