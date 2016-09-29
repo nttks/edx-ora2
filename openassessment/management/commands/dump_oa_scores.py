@@ -1,6 +1,5 @@
 from collections import OrderedDict
 from datetime import datetime
-import json
 import logging
 from optparse import make_option
 import os
@@ -40,24 +39,27 @@ class Command(BaseCommand):
                              like 'org/course/run' or 'course-v1:org+course+run'
     """
     help = """Usage: dump_oa_scores [-d /tmp/dump_oa_scores] [-w] <course_id>"""
-    option_list = BaseCommand.option_list + (
-        make_option('-d', '--dump-dir',
-                    action="store",
-                    dest='dump_dir',
-                    default=None,
-                    help='Directory in which csv file is to be dumped'),
-        make_option('-w', '--with-attachments',
-                    action="store_true",
-                    dest='with_attachments',
-                    default=False,
-                    help='Whether to gather submission attachments'),
-    )
+
+    def add_arguments(self, parser):
+        parser.add_argument('course_id')
+        parser.add_argument(
+            '-d', '--dump-dir',
+            action="store",
+            dest='dump_dir',
+            default=None,
+            help='Directory in which csv file is to be dumped',
+        )
+        parser.add_argument(
+            '-w', '--with-attachments',
+            action="store_true",
+            dest='with_attachments',
+            default=False,
+            help='Whether to gather submission attachments',
+        )
 
     def handle(self, *args, **options):
-        if len(args) != 1:
-            raise CommandError("This command requires only one argument: <course_id>")
+        course_id = options['course_id']
 
-        course_id, = args
         # Check args: course_id
         try:
             course_id = CourseLocator.from_string(course_id)
@@ -128,7 +130,7 @@ class Command(BaseCommand):
             user = user_by_anonymous_id(submission.student_id)
             row.append(user.username)
             # 'Submission Content'
-            raw_answer = json.loads(Submission.objects.get(uuid=submission.submission_uuid).raw_answer)
+            raw_answer = Submission.objects.get(uuid=submission.submission_uuid).answer
             # Note: 'parts' is added as top-level domain of 'raw_answer' since Cypress
             # Currently, get only the first text from a list of answer parts
             text = raw_answer['parts'][0]['text'] if 'parts' in raw_answer else raw_answer['text']
