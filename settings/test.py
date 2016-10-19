@@ -39,3 +39,8 @@ INSTALLED_APPS += ('django_nose',)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'storage/test')
 
 FEATURES = {}
+
+WORKBENCH = WORKBENCH or {}
+WORKBENCH['services'] = {
+    'optional': 'openassessment.xblock.test.base.WorkbenchOptionalService',
+}

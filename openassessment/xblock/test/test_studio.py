@@ -252,7 +252,6 @@ class StudioViewTest(XBlockHandlerTestCase):
             'student-training',
             'self-assessment',
             'peer-assessment',
-            'staff-assessment'
         ])
 
         # Change the order (simulates what would happen when the author saves).
@@ -271,7 +270,6 @@ class StudioViewTest(XBlockHandlerTestCase):
             'student-training',
             'peer-assessment',
             'self-assessment',
-            'staff-assessment',
         ])
 
     def _assert_rendered_editor_order(self, xblock, expected_assessment_order):
@@ -335,3 +333,26 @@ class StudioViewTest(XBlockHandlerTestCase):
                 self.assertEqual(criterion['label'], criterion['name'])
                 for option in criterion['options']:
                     self.assertEqual(option['label'], option['name'])
+
+    @scenario('data/basic_scenario.xml')
+    def test_render_editor_assessment(self, xblock):
+        # Set another XBlock to be allowed.
+        self.runtime._allowed_staff_assessment_blocks = [self.load_scenario('data/basic_scenario.xml')]
+
+        # Expect that staff-assessment does not show
+        self._assert_rendered_editor_order(xblock, [
+            'student-training',
+            'peer-assessment',
+            'self-assessment',
+        ])
+
+        # Set target XBlock to be allowed.
+        self.runtime._allowed_staff_assessment_blocks.append(xblock)
+
+        # Expect that staff-assessment show
+        self._assert_rendered_editor_order(xblock, [
+            'student-training',
+            'peer-assessment',
+            'self-assessment',
+            'staff-assessment'
+        ])
