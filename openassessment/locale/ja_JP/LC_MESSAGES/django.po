@@ -2146,3 +2146,7 @@ msgstr "あなたの得点"
 #: openassessment/templates/openassessmentblock/oa_base.html
 msgid "Leaderboard"
 msgstr "上位成績者"
+
+#: openassessment/xblock/validation.py
+msgid "Peer Assessment and Staff Assessment cannot be used at the same time."
+msgstr "相互採点とスタッフ採点は同時に設定できません。"

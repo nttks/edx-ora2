@@ -72,3 +72,7 @@ msgstr "提出ファイル"
 # openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 msgid "Your Uploaded File"
 msgstr "提出ファイル"
+
+#: openassessment/xblock/validation.py
+msgid "Peer Assessment and Staff Assessment cannot be used at the same time."
+msgstr "相互採点とスタッフ採点は同時に設定できません。"
