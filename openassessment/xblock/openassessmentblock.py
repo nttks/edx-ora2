@@ -97,6 +97,7 @@ def load(path):
 
 @XBlock.needs("i18n")
 @XBlock.needs("user")
+@XBlock.needs("optional")
 class OpenAssessmentBlock(
     MessageMixin,
     SubmissionMixin,

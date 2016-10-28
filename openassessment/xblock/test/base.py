@@ -17,6 +17,7 @@ from openassessment.test_utils import CacheResetTest, TransactionCacheResetTest
 
 from workbench.runtime import WorkbenchRuntime
 import webob
+from xblock.reference.plugins import Service
 
 # Sample peer assessments
 PEER_ASSESSMENTS = [
@@ -424,3 +425,9 @@ class SubmitAssessmentsMixin(object):
         assessment['submission_uuid'] = submission['uuid']
         resp = self.request(xblock, 'staff_assess', json.dumps(assessment), response_format='json')
         self.assertTrue(resp['success'])
+
+
+class WorkbenchOptionalService(Service):
+
+    def is_available(self, xblock, key):
+        return xblock in getattr(self.runtime, '_allowed_staff_assessment_blocks', [])
