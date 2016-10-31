@@ -95,6 +95,11 @@ def _is_valid_assessment_sequence(assessments):
     return True
 
 
+def _has_peer_and_staff_assessments(assessments):
+    names = [asmnt.get('name') for asmnt in assessments]
+    return 'peer-assessment' in names and 'staff-assessment' in names
+
+
 def validate_assessments(assessments, current_assessments, is_released, _):
     """
     Check that the assessment dict is semantically valid. See _is_valid_assessment_sequence()
@@ -124,6 +129,10 @@ def validate_assessments(assessments, current_assessments, is_released, _):
     if not _is_valid_assessment_sequence(assessments):
         msg = _("The assessment order you selected is invalid.")
         return False, msg
+
+    # We do NOT support peer and staff assessment at the same time.
+    if _has_peer_and_staff_assessments(assessments):
+        return False, _("Peer Assessment and Staff Assessment cannot be used at the same time.")
 
     for assessment_dict in assessments:
         # Number you need to grade is >= the number of people that need to grade you

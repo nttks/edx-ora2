@@ -48,7 +48,7 @@
         "is_released": false
     },
     "staff_optional_after_peer": {
-        "valid": true,
+        "valid": false,
         "assessments": [
             {
                 "name": "peer-assessment",
@@ -78,7 +78,7 @@
         "current_assessments": null,
         "is_released": false
     },
-    "student_training_self_peer_staff": {
+    "student_training_self_peer": {
         "valid": true,
         "assessments": [
             {
@@ -99,10 +99,6 @@
                 "name": "peer-assessment",
                 "must_grade": 5,
                 "must_be_graded_by": 3
-            },
-            {
-                "name": "staff-assessment",
-                "required": true
             }
         ],
         "current_assessments": null,
