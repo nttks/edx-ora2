@@ -372,6 +372,7 @@
             $staffGradeTool.find('.staff__grade__show-form').click(
                 function(event) {
                     var wasShowing = $(event.currentTarget).hasClass(view.IS_SHOWING_CLASS);
+                    event.preventDefault();
                     if (wasShowing) {
                         view.closeStaffGradeForm(false);
                     }
