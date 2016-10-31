@@ -62,7 +62,7 @@ class StaffWorkflow(models.Model):
         Returns:
             dict: a dictionary that contains the following keys: 'graded', 'ungraded', and 'in-progress'
         """
-        timeout = (now() - cls.TIME_LIMIT).strftime("%Y-%m-%d %H:%M:%S")
+        timeout = now() - cls.TIME_LIMIT
         ungraded = cls.objects.filter(
             models.Q(grading_started_at=None) | models.Q(grading_started_at__lte=timeout),
             course_id=course_id, item_id=item_id, grading_completed_at=None, cancelled_at=None
@@ -102,7 +102,7 @@ class StaffWorkflow(models.Model):
                 the workflows for this request.
 
         """
-        timeout = (now() - cls.TIME_LIMIT).strftime("%Y-%m-%d %H:%M:%S")
+        timeout = now() - cls.TIME_LIMIT
         try:
             # Search for existing submissions that the scorer has worked on.
             staff_workflows = StaffWorkflow.objects.filter(
