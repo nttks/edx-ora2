@@ -409,24 +409,26 @@ class TestStaffAssessment(CacheResetTest):
         self.assertEqual(bob_sub, tim_to_grade)
         self.assertEqual(tim_sub, bob_to_grade)
 
-    def test_fetch_submission_delayed(self):
-        bob_sub, bob = self._create_student_and_submission("bob", "bob's answer")
-        # Fetch the submission for Tim to grade
-        tim_to_grade = staff_api.get_submission_to_assess(bob['course_id'], bob['item_id'], "Tim")
-        self.assertEqual(bob_sub, tim_to_grade)
+    @data('America/New_York', 'Asia/Tokyo')
+    def test_fetch_submission_delayed(self, time_zone):
+        with override_settings(TIME_ZONE=time_zone):
+            bob_sub, bob = self._create_student_and_submission("bob", "bob's answer")
+            # Fetch the submission for Tim to grade
+            tim_to_grade = staff_api.get_submission_to_assess(bob['course_id'], bob['item_id'], "Tim")
+            self.assertEqual(bob_sub, tim_to_grade)
 
-        bob_to_grade = staff_api.get_submission_to_assess(bob['course_id'], bob['item_id'], bob['student_id'])
-        self.assertIsNone(bob_to_grade)
+            bob_to_grade = staff_api.get_submission_to_assess(bob['course_id'], bob['item_id'], bob['student_id'])
+            self.assertIsNone(bob_to_grade)
 
-        # Change the grading_started_at timestamp so that the 'lock' on the
-        # problem is released.
-        workflow = StaffWorkflow.objects.get(scorer_id="Tim")
-        timestamp = (now() - (workflow.TIME_LIMIT + timedelta(hours=1))).strftime("%Y-%m-%d %H:%M:%S")
-        workflow.grading_started_at = timestamp
-        workflow.save()
+            # Change the grading_started_at timestamp so that the 'lock' on the
+            # problem is released.
+            workflow = StaffWorkflow.objects.get(scorer_id="Tim")
+            timestamp = now() - (workflow.TIME_LIMIT + timedelta(hours=1))
+            workflow.grading_started_at = timestamp
+            workflow.save()
 
-        bob_to_grade = staff_api.get_submission_to_assess(bob['course_id'], bob['item_id'], bob['student_id'])
-        self.assertEqual(tim_to_grade, bob_to_grade)
+            bob_to_grade = staff_api.get_submission_to_assess(bob['course_id'], bob['item_id'], bob['student_id'])
+            self.assertEqual(tim_to_grade, bob_to_grade)
 
     def test_next_submission_error(self):
         tim_sub, tim = self._create_student_and_submission("Tim", "Tim's answer")
@@ -447,46 +449,48 @@ class TestStaffAssessment(CacheResetTest):
         workflow = StaffWorkflow.objects.get(submission_uuid=tim_sub['uuid'])
         self.assertTrue(workflow.is_cancelled)
 
-    def test_grading_statistics(self):
-        bob_sub, bob = self._create_student_and_submission("bob", "bob's answer")
-        course_id = bob['course_id']
-        item_id = bob['item_id']
-        tim_sub, tim = self._create_student_and_submission("Tim", "Tim's answer")
-        sue_sub, sue = self._create_student_and_submission("Sue", "Sue's answer")
-        stats = staff_api.get_staff_grading_statistics(course_id, item_id)
-        self.assertEqual(stats, {'graded': 0, 'ungraded': 3, 'in-progress': 0})
+    @data('America/New_York', 'Asia/Tokyo')
+    def test_grading_statistics(self, time_zone):
+        with override_settings(TIME_ZONE=time_zone):
+            bob_sub, bob = self._create_student_and_submission("bob", "bob's answer")
+            course_id = bob['course_id']
+            item_id = bob['item_id']
+            tim_sub, tim = self._create_student_and_submission("Tim", "Tim's answer")
+            sue_sub, sue = self._create_student_and_submission("Sue", "Sue's answer")
+            stats = staff_api.get_staff_grading_statistics(course_id, item_id)
+            self.assertEqual(stats, {'graded': 0, 'ungraded': 3, 'in-progress': 0})
 
-        # Fetch a grade so that there's one 'in-progress'
-        tim_to_grade = staff_api.get_submission_to_assess(course_id, item_id, tim['student_id'])
-        stats = staff_api.get_staff_grading_statistics(course_id, item_id)
-        self.assertEqual(stats, {'graded': 0, 'ungraded': 2, 'in-progress': 1})
+            # Fetch a grade so that there's one 'in-progress'
+            tim_to_grade = staff_api.get_submission_to_assess(course_id, item_id, tim['student_id'])
+            stats = staff_api.get_staff_grading_statistics(course_id, item_id)
+            self.assertEqual(stats, {'graded': 0, 'ungraded': 2, 'in-progress': 1})
 
-        bob_to_grade = staff_api.get_submission_to_assess(tim['course_id'], tim['item_id'], bob['student_id'])
-        stats = staff_api.get_staff_grading_statistics(course_id, item_id)
-        self.assertEqual(stats, {'graded': 0, 'ungraded': 1, 'in-progress': 2})
+            bob_to_grade = staff_api.get_submission_to_assess(tim['course_id'], tim['item_id'], bob['student_id'])
+            stats = staff_api.get_staff_grading_statistics(course_id, item_id)
+            self.assertEqual(stats, {'graded': 0, 'ungraded': 1, 'in-progress': 2})
 
-        # Grade one of the submissions
-        staff_assessment = staff_api.create_assessment(
-            tim_to_grade["uuid"],
-            tim['student_id'],
-            OPTIONS_SELECTED_DICT["all"]["options"], dict(), "",
-            RUBRIC,
-        )
-        stats = staff_api.get_staff_grading_statistics(course_id, item_id)
-        self.assertEqual(stats, {'graded': 1, 'ungraded': 1, 'in-progress': 1})
+            # Grade one of the submissions
+            staff_assessment = staff_api.create_assessment(
+                tim_to_grade["uuid"],
+                tim['student_id'],
+                OPTIONS_SELECTED_DICT["all"]["options"], dict(), "",
+                RUBRIC,
+            )
+            stats = staff_api.get_staff_grading_statistics(course_id, item_id)
+            self.assertEqual(stats, {'graded': 1, 'ungraded': 1, 'in-progress': 1})
 
-        # When one of the 'locks' times out, verify that it is no longer
-        # considered ungraded.
-        workflow = StaffWorkflow.objects.get(scorer_id=bob['student_id'])
-        timestamp = (now() - (workflow.TIME_LIMIT + timedelta(hours=1))).strftime("%Y-%m-%d %H:%M:%S")
-        workflow.grading_started_at = timestamp
-        workflow.save()
-        stats = staff_api.get_staff_grading_statistics(course_id, item_id)
-        self.assertEqual(stats, {'graded': 1, 'ungraded': 2, 'in-progress': 0})
+            # When one of the 'locks' times out, verify that it is no longer
+            # considered ungraded.
+            workflow = StaffWorkflow.objects.get(scorer_id=bob['student_id'])
+            timestamp = now() - (workflow.TIME_LIMIT + timedelta(hours=1))
+            workflow.grading_started_at = timestamp
+            workflow.save()
+            stats = staff_api.get_staff_grading_statistics(course_id, item_id)
+            self.assertEqual(stats, {'graded': 1, 'ungraded': 2, 'in-progress': 0})
 
-        workflow_api.cancel_workflow(bob_to_grade['uuid'], "Test Cancel", bob['student_id'], {})
-        stats = staff_api.get_staff_grading_statistics(course_id, item_id)
-        self.assertEqual(stats, {'graded': 1, 'ungraded': 1, 'in-progress': 0})
+            workflow_api.cancel_workflow(bob_to_grade['uuid'], "Test Cancel", bob['student_id'], {})
+            stats = staff_api.get_staff_grading_statistics(course_id, item_id)
+            self.assertEqual(stats, {'graded': 1, 'ungraded': 1, 'in-progress': 0})
 
     @staticmethod
     def _create_student_and_submission(student, answer, date=None, problem_steps=None):
