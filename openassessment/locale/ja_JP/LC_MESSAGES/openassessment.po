@@ -587,7 +587,7 @@ msgstr "点"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Additional comments on your response"
-msgstr "あなたのレポートへの講評"
+msgstr "課題に対する総評"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Provide Feedback on Peer Assessments"
@@ -1068,7 +1068,7 @@ msgstr ""
 #: openassessment/xblock/staff_assessment_mixin.py
 #: openassessment/xblock/staff_assessment_mixin.py
 msgid "Not Available"
-msgstr "無効"
+msgstr "未採点"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html
 #, python-format
@@ -1132,7 +1132,7 @@ msgstr "課題に対するレポートを入力してください。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "We could not upload this file"
-msgstr "ファイルアップロードできませんでした。"
+msgstr "ファイルアップロードできません。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Select a file to upload for this submission."
@@ -1144,7 +1144,7 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "You may continue to work on your response until you submit it."
-msgstr "提出するまではレポートを編集することができます。"
+msgstr "課題を提出するまでは何度でも編集できます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "We could not save your progress"
@@ -1296,7 +1296,7 @@ msgstr "スタッフ採点"
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
 msgid "Manage Individual Learners"
-msgstr "講座スタッフツール"
+msgstr "受講者管理ツール"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
@@ -1411,6 +1411,9 @@ msgid ""
 "                                        Response for: %(student_username)s\n"
 "                                    "
 msgstr ""
+"\n"
+"                                        採点者: %(student_username)s\n"
+"                                    "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
@@ -1421,7 +1424,7 @@ msgstr "受講者の回答"
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "The learner's response to the question above:"
-msgstr "受講者の回答"
+msgstr "提出された回答"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
@@ -1604,7 +1607,7 @@ msgstr "投稿の削除"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "A response was not found for this learner."
-msgstr ""
+msgstr "入力された受講者は存在しません。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info_assessment_detail.html
 #, python-format
@@ -1910,7 +1913,7 @@ msgstr ""
 
 #: openassessment/xblock/staff_area_mixin.py
 msgid "No other learner responses are available for grading at this time."
-msgstr ""
+msgstr "採点待ちの提出物はありません。"
 
 #: openassessment/xblock/staff_area_mixin.py
 msgid "Error getting staff grade information."
@@ -1957,7 +1960,7 @@ msgstr "スタッフからの採点待ち状態"
 msgid ""
 "Check back later to see if a course staff member has assessed your response."
 " You will receive your grade after the assessment is complete."
-msgstr "しばらく経ってから、講座のスタッフによる採点が完了したかどうかを確認して下さい。採点が完了すると、あなたの得点を確認することができます。"
+msgstr "スタッフによる採点が完了するまでしばらくお待ちください。採点が完了すると得点が表示されます。"
 
 #: openassessment/xblock/staff_assessment_mixin.py
 msgid "You Must Complete the Steps Above to View Your Grade"

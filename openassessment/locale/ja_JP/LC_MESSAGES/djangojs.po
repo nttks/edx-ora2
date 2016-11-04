@@ -165,7 +165,7 @@ msgstr "課題に対する回答を投稿しようとしています。回答を
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "File size must be 4MB or less."
-msgstr "ファイルサイズは4MB以下である必要があります"
+msgstr "アップロードできるファイルサイズは4MB以下です。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js

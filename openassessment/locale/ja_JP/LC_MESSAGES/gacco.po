@@ -83,7 +83,7 @@ msgid ""
 "verified, screened, approved, reviewed, or endorsed by edX. If you decide to"
 " access it, you do so at your own risk."
 msgstr ""
-"注意：このファイルは、他の受講者によって提出されたものです。ファイルの内容について、gaccoは関与いたしかねますことご了承ください。なお、gaccoのシステムによりウイルススキャンは実施しておりますが、お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。"
+"注意：他の受講者によって提出されたファイルです。お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。また、ファイルの安全性について当社では一切の責任を負わないものとします。"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_unavailable.html
 #: openassessment/templates/openassessmentblock/response/oa_response_unavailable.html
