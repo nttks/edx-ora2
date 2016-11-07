@@ -76,3 +76,32 @@ msgstr "提出ファイル"
 #: openassessment/xblock/validation.py
 msgid "Peer Assessment and Staff Assessment cannot be used at the same time."
 msgstr "相互採点とスタッフ採点は同時に設定できません。"
+
+#: openassessment/templates/openassessmentblock/oa_uploaded_file.html
+msgid ""
+"Caution: This file was uploaded by another course learner and has not been "
+"verified, screened, approved, reviewed, or endorsed by edX. If you decide to"
+" access it, you do so at your own risk."
+msgstr ""
+"注意：他の受講者によって提出されたファイルです。お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。また、ファイルの安全性について当社では一切の責任を負わないものとします。"
+
+#: openassessment/templates/openassessmentblock/peer/oa_peer_unavailable.html
+#: openassessment/templates/openassessmentblock/response/oa_response_unavailable.html
+#: openassessment/templates/openassessmentblock/self/oa_self_unavailable.html
+#: openassessment/templates/openassessmentblock/student_training/student_training_unavailable.html
+#: openassessment/xblock/staff_assessment_mixin.py
+#: openassessment/xblock/staff_assessment_mixin.py
+msgid "Not Available"
+msgstr "未採点"
+
+#: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
+msgid "Override this learner's current grade using the problem's rubric."
+msgstr ""
+"こちらからレポート課題の再採点を実施できます。相互採点の結果が存在する場合も、受講者の最終成績はスタッフ採点の内容で上書きされ、元に戻すことはできません。スタッフ採点のやり直しは可能です。"
+
+#: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
+msgid ""
+"Removing a learner's submission cannot be undone and should be done with "
+"caution."
+msgstr ""
+"回答を削除すると、受講者の回答はキャンセル状態になり、また受講者には以下に入力されたメッセージが表示されます。削除の取り消し、および受講者による課題の再投稿はできません。"

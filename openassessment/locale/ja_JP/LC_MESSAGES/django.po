@@ -513,9 +513,12 @@ msgid ""
 "                        "
 msgid_plural ""
 "\n"
-"                            %(assessment_title)s - %(points)s points\n"
+"                            %(assessment_title)s - %(points)s 点\n"
 "                        "
 msgstr[0] ""
+"\n"
+"                            %(assessment_title)s - %(points)s 点\n"
+"                        "
 
 #: openassessment/templates/openassessmentblock/grade/oa_assessment_title.html
 #, python-format
@@ -552,6 +555,9 @@ msgid ""
 "                                %(points_earned)s out of %(points_possible)s\n"
 "                            "
 msgstr ""
+"\n"
+"                                %(points_earned)s / %(points_possible)s\n"
+"                            "
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/response/oa_response.html
@@ -587,7 +593,7 @@ msgstr "点"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Additional comments on your response"
-msgstr "あなたのレポートへの講評"
+msgstr "課題に対する総評"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Provide Feedback on Peer Assessments"
@@ -678,7 +684,7 @@ msgid ""
 "need to be done on your response. When the assessments of your response are "
 "complete, you will see feedback from everyone who assessed your response, "
 "and you will receive your final grade."
-msgstr ""
+msgstr "あなたのレポートは現在採点中です。全ての採点ステップが完了しますと取得した得点やコメントが表示されます。"
 
 #: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_show.html
 msgid "Top-Scoring Responses for This Assignment"
@@ -727,7 +733,7 @@ msgstr "この課題を完了しました"
 msgid ""
 "Your final grade will be available when the assessments of your response are"
 " complete."
-msgstr ""
+msgstr "あなたの得点は全ての採点ステップが完了すると表示されます。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_complete.html
 msgid "Review your grade and your assessment details."
@@ -735,7 +741,7 @@ msgstr "あなたの得点と評価の詳細を確認してください。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 msgid "Assignment in progress"
-msgstr ""
+msgstr "採点中"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 msgid ""
@@ -758,6 +764,8 @@ msgid ""
 "                                    %(start_strong)sThe self assessment step will close soon.%(end_strong)s You still need to complete the %(start_link)sself assessment%(end_link)s step.\n"
 "                                "
 msgstr ""
+"\n"
+"                                    %(start_strong)sこの課題の自己採点はもうすぐ終了します。%(end_strong)sあなたがスコアを得るためには、%(start_link)s自己採点%(end_link)sステップを完了する必要があります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -766,6 +774,8 @@ msgid ""
 "                                    You still need to complete the %(start_link)sself assessment%(end_link)s step.\n"
 "                                "
 msgstr ""
+"\n"
+"                                    あなたがスコアを得るためには、%(start_link)s自己採点%(end_link)sステップを完了する必要があります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -774,6 +784,8 @@ msgid ""
 "                                    %(start_strong)sThe peer assessment step will close soon.%(end_strong)s All submitted peer responses have been assessed. Check back later to see if more learners have submitted responses. You still need to complete the %(start_link)speer assessment%(end_link)s step.\n"
 "                                "
 msgstr ""
+"\n"
+"                                    %(start_strong)sこの課題の相互採点はもうすぐ終了します。%(end_strong)s提出済のレポートが全て採点済となり、採点ができない状態です。しばらくしてからこのページを開き、他の受講者が提出したレポートがないか確認してください。あなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -782,6 +794,9 @@ msgid ""
 "                                    All submitted peer responses have been assessed. Check back later to see if more learners have submitted responses. You still need to complete the %(start_link)speer assessment%(end_link)s step.\n"
 "                                "
 msgstr ""
+"\n"
+"                                    提出済のレポートが全て採点済となり、採点ができない状態です。しばらく経ってから、こちらのページで他の受講者が新しいレポートを提出したかどうかを確認してください。あなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。\n"
+"                                "
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -790,6 +805,8 @@ msgid ""
 "                                    %(start_strong)sThe peer assessment step will close soon.%(end_strong)s You still need to complete the %(start_link)speer assessment%(end_link)s step.\n"
 "                                "
 msgstr ""
+"\n"
+"                                    %(start_strong)sこの課題の相互採点はもうすぐ終了します。%(end_strong)sあなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -798,6 +815,8 @@ msgid ""
 "                                    You still need to complete the %(start_link)speer assessment%(end_link)s step.\n"
 "                                "
 msgstr ""
+"\n"
+"                                    あなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。                                "
 
 #: openassessment/templates/openassessmentblock/message/oa_message_open.html
 #, python-format
@@ -1057,7 +1076,7 @@ msgstr ""
 #: openassessment/templates/openassessmentblock/student_training/student_training_unavailable.html
 #: openassessment/xblock/staff_assessment_mixin.py
 msgid "Not Available"
-msgstr "無効"
+msgstr "未採点"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html
 #, python-format
@@ -1071,7 +1090,7 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html
 msgid "Waiting for Peer Responses"
-msgstr "他の受講者からの採点待ち状態"
+msgstr "他の受講者からのレポート提出待ち状態"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html
 msgid ""
@@ -1121,7 +1140,7 @@ msgstr "課題に対するレポートを入力してください。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "We could not upload this file"
-msgstr "ファイルアップロードできませんでした。"
+msgstr "ファイルアップロードできません。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Select a file to upload for this submission."
@@ -1133,7 +1152,7 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "You may continue to work on your response until you submit it."
-msgstr "提出するまではレポートを編集することができます。"
+msgstr "課題を提出するまでは何度でも編集できます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "We could not save your progress"
@@ -1283,15 +1302,15 @@ msgstr "スタッフ採点"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
 msgid "Manage Individual Learners"
-msgstr ""
+msgstr "受講者管理ツール"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
 msgid "View Assignment Statistics"
-msgstr ""
+msgstr "講座スタッフ情報"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
 msgid "Grade Available Responses"
-msgstr ""
+msgstr "スタッフ採点を実施する"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_area.html
 msgid "Close"
@@ -1383,7 +1402,7 @@ msgstr "スタッフ採点"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
 msgid "Give this learner a grade using the problem's rubric."
-msgstr ""
+msgstr "課題のルーブリックに沿って、採点を実施してください。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
 #, python-format
@@ -1392,6 +1411,9 @@ msgid ""
 "                                        Response for: %(student_username)s\n"
 "                                    "
 msgstr ""
+"\n"
+"                                        採点者: %(student_username)s\n"
+"                                    "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
@@ -1402,16 +1424,16 @@ msgstr "受講者の回答"
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "The learner's response to the question above:"
-msgstr ""
+msgstr "提出された回答"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
 msgid "Submit assessment"
-msgstr "課題を提出する"
+msgstr "採点を実施する"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
 msgid "Submit assessment and continue grading"
-msgstr ""
+msgstr "採点を実施し、続けて次のレポートを採点する"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_count.html
 #, python-format
@@ -1420,10 +1442,13 @@ msgid ""
 "                %(ungraded)s Available and %(in_progress)s Checked Out\n"
 "            "
 msgstr ""
+"\n"
+"                %(ungraded)s : 採点可能（担当者未割当）, %(in_progress)s : 採点中            "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
 msgid "Override this learner's current grade using the problem's rubric."
 msgstr ""
+"こちらからレポート課題の再採点を実施できます。相互採点の結果が存在する場合も、受講者の最終成績はスタッフ採点の内容で上書きされ、元に戻すことはできません。スタッフ採点のやり直しは可能です。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html
 #, python-format
@@ -1432,6 +1457,9 @@ msgid ""
 "                                    Response for: %(student_username)s\n"
 "                                "
 msgstr ""
+"\n"
+"                                    選択中の受講者 : %(student_username)s\n"
+"                                "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 #, python-format
@@ -1440,10 +1468,13 @@ msgid ""
 "                Viewing learner: %(learner)s\n"
 "            "
 msgstr ""
+"\n"
+"                次の受講者の情報を閲覧しています：%(learner)s\n"
+"            "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Learner's Response"
-msgstr ""
+msgstr "受講者のレポート回答内容"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 #, python-format
@@ -1474,11 +1505,11 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Peer Assessments for This Learner"
-msgstr "この受講者の相互採点結果"
+msgstr "この受講者に対する相互採点結果"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Peer Assessments Completed by This Learner"
-msgstr ""
+msgstr "この受講者が実施した相互採点結果"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Learner's Self Assessment"
@@ -1490,11 +1521,11 @@ msgstr "凡例準拠採点"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Staff Assessment for This Learner"
-msgstr "この受講者のスタッフ採点結果"
+msgstr "この受講者に対するスタッフ採点結果"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Learner's Final Grade"
-msgstr ""
+msgstr "受講者の最終結果"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 #, python-format
@@ -1503,6 +1534,9 @@ msgid ""
 "                            Final grade: %(points_earned)s out of %(points_possible)s\n"
 "                        "
 msgstr ""
+"\n"
+"                            最終成績： %(points_earned)s / %(points_possible)s\n"
+"                        "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Final Grade Details"
@@ -1516,9 +1550,12 @@ msgid ""
 "                                    "
 msgid_plural ""
 "\n"
-"                                        %(assessment_label)s - %(points)s points\n"
+"                                        %(assessment_label)s - %(points)s 点\n"
 "                                    "
 msgstr[0] ""
+"\n"
+"                                        %(assessment_label)s - %(points)s 点\n"
+"                                    "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Feedback Recorded"
@@ -1545,21 +1582,22 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Submit Assessment Grade Override"
-msgstr ""
+msgstr "採点結果を上書きする"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Remove Submission From Peer Grading"
-msgstr "相互採点から投稿を削除する"
+msgstr "レポート回答を削除する"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Caution: This Action Cannot Be Undone"
-msgstr ""
+msgstr "注意： この操作を取り消すことはできません"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid ""
 "Removing a learner's submission cannot be undone and should be done with "
 "caution."
 msgstr ""
+"回答を削除すると、受講者の回答はキャンセル状態になり、また受講者には以下に入力されたメッセージが表示されます。削除の取り消し、および受講者による課題の再投稿はできません。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Comments:"
@@ -1571,7 +1609,7 @@ msgstr "投稿の削除"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "A response was not found for this learner."
-msgstr ""
+msgstr "入力された受講者は存在しません。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info_assessment_detail.html
 #, python-format
@@ -1580,6 +1618,9 @@ msgid ""
 "                            Assessment %(assessment_num)s:\n"
 "                        "
 msgstr ""
+"\n"
+"                            評価 %(assessment_num)s:\n"
+"                        "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info_assessment_detail.html
 msgid "Assessment Details"
@@ -1721,11 +1762,11 @@ msgstr "スタッフコメント"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Peer Median Grade"
-msgstr ""
+msgstr "相互採点結果（中央値）"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Peer {peer_index}"
-msgstr ""
+msgstr "採点者 {peer_index}"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Peer Comments"
@@ -1749,7 +1790,7 @@ msgstr "自己採点結果"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Your Comments"
-msgstr ""
+msgstr "自己採点コメント"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Waiting for peer reviews"
@@ -1870,7 +1911,7 @@ msgstr ""
 
 #: openassessment/xblock/staff_area_mixin.py
 msgid "No other learner responses are available for grading at this time."
-msgstr ""
+msgstr "採点待ちの提出物はありません。"
 
 #: openassessment/xblock/staff_area_mixin.py
 msgid "Error getting staff grade information."
@@ -1916,7 +1957,7 @@ msgstr "スタッフからの採点待ち状態"
 msgid ""
 "Check back later to see if a course staff member has assessed your response."
 " You will receive your grade after the assessment is complete."
-msgstr "しばらく経ってから、講座のスタッフによる採点が完了したかどうかを確認して下さい。採点が完了すると、あなたの得点を確認することができます。"
+msgstr "スタッフによる採点が完了するまでしばらくお待ちください。採点が完了すると得点が表示されます。"
 
 #: openassessment/xblock/staff_assessment_mixin.py
 msgid "You Must Complete the Steps Above to View Your Grade"
@@ -2150,3 +2191,11 @@ msgstr "上位成績者"
 #: openassessment/xblock/validation.py
 msgid "Peer Assessment and Staff Assessment cannot be used at the same time."
 msgstr "相互採点とスタッフ採点は同時に設定できません。"
+
+#: openassessment/templates/openassessmentblock/oa_uploaded_file.html
+msgid ""
+"Caution: This file was uploaded by another course learner and has not been "
+"verified, screened, approved, reviewed, or endorsed by edX. If you decide to"
+" access it, you do so at your own risk."
+msgstr ""
+"注意：他の受講者によって提出されたファイルです。お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。また、ファイルの安全性について当社では一切の責任を負わないものとします。"
