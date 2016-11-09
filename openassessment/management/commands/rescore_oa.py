@@ -27,7 +27,7 @@ class Command(BaseCommand):
     This command allows you to rescore the user's openassessment by switching peer-assessments.
     In addition, it also allows you to create a new peer-assessment record and attach it to the specified users (like staff).
 
-    Usage: python manage.py cms --settings=aws rescore_oa edX/DemoX/Demo_Course
+    Usage: python manage.py cms --settings=aws rescore_oa course-v1:edX+DemoX+Demo_Course testuser
 
     Args:
         course_id (unicode): The ID of the course to the openassessment item exists in,
@@ -36,16 +36,19 @@ class Command(BaseCommand):
     """
     help = """Usage: rescore_oa <course_id> <username>"""
 
-    def handle(self, *args, **options):
-        if len(args) != 2:
-            raise CommandError("This command requires two arguments: <course_id> <username>")
+    def add_arguments(self, parser):
+        parser.add_argument('course_id')
+        parser.add_argument('username')
 
-        course_id, username, = args
+    def handle(self, *args, **options):
+        course_id = options['course_id']
+        username = options['username']
+
         # Check args: course_id
         try:
             course_id = CourseLocator.from_string(course_id)
         except InvalidKeyError:
-            raise CommandError("The course_id is not of the right format. It should be like 'org/course/run' or 'course-v1:org+course+run'")
+            raise CommandError("The course_id is not of the right format. It should be like 'course-v1:org+course+run'")
 
         # Find course
         course_items = modulestore().get_items(course_id, qualifiers={'category': 'course'})
