@@ -26,11 +26,11 @@
                 <div class="message__content">
                     <p>
                         {% if workflow_cancellation.cancelled_by %}
-                            {% blocktrans with removed_datetime=workflow_cancellation.cancelled_at|utc|date:"N j, Y H:i e" removed_by_username=workflow_cancellation.cancelled_by %}
+                            {% blocktrans with removed_datetime=workflow_cancellation.cancelled_at|utc|date:"DATETIME_FORMAT" removed_by_username=workflow_cancellation.cancelled_by %}
                                 Your submission has been cancelled by {{ removed_by_username }} on {{ removed_datetime }}
                             {% endblocktrans %}
                         {% else %}
-                            {% blocktrans with removed_datetime=workflow_cancellation.cancelled_at|utc|date:"N j, Y H:i e" %}
+                            {% blocktrans with removed_datetime=workflow_cancellation.cancelled_at|utc|date:"DATETIME_FORMAT" %}
                                 Your submission was cancelled on {{ removed_datetime }}
                             {% endblocktrans %}
                         {% endif %}
