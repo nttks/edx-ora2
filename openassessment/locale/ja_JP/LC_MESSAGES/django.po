@@ -559,11 +559,9 @@ msgstr ""
 "                                %(points_earned)s / %(points_possible)s\n"
 "                            "
 
-#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 #: openassessment/templates/openassessmentblock/response/oa_response_graded.html
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
-#: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
 msgid "Your Response"
 msgstr "あなたのレポート"
 
@@ -572,7 +570,7 @@ msgstr "あなたのレポート"
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
 msgid "Your response to the question above:"
-msgstr "あなたの回答："
+msgstr "あなたのレポート："
 
 # openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Your Upload"
@@ -664,15 +662,15 @@ msgstr "未完了"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_incomplete.html
 msgid "You have not completed all the steps of this problem."
-msgstr "あなたはこの課題の全てのステップを完了していません"
+msgstr "あなたはこの課題を完了していません。"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_not_started.html
 msgid "Not Started"
-msgstr "未開始"
+msgstr "未得点"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_not_started.html
 msgid "You have not started this problem yet."
-msgstr "あなたのレポートの採点はまだ開始されていません"
+msgstr "課題が始まっていないか、得点を得るための条件をクリアしていません。"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_waiting.html
 msgid "Waiting for Assessments"
@@ -684,7 +682,7 @@ msgid ""
 "need to be done on your response. When the assessments of your response are "
 "complete, you will see feedback from everyone who assessed your response, "
 "and you will receive your final grade."
-msgstr "あなたのレポートは現在採点中です。全ての採点ステップが完了しますと取得した得点やコメントが表示されます。"
+msgstr "あなたの課題は採点中です。あなたへの採点が完了した後に得点やコメントが表示されます。"
 
 #: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_show.html
 msgid "Top-Scoring Responses for This Assignment"
@@ -709,35 +707,35 @@ msgstr "この課題の全てのステップを終えると、成績優秀者の
 
 #: openassessment/templates/openassessmentblock/message/oa_message_closed.html
 msgid "This Task Is Not Yet Available"
-msgstr "実施不可"
+msgstr "未公開"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_closed.html
 msgid "This Assignment Has Closed"
-msgstr "この課題は終了し閉じられました。"
+msgstr "この課題は終了しました"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_closed.html
 msgid "Check back to complete the assignment once this section has opened."
-msgstr "このセクションが開始されてからこのページを再度開いてください。"
+msgstr "課題が公開されてから実施してください。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_closed.html
 msgid ""
 "One or more deadlines for this assignment have passed. You will receive an "
 "incomplete grade for this assignment."
-msgstr "一つ以上の期限が過ぎました。この課題の得点は未完了となります。"
+msgstr "採点期限を過ぎました。この課題は未完了となります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_complete.html
 msgid "You Have Completed This Assignment"
-msgstr "この課題を完了しました"
+msgstr "この課題は終了しました"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_complete.html
 msgid ""
 "Your final grade will be available when the assessments of your response are"
 " complete."
-msgstr "あなたの得点は全ての採点ステップが完了すると表示されます。"
+msgstr "あなたの得点は、あなたへの採点が完了した後に表示されます。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_complete.html
 msgid "Review your grade and your assessment details."
-msgstr "あなたの得点と評価の詳細を確認してください。"
+msgstr "あなたの得点と提出した課題を確認してください。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 msgid "Assignment in progress"
@@ -765,7 +763,7 @@ msgid ""
 "                                "
 msgstr ""
 "\n"
-"                                    %(start_strong)sこの課題の自己採点はもうすぐ終了します。%(end_strong)sあなたがスコアを得るためには、%(start_link)s自己採点%(end_link)sステップを完了する必要があります。"
+"                                    %(start_strong)s%(end_strong)s自己採点の期限はまもなく終了です。%(start_link)s自己採点%(end_link)sを実施してください。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -775,7 +773,7 @@ msgid ""
 "                                "
 msgstr ""
 "\n"
-"                                    あなたがスコアを得るためには、%(start_link)s自己採点%(end_link)sステップを完了する必要があります。"
+"                                    %(start_link)s自己採点%(end_link)sを実施してください。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -785,7 +783,7 @@ msgid ""
 "                                "
 msgstr ""
 "\n"
-"                                    %(start_strong)sこの課題の相互採点はもうすぐ終了します。%(end_strong)s提出済のレポートが全て採点済となり、採点ができない状態です。しばらくしてからこのページを開き、他の受講者が提出したレポートがないか確認してください。あなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。"
+"                                    %(start_strong)s他の受講者のレポートを採点する期限はまもなく終了します。%(end_strong)s他の受講者が提出したレポートはすべて採点済みのため、他の受講者のレポートが提出されるのをお待ちください。得点を得るためには%(start_link)s他の受講者のレポート採点%(end_link)sを完了する必要があります。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -795,7 +793,7 @@ msgid ""
 "                                "
 msgstr ""
 "\n"
-"                                    提出済のレポートが全て採点済となり、採点ができない状態です。しばらく経ってから、こちらのページで他の受講者が新しいレポートを提出したかどうかを確認してください。あなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。\n"
+"                                    他の受講者が提出したレポートはすべて採点済みのため、他の受講者がレポートを提出するのをお待ちください。あなたの採点は、%(start_link)s他の受講者のレポート採点%(end_link)sが完了した後に行われます。\n"
 "                                "
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
@@ -806,7 +804,7 @@ msgid ""
 "                                "
 msgstr ""
 "\n"
-"                                    %(start_strong)sこの課題の相互採点はもうすぐ終了します。%(end_strong)sあなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。"
+"                                    %(start_strong)s他の受講者のレポートを採点する期限はまもなく終了します。%(end_strong)s%(start_link)s他の受講者のレポート採点%(end_link)sを実施してください。"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_incomplete.html
 #, python-format
@@ -816,7 +814,7 @@ msgid ""
 "                                "
 msgstr ""
 "\n"
-"                                    あなたがスコアを得るためには、%(start_link)s相互採点%(end_link)sステップを完了する必要があります。                                "
+"                                    %(start_link)s他の受講者のレポート採点%(end_link)sを実施してください。                                "
 
 #: openassessment/templates/openassessmentblock/message/oa_message_open.html
 #, python-format
@@ -826,7 +824,7 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    課題の提出期限が迫っています。評価されるためには課題に回答し、%(start_tag)sあなたのレポート%(end_tag)s より下のステップを完了してください。\n"
+"                    課題提出期限が迫っています。すべての課題提出が完了するまで得点を得ることはできません。%(start_tag)s%(end_tag)s\n"
 "                "
 
 #: openassessment/templates/openassessmentblock/message/oa_message_open.html
@@ -837,16 +835,16 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    この課題には幾つかのステップがあります。１つ目のステップではレポートを提出します。 %(start_tag)sあなたのレポート%(end_tag)s の下に次のステップが表示されます。\n"
+"                    この課題にはいくつかのステップがあります。次の課題がある場合、 %(start_tag)sあなたのレポート%(end_tag)s の下に次のステップが表示されます。\n"
 "                "
 
 #: openassessment/templates/openassessmentblock/message/oa_message_unavailable.html
 msgid "Instructions Unavailable"
-msgstr "無効"
+msgstr "取り消し"
 
 #: openassessment/templates/openassessmentblock/message/oa_message_unavailable.html
 msgid "The instructions for this step could not be loaded."
-msgstr "このステップの取り組みはロードできません。"
+msgstr "課題は提出されていません。"
 
 #: openassessment/templates/openassessmentblock/oa_base.html
 msgid ""
@@ -1012,13 +1010,13 @@ msgstr ""
 #: openassessment/templates/openassessmentblock/self/oa_self_closed.html
 #: openassessment/templates/openassessmentblock/student_training/student_training_closed.html
 msgid "The Due Date for This Step Has Passed"
-msgstr "このステップの終了期限をすぎました"
+msgstr "課題提出期限が過ぎました"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_closed.html
 msgid ""
 "This step is now closed. You can no longer complete peer assessments or "
 "continue with this assignment, and you'll receive a grade of Incomplete."
-msgstr "このステップは終了して閉じられました。今後継続して他者の評価、自己評価を行うことはできません。あなたの結果は未完了となります。"
+msgstr "終了しました。これ以上採点を行うことはできません。また、あなたの評価は行われません。"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_complete.html
 msgid "Completed"
@@ -1076,7 +1074,7 @@ msgstr ""
 #: openassessment/templates/openassessmentblock/student_training/student_training_unavailable.html
 #: openassessment/xblock/staff_assessment_mixin.py
 msgid "Not Available"
-msgstr "未採点"
+msgstr "未完了"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html
 #, python-format
@@ -1099,7 +1097,7 @@ msgid ""
 "you've completed all the steps for this problem and your peers have assessed"
 " your response."
 msgstr ""
-"提出済のレポートが全て採点済となり、採点ができない状態です。しばらく経ってから、こちらのページで他の受講者が新しいレポートを提出したかどうかを確認してください。あなたがスコアを得るためには、この課題の全てのステップを完了し、かつ、あなたのレポートが第三者に採点を受けることが必要です。"
+"他の受講者が提出したレポートはすべて採点済みのため、他の受講者がレポートを提出するのをお待ちください。あなたの採点は、他の受講者のレポート採点が完了した後に行われます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
@@ -1109,22 +1107,22 @@ msgstr "実施中"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Enter your response to the question."
-msgstr "課題に対するレポートを入力してください。"
+msgstr "期限までに課題を提出してください。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid ""
 "You can save your progress and return to complete your response at any time "
 "before the due date"
-msgstr "期限内であれば記入途中のレポートを一時保存して後から提出することができます。"
+msgstr " "
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid ""
 "You can save your progress and return to complete your response at any time."
-msgstr "記入途中のレポート一時保存して後から提出することができます。"
+msgstr "進捗を保存することができ、課題を進めることもできます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "After you submit your response, you cannot edit it"
-msgstr "レポートを提出した後は編集したり新たに提出することはできません。"
+msgstr " "
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "The prompt for this section."
@@ -1184,7 +1182,7 @@ msgstr "レポートを提出することができませんでした"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Submit your response and move to the next step"
-msgstr "次のステップに進む（レポートを提出する）"
+msgstr "課題を提出して次のステップに進む"
 
 #: openassessment/templates/openassessmentblock/response/oa_response_cancelled.html
 msgid "Submission Cancelled"
@@ -1224,7 +1222,7 @@ msgstr ""
 #: openassessment/templates/openassessmentblock/self/oa_self_closed.html
 #: openassessment/templates/openassessmentblock/student_training/student_training_closed.html
 msgid "Incomplete"
-msgstr "完了できず"
+msgstr "未完了"
 
 #: openassessment/templates/openassessmentblock/response/oa_response_closed.html
 msgid ""
@@ -1232,7 +1230,7 @@ msgid ""
 "with this problem, and you'll receive a grade of Incomplete. If you saved "
 "but did not submit a response, the response appears in the course records."
 msgstr ""
-"このステップは終了して閉じられました。今後継続して採点行うことはできません。あなたの結果は未完了となります。一時保存のみして、提出されていない場合は講座レコードには解答が表示されます。"
+"課題提出期限が過ぎたため、この課題に対する得点を得ることはできません。一時保存をしていても、課題を提出していない場合も得点を得ることはできません。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response_graded.html
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
@@ -1255,7 +1253,7 @@ msgstr "あなたのレポートは提出されました"
 msgid ""
 "You will receive your grade after all steps are complete and your response "
 "is fully assessed."
-msgstr ""
+msgstr "この課題の手順が全て終わり、他の受講者からの評価が終わると、あなたの成績が表示されます。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 #, python-format
@@ -1264,6 +1262,8 @@ msgid ""
 "                        You still need to complete the %(peer_start_tag)speer assessment%(end_tag)s and %(self_start_tag)sself assessment%(end_tag)s steps.\n"
 "                    "
 msgstr ""
+"\n"
+"                        %(peer_start_tag)s他の受講者のレポート採点%(end_tag)sと、%(self_start_tag)s自己採点%(end_tag)sを行ってください。                    "
 
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 #, python-format
@@ -1283,7 +1283,7 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
 msgid "Assess Your Response"
-msgstr "あなたのレポートを採点する"
+msgstr "自己採点"
 
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
 msgid "Submit your assessment"
@@ -1293,7 +1293,7 @@ msgstr "自己採点を完了する"
 msgid ""
 "This step is now closed. You can no longer complete a self assessment or "
 "continue with this assignment, and you'll receive a grade of Incomplete."
-msgstr "このステップは終了して閉じられました。今後継続して自己採点を行うことはできません。あなたの結果は未完了となります。"
+msgstr "終了しました。これ以上採点を行うことはできません。またあなたの評価は行われません。"
 
 #: openassessment/templates/openassessmentblock/staff/oa_staff_grade.html
 #: openassessment/xblock/grade_mixin.py
@@ -1412,7 +1412,7 @@ msgid ""
 "                                    "
 msgstr ""
 "\n"
-"                                        採点者: %(student_username)s\n"
+"                                        選択中の受講者: %(student_username)s\n"
 "                                    "
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_grade_learners_assessment.html
@@ -1563,14 +1563,14 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "The submission is waiting for assessments."
-msgstr ""
+msgstr "受講者に対する採点が完了していません。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid ""
 "The learner's submission has been removed from peer assessment. The learner "
 "receives a grade of zero unless you delete the learner's state for the "
 "problem to allow them to resubmit a response."
-msgstr ""
+msgstr "この受講者の回答は講座スタッフにより削除されています。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "The problem has not been started."
@@ -1578,7 +1578,7 @@ msgstr ""
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "The problem has not been completed."
-msgstr ""
+msgstr "受講者による採点が完了していません。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "Submit Assessment Grade Override"
@@ -1609,7 +1609,7 @@ msgstr "投稿の削除"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html
 msgid "A response was not found for this learner."
-msgstr "入力された受講者は存在しません。"
+msgstr "入力された受講者のレポートは存在しません"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info_assessment_detail.html
 #, python-format
@@ -1762,7 +1762,7 @@ msgstr "スタッフコメント"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Peer Median Grade"
-msgstr "相互採点結果（中央値）"
+msgstr "他の受講者による採点結果（中央値）"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Peer {peer_index}"
@@ -1794,7 +1794,7 @@ msgstr "自己採点コメント"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Waiting for peer reviews"
-msgstr ""
+msgstr "他の受講者による採点待ち"
 
 #: openassessment/xblock/grade_mixin.py
 msgid "Peer"
@@ -1961,14 +1961,14 @@ msgstr "スタッフによる採点が完了するまでしばらくお待ちく
 
 #: openassessment/xblock/staff_assessment_mixin.py
 msgid "You Must Complete the Steps Above to View Your Grade"
-msgstr ""
+msgstr "すべての課題を提出してください"
 
 #: openassessment/xblock/staff_assessment_mixin.py
 msgid ""
 "Although a course staff member has assessed your response, you will receive "
 "your grade only after you have completed all the required steps of this "
 "problem."
-msgstr ""
+msgstr "スタッフによる採点が行われましたが、引き続き課題を実施してください。"
 
 #: openassessment/xblock/student_training_mixin.py
 msgid "Missing options_selected key in request"
@@ -2199,3 +2199,12 @@ msgid ""
 " access it, you do so at your own risk."
 msgstr ""
 "注意：他の受講者によって提出されたファイルです。お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。また、ファイルの安全性について当社では一切の責任を負わないものとします。"
+
+#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
+#: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+msgid "Your Response:"
+msgstr "提出課題"
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "select a file to upload for this submission."
+msgstr "ファイルを選択してください。"

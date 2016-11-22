@@ -26,7 +26,7 @@
             <div class="wrapper--step__content">
                 <div class="step__content">
                     <article class="submission__answer__display step__content__section">
-                        <h3 class="submission__answer__display__title">{% trans "Your Response" %}</h3>
+                        <h3 class="submission__answer__display__title">{% trans "Your Response:" %}</h3>
 
                         {% trans "Your response to the question above:" as translated_label %}
                         {% include "openassessmentblock/oa_submission_answer.html" with answer=student_submission.answer answer_text_label=translated_label %}
