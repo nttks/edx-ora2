@@ -30,7 +30,7 @@ msgstr "課題に対するレポートを入力してください。"
 #: openassessment/templates/openassessmentblock/response/oa_response_submitted.html
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
 msgid "Your response to the question above:"
-msgstr "あなたの回答："
+msgstr "あなたのレポート："
 
 #: openassessment/templates/openassessmentblock/leaderboard/oa_leaderboard_show.html
 #: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html
@@ -105,3 +105,22 @@ msgid ""
 "caution."
 msgstr ""
 "回答を削除すると、受講者の回答はキャンセル状態になり、また受講者には以下に入力されたメッセージが表示されます。削除の取り消し、および受講者による課題の再投稿はできません。"
+
+#: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
+#: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
+msgid "Your Response:"
+msgstr "提出課題"
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "select a file to upload for this submission."
+msgstr "ファイルを選択してください。"
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid ""
+"You can save your progress and return to complete your response at any time "
+"before the due date"
+msgstr " "
+
+#: openassessment/templates/openassessmentblock/response/oa_response.html
+msgid "After you submit your response, you cannot edit it"
+msgstr " "
