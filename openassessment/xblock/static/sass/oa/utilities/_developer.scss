@@ -100,6 +100,7 @@ $link-hover: $edx-blue-l1 !default; // from our Pattern Library http://ux.edx.or
     margin-bottom: ($baseline-v/2);
 
     input {
+      color: $copy-staff-color;
       display: block;
       padding-top: 0;
       padding-bottom: 0;

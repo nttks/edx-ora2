@@ -691,7 +691,7 @@ class SubmissionRenderTest(XBlockHandlerTestCase):
         # Expect that the response step is open and displays the deadline
         resp = self.request(xblock, 'render_submission', json.dumps(dict()))
         self.assertIn('Enter your response to the question', resp)
-        self.assertIn('Monday, May 6, 2999 00:00 UTC', resp)
+        self.assertIn('May 6, 2999, midnight', resp)
 
         # Create a submission for the user
         xblock.create_submission(
