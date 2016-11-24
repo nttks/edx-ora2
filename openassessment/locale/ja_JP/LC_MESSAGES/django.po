@@ -1118,7 +1118,7 @@ msgstr " "
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid ""
 "You can save your progress and return to complete your response at any time."
-msgstr "進捗を保存することができ、課題を進めることもできます。"
+msgstr "講座スタッフは提出期限に関わらず、いつでも課題提出が可能です。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "After you submit your response, you cannot edit it"
@@ -1280,6 +1280,9 @@ msgid ""
 "                        You still need to complete the %(start_tag)sself assessment%(end_tag)s step.\n"
 "                    "
 msgstr ""
+"\n"
+"                        %(start_tag)s自己採点%(end_tag)sを行ってください。\n"
+"                    "
 
 #: openassessment/templates/openassessmentblock/self/oa_self_assessment.html
 msgid "Assess Your Response"
@@ -2206,5 +2209,5 @@ msgid "Your Response:"
 msgstr "提出課題"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
-msgid "select a file to upload for this submission."
-msgstr "ファイルを選択してください。"
+msgid "Please attach the report file."
+msgstr "課題に添付するファイルを選択して下さい。"
