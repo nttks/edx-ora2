@@ -112,8 +112,8 @@ msgid "Your Response:"
 msgstr "提出課題"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
-msgid "select a file to upload for this submission."
-msgstr "ファイルを選択してください。"
+msgid "Please attach the report file."
+msgstr "課題に添付するファイルを選択して下さい。"
 
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid ""
