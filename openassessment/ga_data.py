@@ -76,7 +76,7 @@ class OraAggregateData(object):
         return header, row
 
     @classmethod
-    def collect_ora2_data(cls, course_key, item_location, user_by_anonymous_id=lambda x: x):
+    def collect_ora2_data(cls, course_key, item_location, user_by_anonymous_id):
         header = [
             'Username',
             'Submission Content',
