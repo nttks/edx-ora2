@@ -11,3 +11,8 @@ factory_boy==2.6.1
 git+https://github.com/edx/django-pyfs.git@1.0.3#egg=django-pyfs==1.0.3
 git+https://github.com/edx/i18n-tools.git@56f048af9b6868613c14aeae760548834c495011#egg=i18n_tools
 git+https://github.com/edx/edx-lint.git@v0.4.1#egg=edx_lint==0.4.1
+
+# Master pyfs has a bug working with VPC auth. This is a fix. We should switch
+# back to master when and if this fix is merged back.
+# fs==0.4.0
+git+https://github.com/pmitros/pyfs.git@96e1922348bfe6d99201b9512a9ed946c87b7e0b
