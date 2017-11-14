@@ -4,6 +4,7 @@ Resolve unspecified dates and date strings to datetimes.
 import datetime as dt
 import pytz
 from dateutil.parser import parse as parse_date
+from django.conf import settings
 
 
 class InvalidDateFormat(Exception):
@@ -28,12 +29,11 @@ def get_current_time_zone(user_service):
     """
     Returns the preferred time zone for the current user, if specified, or UTC if not
 
+    Note: Fix time_zone to display JST.
+
     :param user_service: XblockUserService
     """
-    user_preferences = user_service.get_current_user().opt_attrs.get('edx-platform.user_preferences')
-    if user_preferences is None:
-        return pytz.utc
-    return pytz.timezone(user_preferences.get('time_zone', 'utc'))
+    return pytz.timezone(settings.TIME_ZONE_DISPLAYED_FOR_DEADLINES)
 
 
 def _parse_date(value, _):

@@ -3,6 +3,7 @@ Test resolving unspecified dates and date strings to datetimes.
 """
 
 import datetime
+from django.conf import settings
 from django.test import TestCase
 import ddt
 from mock import MagicMock
@@ -140,4 +141,4 @@ class ResolveDatesTest(TestCase):
         user_service.get_current_user().opt_attrs['edx-platform.user_preferences'] = user_preferences
 
         time_zone = get_current_time_zone(user_service)
-        self.assertEqual(expected_time_zone, time_zone)
+        self.assertEqual(pytz.timezone(settings.TIME_ZONE_DISPLAYED_FOR_DEADLINES), time_zone)
