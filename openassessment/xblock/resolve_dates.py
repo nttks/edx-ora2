@@ -4,6 +4,7 @@ Resolve unspecified dates and date strings to datetimes.
 import datetime as dt
 import pytz
 from dateutil.parser import parse as parse_date
+from django.conf import settings
 
 
 class InvalidDateFormat(Exception):
@@ -22,6 +23,17 @@ class DateValidationError(Exception):
 
 DISTANT_PAST = dt.datetime(dt.MINYEAR, 1, 1, tzinfo=pytz.utc)
 DISTANT_FUTURE = dt.datetime(dt.MAXYEAR, 1, 1, tzinfo=pytz.utc)
+
+
+def get_current_time_zone(user_service):
+    """
+    Returns the preferred time zone for the current user, if specified, or UTC if not
+
+    Note: Fix time_zone to display JST.
+
+    :param user_service: XblockUserService
+    """
+    return pytz.timezone(settings.TIME_ZONE_DISPLAYED_FOR_DEADLINES)
 
 
 def _parse_date(value, _):
@@ -46,7 +58,11 @@ def _parse_date(value, _):
         try:
             return parse_date(value).replace(tzinfo=pytz.utc)
         except ValueError:
-            raise InvalidDateFormat(_("'{date}' is an invalid date format. Make sure the date is formatted as YYYY-MM-DDTHH:MM:SS.").format(date=value))
+            raise InvalidDateFormat(
+                _("'{date}' is an invalid date format. Make sure the date is formatted as YYYY-MM-DDTHH:MM:SS.").format(
+                    date=value
+                )
+            )
 
     else:
         raise InvalidDateFormat(_("'{date}' must be a date string or datetime").format(date=value))
@@ -201,8 +217,11 @@ def resolve_dates(start, end, date_ranges, _):
         step_end = _parse_date(step_end, _) if step_end is not None else prev_end
 
         if step_start < prev_start:
-            msg = _(u"This step's start date '{start}' cannot be earlier than the previous step's start date '{prev}'.").format(
-                start=step_start, prev=prev_start
+            msg = _(
+                u"This step's start date '{start}' cannot be earlier than the previous step's start date '{prev}'."
+            ).format(
+                start=step_start,
+                prev=prev_start,
             )
             raise DateValidationError(msg)
 
