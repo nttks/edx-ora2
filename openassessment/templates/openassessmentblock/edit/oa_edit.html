@@ -108,6 +108,9 @@
                             <option value="">{% trans "None"%}</option>
                             <option value="image" {% if file_upload_type == "image" %} selected="true" {% endif %}>{% trans "Image File"%}</option>
                             <option value="pdf-and-image" {% if file_upload_type == "pdf-and-image" %} selected="true" {% endif %}>{% trans "PDF or Image File"%}</option>
+                            {% if video_upload_enabled %}
+                            <option value="video" {% if file_upload_type == "video" %} selected="true" {% endif %}>{% trans "Video File"%}</option>
+                            {% endif %}
                             <option value="custom" {% if file_upload_type == "custom" %} selected="true" {% endif %}>{% trans "Custom File Types"%}</option>
                         </select>
                     </div>

@@ -20,6 +20,11 @@ describe("OpenAssessment.ResponseView", function() {
         'image/png'
     ];
 
+    var ALLOWED_VIDEO_MIME_TYPES = [
+        'video/mp4',
+        'video/quicktime'
+    ];
+
     var FILE_TYPE_WHITE_LIST = ['pdf', 'doc', 'docx', 'html'];
     var FILE_EXT_BLACK_LIST = ['exe', 'msi', 'app', 'dmg'];
 
@@ -119,6 +124,7 @@ describe("OpenAssessment.ResponseView", function() {
         data = {
             "ALLOWED_IMAGE_MIME_TYPES": ALLOWED_IMAGE_MIME_TYPES,
             "ALLOWED_FILE_MIME_TYPES": ALLOWED_FILE_MIME_TYPES,
+            "ALLOWED_VIDEO_MIME_TYPES": ALLOWED_VIDEO_MIME_TYPES,
             "FILE_TYPE_WHITE_LIST": FILE_TYPE_WHITE_LIST,
             "FILE_EXT_BLACK_LIST": FILE_EXT_BLACK_LIST
         };
@@ -508,6 +514,15 @@ describe("OpenAssessment.ResponseView", function() {
         view.prepareUpload(files, 'pdf-and-image');
         expect(view.baseView.toggleActionError).toHaveBeenCalledWith(
             'upload', 'You can upload files with these file types: JPG, PNG, GIF or PDF'
+        );
+    });
+
+    it("selects the wrong video file type", function() {
+        spyOn(view.baseView, 'toggleActionError').and.callThrough();
+        var files = [{type: 'image/jpg', size: 1024, name: 'sample.mp4', data: ''}];
+        view.prepareUpload(files, 'video');
+        expect(view.baseView.toggleActionError).toHaveBeenCalledWith(
+            'upload', 'You can upload files with these file types: MP4 or MOV'
         );
     });
 

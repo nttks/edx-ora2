@@ -21,6 +21,10 @@ msgstr ""
 msgid "Error uploading file."
 msgstr "ファイルアップロードに失敗しました。"
 
+#: openassessment/xblock/submission_mixin.py
+msgid "Content type must be MP4 or MOV."
+msgstr "動画ファイルを指定してください。MP4 または MOV"
+
 #: openassessment/templates/openassessmentblock/response/oa_response.html
 msgid "Enter your response to the question above."
 msgstr "課題に対するレポートを入力してください。"
@@ -58,6 +62,10 @@ msgstr "あなたの得点"
 msgid "Leaderboard"
 msgstr "上位成績者"
 
+#: openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid "Video File"
+msgstr "動画ファイル"
+
 # openassessment/templates/openassessmentblock/grade/oa_grade_complete.html
 msgid "Your Upload"
 msgstr "提出ファイル"
@@ -83,7 +91,7 @@ msgid ""
 "verified, screened, approved, reviewed, or endorsed by edX. If you decide to"
 " access it, you do so at your own risk."
 msgstr ""
-"注意：他の受講者によって提出されたファイルです。お客様の安全のためにもお使いの端末のセキュリティ対策を実施いただくことを推奨いたします。また、ファイルの安全性について当社では一切の責任を負わないものとします。"
+"注意：他の受講者によって提出されたファイルです。お客様の安全のためにご使用の端末のセキュリティ対策を実施いただくことを推奨いたします。また、ファイルの安全性については当社では一切の責任を負わないものとします。"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_unavailable.html
 #: openassessment/templates/openassessmentblock/response/oa_response_unavailable.html

@@ -16,9 +16,9 @@
                  class="submission--image"
                  alt="{% trans "The image associated with this submission." %}"
                  src="{{ file_url }}" />
-        {% elif file_upload_type == "pdf-and-image" or file_upload_type == "custom" %}
+        {% elif file_upload_type == "pdf-and-image" or file_upload_type == "video" or file_upload_type == "custom" %}
             <a href="{{ file_url }}" id="submission__answer__file" class="submission--file" target="_blank">
-                <i class="fa fa-file-pdf-o"></i>
+                <i class="fa {% if file_upload_type == "video" %}fa-file-video-o{% else %}fa-file-o{% endif %}"></i>
                 <span class="file--button"><i class="fa fa-check-square-o"></i> {% trans "View the file associated with this submission." %}</span>
             </a>
             {% if show_warning %}

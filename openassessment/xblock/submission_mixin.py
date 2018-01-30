@@ -39,6 +39,11 @@ class SubmissionMixin(object):
 
     ALLOWED_FILE_MIME_TYPES = ALLOWED_PDF_MIME_TYPES + ALLOWED_IMAGE_MIME_TYPES
 
+    ALLOWED_VIDEO_MIME_TYPES = [
+        'video/mp4',  # .mp4
+        'video/quicktime',  # .mov
+    ]
+
     # taken from http://www.howtogeek.com/137270/50-file-extensions-that-are-potentially-dangerous-on-windows/
     # and http://pcsupport.about.com/od/tipstricks/a/execfileext.htm
     # left out .js and office extensions
@@ -243,6 +248,9 @@ class SubmissionMixin(object):
         if self.file_upload_type == 'pdf-and-image' and content_type not in self.ALLOWED_FILE_MIME_TYPES:
             return json_response({'success': False, 'msg': self._(u"Content type must be PDF, GIF, PNG or JPG.")})
 
+        if self.file_upload_type == 'video' and content_type not in self.ALLOWED_VIDEO_MIME_TYPES:
+            return json_response({'success': False, 'msg': self._(u"Content type must be MP4 or MOV.")})
+
         file_name_parts = file.name.split('.')
         file_ext = file_name_parts[-1] if len(file_name_parts) > 1 else None
         if self.file_upload_type == 'custom' and file_ext not in self.white_listed_file_types:
@@ -286,6 +294,9 @@ class SubmissionMixin(object):
 
         if self.file_upload_type == 'pdf-and-image' and content_type not in self.ALLOWED_FILE_MIME_TYPES:
             return {'success': False, 'msg': self._(u"Content type must be PDF, GIF, PNG or JPG.")}
+
+        if self.file_upload_type == 'video' and content_type not in self.ALLOWED_VIDEO_MIME_TYPES:
+            return json_response({'success': False, 'msg': self._(u"Content type must be MP4 or MOV.")})
 
         if self.file_upload_type == 'custom' and file_ext not in self.white_listed_file_types:
             return {'success': False, 'msg': self._(u"File type must be one of the following types: {}").format(

@@ -68,6 +68,7 @@ VALID_UPLOAD_FILE_TYPES = [
     u'',
     u'image',
     u'pdf-and-image',
+    u'video',
     u'custom'
 ]
 
