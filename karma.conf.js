@@ -64,12 +64,12 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress', 'coverage', 'junit'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress','coverage','junit'],
+    reporters: ['progress', 'coverage', 'junit'],
 
     coverageReporter: {
       reporters: [
         {
-          type : 'text'
+          type : 'html'
         },
         {
           dir : 'coverage',
