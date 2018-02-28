@@ -36,8 +36,8 @@ OpenAssessment.ResponseView.prototype = {
     // before we can autosave.
     AUTO_SAVE_WAIT: 30000,
 
-    // Maximum file size (4 MB) for an attached file.
-    MAX_FILE_SIZE: 4194304,
+    // Maximum file size (5 MB) for an attached file.
+    MAX_FILE_SIZE: 5242880,
 
     UNSAVED_WARNING_KEY: "learner-response",
 
@@ -480,7 +480,7 @@ OpenAssessment.ResponseView.prototype = {
         if (files[0].size > this.MAX_FILE_SIZE) {
             this.baseView.toggleActionError(
                 'upload',
-                gettext("File size must be 4MB or less.")
+                gettext("File size must be 5MB or less.")
             );
         } else if (uploadType === "image" && this.data.ALLOWED_IMAGE_MIME_TYPES.indexOf(this.fileType) === -1) {
             this.baseView.toggleActionError(
@@ -491,6 +491,11 @@ OpenAssessment.ResponseView.prototype = {
             this.baseView.toggleActionError(
                 'upload',
                 gettext("You can upload files with these file types: ") + "JPG, PNG, GIF or PDF"
+            );
+        } else if (uploadType === "video" && this.data.ALLOWED_VIDEO_MIME_TYPES.indexOf(this.fileType) === -1) {
+            this.baseView.toggleActionError(
+                'upload',
+                gettext("You can upload files with these file types: ") + "MP4 or MOV"
             );
         } else if (uploadType === "custom" && this.data.FILE_TYPE_WHITE_LIST.indexOf(ext) === -1) {
             // Check only pdf file of custom.

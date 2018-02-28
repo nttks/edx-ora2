@@ -145,6 +145,17 @@ class SubmissionTest(XBlockHandlerTestCase):
         self.assertEqual(resp['url'], 'dummy_download_url')
 
     @patch.object(file_upload_api, 'upload_file')
+    @scenario('data/basic_scenario_video.xml', user_id='Bob')
+    def test_upload_file_image(self, xblock, mock_upload_file):
+        mock_upload_file.return_value = 'dummy_download_url'
+        file = SimpleUploadedFile('test.mp4', 'test', 'video/mp4')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], True)
+        self.assertEqual(resp['url'], 'dummy_download_url')
+
+    @patch.object(file_upload_api, 'upload_file')
     @scenario('data/basic_scenario_custom.xml', user_id='Bob')
     def test_upload_file_custom(self, xblock, mock_upload_file):
         mock_upload_file.return_value = 'dummy_download_url'
@@ -191,6 +202,15 @@ class SubmissionTest(XBlockHandlerTestCase):
         resp = json.loads(resp.body)
         self.assertEqual(resp['success'], False)
         self.assertEqual(resp['msg'], u"Content type must be PDF, GIF, PNG or JPG.")
+
+    @scenario('data/basic_scenario_video.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_video(self, xblock):
+        file = tempfile.TemporaryFile()
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"Content type must be MP4 or MOV.")
 
     @scenario('data/basic_scenario_custom.xml', user_id='Bob')
     def test_upload_file_with_invalid_content_type_custom(self, xblock):
@@ -299,6 +319,16 @@ class SubmissionTest(XBlockHandlerTestCase):
         resp = json.loads(resp.body)
         self.assertEqual(resp['success'], False)
         self.assertEqual(resp['msg'], u"Content type must be PDF, GIF, PNG or JPG.")
+
+    @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
+    @scenario('data/basic_scenario_video.xml', user_id='Bob')
+    def test_upload_file_with_invalid_content_type_using_strict_check_video(self, xblock):
+        file = SimpleUploadedFile('test.txt', 'test', 'text/plain')
+        dj_req = RequestFactory().post('/', data={'file': file})
+        resp = self.runtime.handle(xblock, 'upload_file', django_to_webob_request(dj_req))
+        resp = json.loads(resp.body)
+        self.assertEqual(resp['success'], False)
+        self.assertEqual(resp['msg'], u"Content type must be MP4 or MOV.")
 
     @patch.dict('django.conf.settings.FEATURES', {'ENABLE_ORA2_FILE_TYPE_STRICT_CHECK': True})
     @scenario('data/basic_scenario_custom.xml', user_id='Bob')

@@ -1094,7 +1094,8 @@ $link-hover: $edx-blue-l1 !default; // from our Pattern Library http://ux.edx.or
     max-width: 100%;
   }
   .submission--file{
-    .fa-file-pdf-o::before{
+    .fa-file-o::before,
+    .fa-file-video-o::before{
       color: #c00;
       vertical-align: sub;
       font-size: 1.5rem;
@@ -1114,7 +1115,8 @@ $link-hover: $edx-blue-l1 !default; // from our Pattern Library http://ux.edx.or
 .peer-assessment__display__file,
 .staff-assessment__display__file{
   .submission--file{
-    .fa-file-pdf-o::before{
+    .fa-file-o::before,
+    .fa-file-video-o::before{
       font-size: 2rem;
     }
     .file--button{

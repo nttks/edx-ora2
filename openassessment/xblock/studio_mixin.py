@@ -135,6 +135,7 @@ class StudioMixin(object):
             'criteria': criteria,
             'feedbackprompt': self.rubric_feedback_prompt,
             'feedback_default_text': feedback_default_text,
+            'video_upload_enabled': self.runtime.service(self, 'optional').is_available(self, 'ora2-video-upload'),
             'file_upload_type': self.file_upload_type,
             'white_listed_file_types': self.white_listed_file_types_string,
             'allow_latex': self.allow_latex,
