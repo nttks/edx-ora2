@@ -121,7 +121,8 @@
 
                                 <ul class="list list--actions">
                                     <li class="list--actions__item">
-                                        <button type="submit" class="action action--save submission__save" aria-describedby="response__save_status__{{ xblock_id }}" disabled>
+                                        <button type="submit" class="action action--save submission__save" aria-describedby="response__save_status__{{ xblock_id }}"
+                                                style="background-color:#43ac6a; border-color:#007095;" disabled>
                                             {% trans "Save your progress" %}
                                         </button>
 
@@ -167,6 +168,7 @@
                 <ul class="list list--actions">
                     <li class="list--actions__item">
                         <button type="submit" class="action action--submit step--response__submit"
+                                style="background-color:#008cba; border-color:#007095;"
                                 text_response="{{text_response}}"
                                 file_upload_response="{{file_upload_response}}"
                                 {{submit_enabled|yesno:",disabled" }}>

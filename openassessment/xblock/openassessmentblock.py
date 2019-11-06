@@ -94,6 +94,7 @@ def load(path):
 
 @XBlock.needs("i18n")
 @XBlock.needs("user")
+@XBlock.needs("optional")
 class OpenAssessmentBlock(MessageMixin,
                           SubmissionMixin,
                           PeerAssessmentMixin,
@@ -528,6 +529,7 @@ class OpenAssessmentBlock(MessageMixin,
         js_context_dict = {
             "ALLOWED_IMAGE_MIME_TYPES": self.ALLOWED_IMAGE_MIME_TYPES,
             "ALLOWED_FILE_MIME_TYPES": self.ALLOWED_FILE_MIME_TYPES,
+            "ALLOWED_VIDEO_MIME_TYPES": self.ALLOWED_VIDEO_MIME_TYPES,
             "FILE_EXT_BLACK_LIST": self.FILE_EXT_BLACK_LIST,
             "FILE_TYPE_WHITE_LIST": self.white_listed_file_types,
         }

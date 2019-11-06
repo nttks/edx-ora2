@@ -79,6 +79,7 @@ VALID_ASSESSMENT_TYPES = [
 VALID_UPLOAD_FILE_TYPES = [
     u'image',
     u'pdf-and-image',
+    u'video',
     u'custom'
 ]
 

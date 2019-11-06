@@ -154,6 +154,7 @@ class StudioMixin(object):
             ],
             'base_asset_url': self._get_base_url_path_for_course_assets(course_id),
             'is_released': self.is_released(),
+            'video_upload_enabled': self.runtime.service(self, 'optional').is_available(self, 'ora2-video-upload'),
         }
 
     @XBlock.json_handler

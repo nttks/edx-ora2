@@ -172,6 +172,7 @@
   }
 
   .action--save {
+    color: #fff;
     @extend %btn--secondary;
     @extend %action-2;
     display: block;
