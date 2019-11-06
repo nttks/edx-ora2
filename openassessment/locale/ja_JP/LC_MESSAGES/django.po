@@ -656,11 +656,11 @@ msgstr "あなたはこの課題の全ステップを完了していません。
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_not_started.html:16
 msgid "Not Started"
-msgstr "開始前"
+msgstr "未完了"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_not_started.html:27
 msgid "You have not started this problem yet."
-msgstr "まだ問題を始めていません。"
+msgstr "あなたはこの課題を完了していません。"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_waiting.html:16
 msgid "Waiting for Assessments"
@@ -866,7 +866,7 @@ msgstr "注意: これらのファイルは別の講座の受講者によって�
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html:26
 msgid "Assess Peers"
-msgstr "他の受講者を評価する"
+msgstr "他の受講者のレポートを採点する"
 
 #. Translators: This string displays a date to the user, then tells them the
 #. time until that date.  Example: "available August 13th, 2014 00:00 UTC (in
@@ -986,7 +986,7 @@ msgstr "提出済の他の受講者の解答を全て評価しました。後ほ
 #: openassessment/xblock/staff_assessment_mixin.py:99
 #: openassessment/xblock/staff_assessment_mixin.py:123
 msgid "Not Available"
-msgstr "不可"
+msgstr "未完了"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html:20
 #, python-format
@@ -2040,3 +2040,8 @@ msgstr "リーダーボードの数が無効です。"
 #: openassessment/xblock/validation.py:376
 msgid "The submission format is invalid."
 msgstr "提出フォーマットが無効です。"
+
+# gacco
+#: openassessment/templates/openassessmentblock/edit/oa_edit.html
+msgid "Video File"
+msgstr "動画ファイル"

@@ -131,6 +131,9 @@
                             <label for="openassessment_submission_upload_selector" class="setting-label">{% trans "File Upload Types"%}</label>
                             <select id="openassessment_submission_upload_selector" class="input setting-input" name="upload submission">
                                 <option value="pdf-and-image" {% if file_upload_type == "pdf-and-image" %} selected="true" {% endif %}>{% trans "PDF or Image Files"%}</option>
+                                {% if video_upload_enabled %}
+                                <option value="video" {% if file_upload_type == "video" %} selected="true" {% endif %}>{% trans "Video File"%}</option>
+                                {% endif %}
                                 <option value="image" {% if file_upload_type == "image" %} selected="true" {% endif %}>{% trans "Image Files"%}</option>
                                 <option value="custom" {% if file_upload_type == "custom" %} selected="true" {% endif %}>{% trans "Custom File Types"%}</option>
                             </select>

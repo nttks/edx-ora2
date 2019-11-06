@@ -1,6 +1,8 @@
 import json
 import logging
+import magic
 
+from django.conf import settings
 from xblock.core import XBlock
 
 from data_conversion import create_submission_dict, prepare_submission_for_serialization
@@ -31,6 +33,11 @@ class SubmissionMixin(object):
     ALLOWED_IMAGE_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/png']
 
     ALLOWED_FILE_MIME_TYPES = ['application/pdf'] + ALLOWED_IMAGE_MIME_TYPES
+
+    ALLOWED_VIDEO_MIME_TYPES = [
+        'video/mp4',  # .mp4
+        'video/quicktime',  # .mov
+    ]
 
     MAX_FILES_COUNT = 20
 
@@ -277,6 +284,56 @@ class SubmissionMixin(object):
         return submission
 
     @XBlock.json_handler
+    def upload_file(self, data, suffix=''):
+        """
+        Uploade an image file for this submission.
+
+        Returns:
+            A JSON-formatted response.
+
+        """
+        if not data.POST.get('file'):
+            logger.exception("No file was found in POST data.")
+            return {'success': False, 'msg': self._(u"Error uploading file.")}
+        file = data.POST.get('file').file
+
+        if hasattr(settings, 'FEATURES') and settings.FEATURES.get('ENABLE_ORA2_FILE_TYPE_STRICT_CHECK', False):
+            content_type = magic.from_buffer(file.read(), mime=True)
+            file.seek(0)
+        else:
+            content_type = file.content_type
+
+        if self.file_upload_type == 'image' and content_type not in self.ALLOWED_IMAGE_MIME_TYPES:
+            return {'success': False, 'msg': self._(u"Content type must be GIF, PNG or JPG.")}
+
+        if self.file_upload_type == 'pdf-and-image' and content_type not in self.ALLOWED_FILE_MIME_TYPES:
+            return {'success': False, 'msg': self._(u"Content type must be PDF, GIF, PNG or JPG.")}
+
+        if self.file_upload_type == 'video' and content_type not in self.ALLOWED_VIDEO_MIME_TYPES:
+            return {'success': False, 'msg': self._(u"Content type must be MP4 or MOV.")}
+
+        file_name_parts = file.name.split('.')
+        file_ext = file_name_parts[-1] if len(file_name_parts) > 1 else None
+        if self.file_upload_type == 'custom' and file_ext not in self.white_listed_file_types:
+            return {'success': False, 'msg': self._(u"File type must be one of the following types: {}").format(
+                ', '.join(self.white_listed_file_types))}
+
+        # validate content type for only pdf file
+        if self.file_upload_type == 'custom' and self.white_listed_file_types == ['pdf'] and content_type not in self.ALLOWED_PDF_MIME_TYPES:
+            return {'success': False, 'msg': self._(u"Content type must be PDF.")}
+
+        if file_ext in self.FILE_EXT_BLACK_LIST:
+            return {'success': False, 'msg': self._(u"File type is not allowed.")}
+
+        try:
+            key = self._get_student_item_key()
+            url = file_upload_api.upload_file(key, file)
+            return {'success': True, 'url': url}
+        except FileUploadError:
+            logger.exception("Error uploading file.")
+            return {'success': False, 'msg': self._(u"Error uploading file.")}
+
+    @XBlock.json_handler
     def upload_url(self, data, suffix=''):  # pylint: disable=unused-argument
         """
         Request a URL to be used for uploading content related to this
@@ -299,6 +356,9 @@ class SubmissionMixin(object):
 
         if self.file_upload_type == 'pdf-and-image' and content_type not in self.ALLOWED_FILE_MIME_TYPES:
             return {'success': False, 'msg': self._(u"Content type must be PDF, GIF, PNG or JPG.")}
+
+        if self.file_upload_type == 'video' and content_type not in self.ALLOWED_VIDEO_MIME_TYPES:
+            return {'success': False, 'msg': self._(u"Content type must be MP4 or MOV.")}
 
         if self.file_upload_type == 'custom' and file_ext.lower() not in self.white_listed_file_types:
             return {'success': False, 'msg': self._(u"File type must be one of the following types: {}").format(

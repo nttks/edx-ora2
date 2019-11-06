@@ -183,6 +183,11 @@
       display: inline;
       margin-top: ($baseline-v/4);
 
+      @include media($bp-m) {
+        display: block !important;
+        text-align: right !important;
+      }
+
       @include media($bp-dm) {
         margin-top: 0;
         @include float(right);

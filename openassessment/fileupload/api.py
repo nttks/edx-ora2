@@ -8,6 +8,13 @@ URLs to the new location.
 from . import backends
 
 
+def upload_file(key, fp):
+    """
+    Uploads an image file and returns the signed url for download.
+    """
+    return backends.get_backend().upload_file(key, fp)
+
+
 def get_upload_url(key, content_type):
     """
     Returns a url (absolute or relative, depending on the endpoint) which can be used to upload a file to.

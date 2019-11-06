@@ -1160,3 +1160,30 @@
     }
   }
 }
+
+// gacco
+.openassessment {
+  .step__header {
+    cursor: pointer;
+  }
+  .is--unavailable {
+    .step__header {
+      cursor: default;
+    }
+  }
+  .openassessment__steps__step {
+    .step__status {
+      @include media($bp-m) {
+        display: block !important;
+        text-align: right !important;
+      }
+    }
+  }
+  .step--response {
+    .response__submission__content {
+      .action--save {
+        color: #fff;
+      }
+    }
+  }
+}
