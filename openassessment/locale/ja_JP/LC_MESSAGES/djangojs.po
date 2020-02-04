@@ -260,8 +260,8 @@ msgstr "この課題に関する返信を提出しようとしています。返
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:574
-msgid "File size must be 10MB or less."
-msgstr "ファイルサイズは10MBを超えてはいけません。"
+msgid "File size must be 5MB or less."
+msgstr "ファイルサイズは5MBを超えてはいけません。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:581
