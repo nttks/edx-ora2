@@ -256,7 +256,7 @@ msgstr "提出前にファイルをアップロードしますか？"
 msgid ""
 "You're about to submit your response for this assignment. After you submit "
 "this response, you can't change it or submit a new response."
-msgstr "この課題に関する返信を提出しようとしています。返信を提出した後は、変更したり新しい返信を提出することはできません。"
+msgstr "レポートを提出します。提出した後は、再提出ができません。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:574
@@ -407,14 +407,14 @@ msgid ""
 "You have deleted an option. That option has been removed from its criterion "
 "in the sample responses in the Learner Training step. You might have to "
 "select a new option for the criterion."
-msgstr "選択肢を削除しました。受講者トレーニングの解答例にある評価基準から、この選択肢が削除されました。必要に応じて新しい選択肢を選択してください。"
+msgstr "選択肢を削除しました。受講者トレーニングの回答例にある評価基準から、この選択肢が削除されました。必要に応じて新しい選択肢を選択してください。"
 
 #: openassessment/xblock/static/js/openassessment-studio.min.js:1
 #: openassessment/xblock/static/js/src/studio/oa_edit_listeners.js:180
 msgid ""
 "You have deleted all the options for this criterion. The criterion has been "
 "removed from the sample responses in the Learner Training step."
-msgstr "この評価基準の全ての選択肢を削除しました。受講者トレーニングの解答例から、この評価基準が削除されました。"
+msgstr "この評価基準の全ての選択肢を削除しました。受講者トレーニングの回答例から、この評価基準が削除されました。"
 
 #: openassessment/xblock/static/js/openassessment-studio.min.js:1
 #: openassessment/xblock/static/js/src/studio/oa_edit_listeners.js:206
@@ -426,7 +426,7 @@ msgstr "評価基準削除済"
 msgid ""
 "You have deleted a criterion. The criterion has been removed from the "
 "example responses in the Learner Training step."
-msgstr "評価基準を削除しました。受講者トレーニングの解答例から評価基準が削除されました。"
+msgstr "評価基準を削除しました。受講者トレーニングの回答例から評価基準が削除されました。"
 
 #: openassessment/xblock/static/js/openassessment-studio.min.js:1
 #: openassessment/xblock/static/js/src/studio/oa_edit_listeners.js:376

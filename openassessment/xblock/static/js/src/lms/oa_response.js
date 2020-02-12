@@ -379,7 +379,7 @@ OpenAssessment.ResponseView.prototype = {
             var saveAbility = this.checkSaveAbility();
             this.saveEnabled(saveAbility);
             this.previewEnabled(saveAbility);
-            this.saveStatus(gettext('This response has not been saved.'));
+            // this.saveStatus(gettext('This response has not been saved.'));
             this.baseView.unsavedWarningEnabled(
                 true,
                 this.UNSAVED_WARNING_KEY,

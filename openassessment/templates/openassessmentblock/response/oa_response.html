@@ -53,7 +53,7 @@
         <div class="wrapper--step__content">
             <div class="step__instruction">
                 <p>
-                    {% trans "Enter your response to the prompt." %}
+<!--                    {% trans "Enter your response to the prompt." %}-->
                     {% if submission_due %}
                     {% trans "You can save your progress and return to complete your response at any time before the due date" %}
                     (<span class="step__deadline">
@@ -71,7 +71,7 @@
                     <ol class="list list--fields response__submission__content">
                         {% for part in saved_response.answer.parts %}
                             <li class="submission__answer__part">
-                                <h5 class="submission__answer__part__text__title">{% trans "The prompt for this section" %}</h5>
+<!--                                <h5 class="submission__answer__part__text__title">{% trans "The prompt for this section" %}</h5>-->
                                 <article class="submission__answer__part__prompt">
                                     <div class="submission__answer__part__prompt__copy">
                                         {% if prompts_type == 'html' %}
