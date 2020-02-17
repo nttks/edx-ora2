@@ -200,7 +200,7 @@ msgstr "全リストへ戻る"
 msgid ""
 "If you leave this page without submitting your peer assessment, you will "
 "lose any work you have done."
-msgstr "ピア・アセスメントを提出せずに別のページへ移動する場合、記述した内容が失われます。"
+msgstr "相互採点を提出せずに別のページへ移動する場合、記述した内容が失われます。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:130
@@ -296,7 +296,7 @@ msgstr "サムネイル・ビュー"
 msgid ""
 "If you leave this page without submitting your self assessment, you will "
 "lose any work you have done."
-msgstr "セルフ・アセスメントを提出せずに別のページへ移動すると、記述した内容が失われます。"
+msgstr "自己採点を提出せずに別のページへ移動すると、記述した内容が失われます。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_staff_area.js:129
@@ -319,7 +319,7 @@ msgstr "採点対象外の返信数の取得エラー"
 msgid ""
 "If you leave this page without submitting your staff assessment, you will "
 "lose any work you have done."
-msgstr "スタッフ・アセスメントを提出せずに別のページへ移動すると、記述した内容が失われます。"
+msgstr "スタッフ採点を提出せずに別のページへ移動すると、記述した内容が失われます。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_training.js:116
