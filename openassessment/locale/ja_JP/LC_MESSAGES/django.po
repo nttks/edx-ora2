@@ -62,7 +62,7 @@ msgstr "例 {example_number} の\"{criterion_name}\"に選択肢が足りませ�
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:12
 msgid "Open Response Assessment"
-msgstr "ORA"
+msgstr "相互採点"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:14
 msgid "Settings"
