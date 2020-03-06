@@ -9,7 +9,7 @@
             <div class="question__title ui-slidable__control">
                 <button class="ui-slidable" aria-expanded="true" id="oa_rubric__{{ rubric_type }}__{{ submission.uuid }}__{{ criterion.order_num }}" aria-controls="oa_rubric__{{ rubric_type }}__{{ submission.uuid }}__{{ criterion.order_num }}__content">
                     <span class="icon fa fa-caret-right" aria-hidden="true"></span>
-                    <span id="{{ rubric_type }}__assessment__rubric__prompt--{{ criterion.order_num }}" class="ui-slidable__control__copy question__title__copy">{{ criterion.prompt }}</span>
+                    <span id="{{ rubric_type }}__assessment__rubric__prompt--{{ criterion.order_num }}" class="ui-slidable__control__copy question__title__copy">{{ criterion.prompt | safe }}</span>
                     <span class="label--required sr">({% trans "Required" %})</span>
                 </button>
             </div>
@@ -33,7 +33,7 @@
                             </div>
                             <div class="wrapper--metadata"
                                  id="{{ rubric_type }}__assessment__rubric__meta--{{ criterion.order_num }}__{{ option.order_num }}__{{ xblock_id }}">
-                                <span class="answer__tip">{{ option.explanation }}</span>
+                                <span class="answer__tip">{{ option.explanation | safe }}</span>
                                 <span class="answer__points">{{ option.points }} <span class="answer__points__label">{% trans "points" %}</span></span>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
         {% endfor %}
         <li class="wrapper--input field field--textarea assessment__rubric__question assessment__rubric__question--feedback">
             <label class="question__title" for="{{ rubric_type }}__assessment__rubric__question--feedback__value__{{ xblock_id }}">
-                <span class="question__title__copy">{{ rubric_feedback_prompt }}</span>
+                <span class="question__title__copy">{{ rubric_feedback_prompt | safe }}</span>
             </label>
 
             <div class="wrapper--input">
