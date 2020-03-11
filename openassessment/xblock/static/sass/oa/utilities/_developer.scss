@@ -1137,6 +1137,8 @@
       margin-left: 5px;
       background-color: #43ac6a;
       padding: 5px 15px;
+      color: white;
+      border-color: #43ac6a;
       &:hover, &:focus{
         background-color: lighten(#43ac6a, 10%);
       }
