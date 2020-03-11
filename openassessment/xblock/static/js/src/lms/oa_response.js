@@ -589,7 +589,7 @@ OpenAssessment.ResponseView.prototype = {
                 );
                 errorCheckerTriggered = true;
                 break;
-            } else if (uploadType === "video" && this.data.ALLOWED_VIDEO_MIME_TYPES.indexOf(this.fileType) === -1) {
+            } else if (uploadType === "video" && this.data.ALLOWED_VIDEO_MIME_TYPES.indexOf(fileType) === -1) {
                 this.baseView.toggleActionError(
                     'upload',
                     gettext("You can upload files with these file types: ") + "MP4 or MOV"
