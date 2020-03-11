@@ -19,6 +19,8 @@ msgstr ""
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/openassessment-studio.min.js
 #: openassessment/xblock/static/js/src/oa_server.js
+#: openassessment/xblock/static/js/src/oa_server.js
+#: openassessment/xblock/static/js/src/oa_server.js
 msgid "This section could not be loaded."
 msgstr ""
 
@@ -55,6 +57,8 @@ msgstr ""
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/openassessment-studio.min.js
 #: openassessment/xblock/static/js/src/oa_server.js
+#: openassessment/xblock/static/js/src/oa_server.js
+#: openassessment/xblock/static/js/src/oa_server.js
 msgid "This assessment could not be submitted."
 msgstr ""
 
@@ -84,6 +88,7 @@ msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/openassessment-studio.min.js
+#: openassessment/xblock/static/js/src/oa_server.js
 #: openassessment/xblock/static/js/src/oa_server.js
 msgid "Server error."
 msgstr ""
@@ -157,6 +162,7 @@ msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_course_items_listing.js
+#: openassessment/xblock/static/js/src/lms/oa_course_items_listing.js
 msgid "Final Grade Received"
 msgstr ""
 
@@ -166,6 +172,7 @@ msgid "List of Open Assessments is unavailable"
 msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
+#: openassessment/xblock/static/js/src/lms/oa_course_items_listing.js
 #: openassessment/xblock/static/js/src/lms/oa_course_items_listing.js
 msgid "Please wait"
 msgstr ""
@@ -245,6 +252,9 @@ msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+#: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "You can upload files with these file types: "
 msgstr ""
 
@@ -254,6 +264,7 @@ msgid "File type is not allowed."
 msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
+#: openassessment/xblock/static/js/src/lms/oa_response.js
 #: openassessment/xblock/static/js/src/lms/oa_response.js
 msgid "Describe "
 msgstr ""
@@ -276,6 +287,7 @@ msgid ""
 msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
+#: openassessment/xblock/static/js/src/lms/oa_staff_area.js
 #: openassessment/xblock/static/js/src/lms/oa_staff_area.js
 msgid "Unexpected server error."
 msgstr ""
@@ -372,6 +384,7 @@ msgid ""
 msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-studio.min.js
+#: openassessment/xblock/static/js/src/studio/oa_edit_listeners.js
 #: openassessment/xblock/static/js/src/studio/oa_edit_listeners.js
 msgid "Option Deleted"
 msgstr ""

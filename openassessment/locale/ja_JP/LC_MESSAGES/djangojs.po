@@ -449,3 +449,8 @@ msgstr "ファイルタイプを指定してください。"
 #: openassessment/xblock/static/js/src/studio/oa_edit_settings.js:76
 msgid "The following file types are not allowed: "
 msgstr "次に示すファイルタイプは不正です："
+
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "View the file associated with this submission."
+msgstr "内容を確認する"
+
