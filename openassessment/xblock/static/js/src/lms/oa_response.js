@@ -831,6 +831,7 @@ OpenAssessment.ResponseView.prototype = {
         view.server.getDownloadUrl(filenum).done(function(url) {
             var className = 'submission__answer__file__block__' + filenum;
             var file = null;
+            var add_i_tag = null;
             var img = null;
             var fileBlock = null;
             var fileBlockExists = sel.find("." + className).length ? true : false;
@@ -863,6 +864,10 @@ OpenAssessment.ResponseView.prototype = {
                 div2.html(img);
                 div2.appendTo(fileBlock);
             } else {
+                add_i_tag = $('<i class="fa {% if file_upload_type == "video" %}fa-file-video-o{% else %}fa-file-o{% endif %}"></i>' +
+                    '<span class="file--button"><i class="fa fa-check-square-o"></i> {% trans "View the files associated with this submission:" %}</span>');
+                add_i_tag.appendTo(file);
+
                 file = $('<a />', {
                     href: url,
                     text: view.filesDescriptions[filenum]
