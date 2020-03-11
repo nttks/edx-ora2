@@ -874,20 +874,22 @@ OpenAssessment.ResponseView.prototype = {
                 file.addClass('submission__answer__file submission--file');
                 file.attr('target', '_blank');
                 if (view.filesType === 'video') {
-                    i_tag = $('<i />', {});
-                    i_tag.addClass('fa fa-file-video-o');
+                    file.append('<i class="fa fa-file-video-o"></i><span class="file--button"><i class="fa fa-check-square-o"></i>' + gettext("View the file associated with this submission.") + '</span>');
+                    // i_tag = $('<i />', {});
+                    // i_tag.addClass('fa fa-file-video-o');
                 } else {
-                    i_tag = $('<i />', {});
-                    i_tag.addClass('fa fa-file-o');
+                    file.append('<i class="fa fa-file-o"></i><span class="file--button"><i class="fa fa-check-square-o"></i>' + gettext("View the file associated with this submission.") + '</span>');
+                    // i_tag = $('<i />', {});
+                    // i_tag.addClass('fa fa-file-o');
                 }
-                span_tag = $('<span />', {});
-                span_tag.addClass('file--button');
-                i_tag_2 = $('<i />', {});
-                i_tag_2.addClass('fa fa-check-square-o');
-                i_tag_2.text(gettext("View the file associated with this submission."));
-                i_tag_2.appendTo(span_tag);
-                span_tag.appendTo(i_tag);
-                i_tag.appendTo(file);
+                // span_tag = $('<span />', {});
+                // span_tag.addClass('file--button');
+                // i_tag_2 = $('<i />', {});
+                // i_tag_2.addClass('fa fa-check-square-o');
+                // i_tag_2.text(gettext("View the file associated with this submission."));
+                // i_tag_2.appendTo(span_tag);
+                // span_tag.appendTo(i_tag);
+                // i_tag.appendTo(file);
                 file.appendTo(fileBlock);
             }
 
