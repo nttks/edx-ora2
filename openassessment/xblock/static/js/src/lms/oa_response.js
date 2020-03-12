@@ -831,9 +831,6 @@ OpenAssessment.ResponseView.prototype = {
         view.server.getDownloadUrl(filenum).done(function(url) {
             var className = 'submission__answer__file__block__' + filenum;
             var file = null;
-            var i_tag = null;
-            var i_tag_2 = null;
-            var span_tag = null;
             var img = null;
             var fileBlock = null;
             var fileBlockExists = sel.find("." + className).length ? true : false;
@@ -874,21 +871,9 @@ OpenAssessment.ResponseView.prototype = {
                 file.attr('target', '_blank');
                 if (view.filesType === 'video') {
                     file.append('<i class="fa fa-file-video-o"></i><span class="file--button"><i class="fa fa-check-square-o"></i>' + gettext("View the file associated with this submission.") + '</span>');
-                    // i_tag = $('<i />', {});
-                    // i_tag.addClass('fa fa-file-video-o');
                 } else {
                     file.append('<i class="fa fa-file-o"></i><span class="file--button"><i class="fa fa-check-square-o"></i>' + gettext("View the file associated with this submission.") + '</span>');
-                    // i_tag = $('<i />', {});
-                    // i_tag.addClass('fa fa-file-o');
                 }
-                // span_tag = $('<span />', {});
-                // span_tag.addClass('file--button');
-                // i_tag_2 = $('<i />', {});
-                // i_tag_2.addClass('fa fa-check-square-o');
-                // i_tag_2.text(gettext("View the file associated with this submission."));
-                // i_tag_2.appendTo(span_tag);
-                // span_tag.appendTo(i_tag);
-                // i_tag.appendTo(file);
                 file.appendTo(fileBlock);
             }
 
