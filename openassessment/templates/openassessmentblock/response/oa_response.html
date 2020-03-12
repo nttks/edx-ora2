@@ -53,7 +53,7 @@
         <div class="wrapper--step__content">
             <div class="step__instruction">
                 <p>
-                    {% trans "Enter your response to the prompt." %}
+<!--                    {% trans "Enter your response to the prompt." %}-->
                     {% if submission_due %}
                     {% trans "You can save your progress and return to complete your response at any time before the due date" %}
                     (<span class="step__deadline">
@@ -71,7 +71,7 @@
                     <ol class="list list--fields response__submission__content">
                         {% for part in saved_response.answer.parts %}
                             <li class="submission__answer__part">
-                                <h5 class="submission__answer__part__text__title">{% trans "The prompt for this section" %}</h5>
+<!--                                <h5 class="submission__answer__part__text__title">{% trans "The prompt for this section" %}</h5>-->
                                 <article class="submission__answer__part__prompt">
                                     <div class="submission__answer__part__prompt__copy">
                                         {% if prompts_type == 'html' %}
@@ -85,23 +85,12 @@
 
                                 {% if text_response %}
                                 <div class="field field--textarea submission__answer__part__text">
-                                    <div class="submission__answer__part__text">
-                                        <h5 id="submission__answer__part__text__title__{{ forloop.counter }}__{{ xblock_id }}"
-                                            class="submission__answer__part__text__title">
-                                          {% if text_response == "required" %}
-                                            {% trans "Your response (required)" %}
-                                          {% elif text_response == "optional" %}
-                                            {% trans "Your response (optional)" %}
-                                          {% endif %}
-                                        </h5>
-                                    </div>
                                     <textarea
                                         id="submission__answer__part__text__{{ forloop.counter }}__{{ xblock_id }}"
                                         class="submission__answer__part__text__value"
                                         data-preview="submission__{{ forloop.counter }}"
                                         aria-labelledby="submission__answer__part__text__title__{{ forloop.counter }}__{{ xblock_id }}"
                                         aria-describedby="submission__answer__tip__{{ xblock_id }}"
-                                        placeholder="{% trans "Enter your response to the prompt above." %}"
                                         maxlength="100000"
                                     >{{ part.text }}</textarea>
                                 </div>
@@ -122,7 +111,7 @@
                                 <ul class="list list--actions">
                                     <li class="list--actions__item">
                                         <button type="submit" class="action action--save submission__save" aria-describedby="response__save_status__{{ xblock_id }}"
-                                                style="background-color:#43ac6a; border-color:#007095;" disabled>
+                                                style="background-color:#43ac6a; border-color:#43ac6a;" disabled>
                                             {% trans "Save your progress" %}
                                         </button>
 

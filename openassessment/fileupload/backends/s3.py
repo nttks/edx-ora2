@@ -3,7 +3,8 @@ import logging
 import boto
 from boto.s3.key import Key
 from boto.exception import S3ResponseError
-
+from boto.s3 import connect_to_region
+from boto.s3.connection import Location, OrdinaryCallingFormat
 from django.conf import settings
 
 from ..exceptions import FileUploadInternalError, FileUploadRequestError
@@ -97,8 +98,8 @@ def _connect_to_s3(waf_proxy_enabled=False):
     # Try to get the AWS credentials from settings if they are available
     # If not, these will default to `None`, and boto will try to use
     # environment vars or configuration files instead.
-    aws_access_key_id = getattr(settings, 'AWS_ACCESS_KEY_ID', None)
-    aws_secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
+    # aws_access_key_id = getattr(settings, 'AWS_ACCESS_KEY_ID', None)
+    # aws_secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
 
     if waf_proxy_enabled:
         waf_proxy_ip = getattr(settings, 'ORA2_WAF_PROXY_SERVER_IP', None)
@@ -114,15 +115,27 @@ def _connect_to_s3(waf_proxy_enabled=False):
             )
             raise Exception(msg)
         logger.info("Connect to S3 with WAF proxy.")
-        return boto.connect_s3(
-            aws_access_key_id=aws_access_key_id,
-            aws_secret_access_key=aws_secret_access_key,
+        return connect_to_region(
+            Location.APNortheast,
             is_secure=False,
+            calling_format=OrdinaryCallingFormat(),
             proxy=waf_proxy_ip,
             proxy_port=waf_proxy_port
         )
+        # return boto.connect_s3(
+        #     aws_access_key_id=aws_access_key_id,
+        #     aws_secret_access_key=aws_secret_access_key,
+        #     is_secure=False,
+        #     proxy=waf_proxy_ip,
+        #     proxy_port=waf_proxy_port
+        # )
     else:
-        return boto.connect_s3(
-            aws_access_key_id=aws_access_key_id,
-            aws_secret_access_key=aws_secret_access_key
+        return connect_to_region(
+            Location.APNortheast,
+            is_secure=False,
+            calling_format=OrdinaryCallingFormat(),
         )
+        # return boto.connect_s3(
+        #     aws_access_key_id=aws_access_key_id,
+        #     aws_secret_access_key=aws_secret_access_key
+        # )
