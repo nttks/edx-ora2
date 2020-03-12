@@ -2048,3 +2048,7 @@ msgstr "提出フォーマットが無効です。"
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html
 msgid "Video File"
 msgstr "動画ファイル"
+
+#: openassessment/templates/openassessmentblock/oa_uploaded_file.html
+msgid "View the file associated with this submission."
+msgstr "内容を確認する"

@@ -22,10 +22,15 @@
                           aria-labelledby="file_description_{{ xblock_id }}_{{ including_template }}_{{ forloop.counter0 }}" /></div>
             {% elif file_upload_type == "pdf-and-image" or file_upload_type == "video" or file_upload_type == "custom" %}
                 <a href="{{ file_url }}" class="submission__answer__file submission--file" target="_blank">
+                    
                     {% if file_description %}
-                      {{ file_description }}
+                      <i class="fa {% if file_upload_type == "video" %}fa-file-video-o{% else %}fa-file-o{% endif %}"></i>
+                      <span class="file--button"><i class="fa fa-check-square-o"></i> {% trans "View the file associated with this submission." %}</span>
+<!--                      {{ file_description }}-->
                     {% else %}
-                      {% trans "View the files associated with this submission:" %} #{{ forloop.counter }}
+                      <i class="fa {% if file_upload_type == "video" %}fa-file-video-o{% else %}fa-file-o{% endif %}"></i>
+                      <span class="file--button"><i class="fa fa-check-square-o"></i> {% trans "View the file associated with this submission." %}</span>
+<!--                    #{{ forloop.counter }}-->
                     {% endif %}
                 </a>
             {% endif %}
