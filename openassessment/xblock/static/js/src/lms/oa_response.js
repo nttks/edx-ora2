@@ -869,7 +869,6 @@ OpenAssessment.ResponseView.prototype = {
                 file = $('<a />', {
                     href: '',
                     // text: view.filesDescriptions[filenum]
-                    text: gettext("View the file associated with this submission.")
                 });
                 file.addClass('submission__answer__file submission--file');
                 file.attr('target', '_blank');
