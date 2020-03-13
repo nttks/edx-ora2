@@ -328,7 +328,7 @@ class SubmissionMixin(object):
         try:
             key = self._get_student_item_key()
             url = file_upload_api.upload_file(key, file)
-            return {'success': True, 'url': url, 'file': file}
+            return {'success': True, 'url': url}
         except FileUploadError:
             logger.exception("Error uploading file.")
             return {'success': False, 'msg': self._(u"Error uploading file.")}
