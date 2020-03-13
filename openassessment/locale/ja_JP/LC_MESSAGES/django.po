@@ -102,27 +102,27 @@ msgstr "本コンポーネントの表示名"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:51
 msgid "Response Start Date"
-msgstr "回答開始日"
+msgstr "提出開始日"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:64
 msgid "Response Start Time"
-msgstr "回答開始時刻"
+msgstr "提出開始時刻"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:73
 msgid "The date and time when learners can begin submitting responses."
-msgstr "回答提出の開始日時。"
+msgstr "レポート提出開始日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:80
 msgid "Response Due Date"
-msgstr "回答締切日"
+msgstr "提出締切日"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:93
 msgid "Response Due Time"
-msgstr "回答締切時刻"
+msgstr "提出締切時刻"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:102
 msgid "The date and time when learners can no longer submit responses."
-msgstr "回答提出の締切日時。"
+msgstr "レポート提出提出の締切日時を指定してください。"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:106
 msgid "Text Response"
