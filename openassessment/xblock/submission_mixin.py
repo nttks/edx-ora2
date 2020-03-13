@@ -350,6 +350,7 @@ class SubmissionMixin(object):
         file_name_parts = file_name.split('.')
         file_num = int(data.get('filenum', 0))
         file_ext = file_name_parts[-1] if len(file_name_parts) > 1 else None
+        file = data.POST.get('file').file
 
         if self.file_upload_type == 'image' and content_type not in self.ALLOWED_IMAGE_MIME_TYPES:
             return {'success': False, 'msg': self._(u"Content type must be GIF, PNG or JPG.")}
@@ -369,7 +370,7 @@ class SubmissionMixin(object):
         try:
             key = self._get_student_item_key(file_num)
             # url = file_upload_api.get_upload_url(key, content_type)
-            url = file_upload_api.upload_file(key, content_type)
+            url = file_upload_api.upload_file(key, file)
             return {'success': True, 'url': url}
         except FileUploadError:
             logger.exception("Error retrieving upload URL.")
