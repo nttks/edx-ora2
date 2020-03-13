@@ -133,7 +133,6 @@ def _connect_to_s3(waf_proxy_enabled=False):
     else:
         return connect_to_region(
             Location.APNortheast,
-            is_secure=False,
             calling_format=OrdinaryCallingFormat(),
         )
         # return boto.connect_s3(
