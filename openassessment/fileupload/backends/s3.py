@@ -27,6 +27,7 @@ class Backend(BaseBackend):
             s3_key = Key(bucket=bucket, name=key_name)
             # Note: S3ResponseError(403 Forbidden) raises if WAF proxy detects a virus in setting contents
             s3_key.set_contents_from_file(fp, size=fp.size)
+            conn.protocol = 'https'
             return s3_key.generate_url(expires_in=self.DOWNLOAD_URL_TIMEOUT)
         except S3ResponseError as ex:
             # Check if the specified keyword exists in ex.message
@@ -102,8 +103,8 @@ def _connect_to_s3(waf_proxy_enabled=False):
     # aws_secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
 
     if waf_proxy_enabled:
-        waf_proxy_ip = getattr(settings, 'ORA2_WAF_PROXY_SERVER_IP', None)
-        waf_proxy_port = getattr(settings, 'ORA2_WAF_PROXY_SERVER_PORT', None)
+        waf_proxy_ip = settings.DISCUSSION_WAF_PROXY_SERVER_IP
+        waf_proxy_port = settings.DISCUSSION_WAF_PROXY_SERVER_PORT
         if not waf_proxy_ip or not waf_proxy_port:
             msg = "WAF proxy feature for ORA2 file upload is enabled, but WAF server ip or port is not configured."
             logger.exception(
