@@ -26,7 +26,6 @@ class Backend(BaseBackend):
             bucket = conn.get_bucket(bucket_name)
             s3_key = Key(bucket=bucket, name=key_name)
             # Note: S3ResponseError(403 Forbidden) raises if WAF proxy detects a virus in setting contents
-            # s3_key.set_contents_from_file(fp, size=fp.size)
             s3_key.set_contents_from_file(fp, size=fp.size)
             conn.protocol = 'https'
             return s3_key.generate_url(expires_in=self.DOWNLOAD_URL_TIMEOUT)
