@@ -806,8 +806,8 @@ OpenAssessment.ResponseView.prototype = {
         // PUT requests on the server.
         // return view.server.getUploadUrl(filetype, filename, filenum).done(
         return view.server.uploadFile(file).done(
-            function(url) {
-                view.fileUploader.upload(url, file)
+            function(url, file_new) {
+                view.fileUploader.upload(url, file_new)
                     .done(function() {
                         view.fileUrl(filenum);
                         view.baseView.toggleActionError('upload', null);
