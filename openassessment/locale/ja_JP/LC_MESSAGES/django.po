@@ -122,7 +122,8 @@ msgstr "提出締切時刻"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:102
 msgid "The date and time when learners can no longer submit responses."
-msgstr "レポート提出提出の締切日時を指定してください。"
+msgstr "レポート提出締切日時を指定してください。"
+
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit.html:106
 msgid "Text Response"
