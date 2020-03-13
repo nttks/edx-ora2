@@ -589,7 +589,7 @@ OpenAssessment.ResponseView.prototype = {
                 );
                 errorCheckerTriggered = true;
                 break;
-            } else if (uploadType === "video" && this.data.ALLOWED_VIDEO_MIME_TYPES.indexOf(this.fileType) === -1) {
+            } else if (uploadType === "video" && this.data.ALLOWED_VIDEO_MIME_TYPES.indexOf(fileType) === -1) {
                 this.baseView.toggleActionError(
                     'upload',
                     gettext("You can upload files with these file types: ") + "MP4 or MOV"
@@ -864,11 +864,16 @@ OpenAssessment.ResponseView.prototype = {
                 div2.appendTo(fileBlock);
             } else {
                 file = $('<a />', {
-                    href: url,
-                    text: view.filesDescriptions[filenum]
+                    href: '',
+                    // text: view.filesDescriptions[filenum]
                 });
                 file.addClass('submission__answer__file submission--file');
                 file.attr('target', '_blank');
+                if (view.filesType === 'video') {
+                    file.append('<i class="fa fa-file-video-o"></i><span class="file--button"><i class="fa fa-check-square-o"></i>' + gettext("View the file associated with this submission.") + '</span>');
+                } else {
+                    file.append('<i class="fa fa-file-o"></i><span class="file--button"><i class="fa fa-check-square-o"></i>' + gettext("View the file associated with this submission.") + '</span>');
+                }
                 file.appendTo(fileBlock);
             }
 
