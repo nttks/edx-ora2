@@ -781,11 +781,60 @@ OpenAssessment.ResponseView.prototype = {
 
         $.each(view.files, function(index, file) {
             promise = promise.then(function() {
-                return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
+                // return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
+                return view.uploadFile(file);
             });
         });
 
         return promise;
+    },
+
+    /**
+     Upload an image file via ora2 server.
+
+     Args:
+        file (File): The HTML5 file reference.
+
+     Returns:
+        A presigned upload URL from the specified service used for uploading
+        files.
+
+     **/
+    uploadFile: function(file) {
+        var url = this.url('upload_file');
+        var formdata = new FormData();
+        formdata.append('file', file);
+        return $.Deferred(function(defer) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                processData: false,
+                contentType: false,
+                data: formdata
+            }).done(function(data) {
+                if (data.success) {
+                    // Log an analytics event
+                    Logger.log(
+                        "openassessment.upload_file",
+                        {
+                            fileName: file.name,
+                            fileSize: file.size,
+                            fileType: file.type
+                        }
+                    );
+                    defer.resolve(data.url);
+                } else { defer.rejectWith(this, [data.msg]); }
+            }).fail(function(data) {
+                var msg = null;
+                try {
+                    // Show error message if possible
+                    msg = JSON.parse(data.responseText).success;
+                } catch(err) {
+                }
+                if (msg !== null) { defer.rejectWith(this, [msg]); }
+                else { defer.rejectWith(this, [gettext('Could not upload file. Try again later.')]); }
+            });
+        }).promise();
     },
 
     /**
