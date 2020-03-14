@@ -283,7 +283,7 @@ class SubmissionMixin(object):
 
         return submission
 
-    @XBlock.json_handler
+    @XBlock.handler
     def upload_file(self, data, suffix=''):
         """
         Uploade an image file for this submission.

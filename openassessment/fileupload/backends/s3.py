@@ -49,9 +49,8 @@ class Backend(BaseBackend):
 
     def get_upload_url(self, key, content_type):
         bucket_name, key_name = self._retrieve_parameters(key)
-        waf_proxy_enabled = hasattr(settings, 'FEATURES') and settings.FEATURES.get('ENABLE_ORA2_WAF_PROXY', False)
         try:
-            conn = _connect_to_s3(waf_proxy_enabled)
+            conn = _connect_to_s3()
             upload_url = conn.generate_url(
                 expires_in=self.UPLOAD_URL_TIMEOUT,
                 method='PUT',
