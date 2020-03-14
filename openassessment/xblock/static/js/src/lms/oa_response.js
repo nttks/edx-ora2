@@ -781,30 +781,11 @@ OpenAssessment.ResponseView.prototype = {
 
         $.each(view.files, function(index, file) {
             promise = promise.then(function() {
-                // return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
-                return view.uploadFileAPI(view, index, file, fileCount === (index + 1));
+                return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
             });
         });
 
         return promise;
-    },
-
-    uploadFileAPI: function(view, filenum, file, finalUpload) {
-        var sel = $('.step--response', this.element);
-        var handleError = function(errMsg) {
-            view.baseView.toggleActionError('upload', errMsg);
-            sel.find('.file__upload').prop('disabled', false);
-        };
-        return view.server.uploadFile(file).done(
-            function(url) {
-                view.fileUrl(filenum);
-                if (finalUpload) {
-                    sel.find('input[type=file]').val('');
-                    view.filesUploaded = true;
-                    view.checkSubmissionAbility(true);
-                }
-            }
-        ).fail(handleError);
     },
 
     /**
