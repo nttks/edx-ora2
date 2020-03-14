@@ -790,6 +790,7 @@ OpenAssessment.ResponseView.prototype = {
     },
 
     uploadFileAPI: function(view, filenum, file, finalUpload) {
+        var sel = $('.step--response', this.element);
         var handleError = function(errMsg) {
             view.baseView.toggleActionError('upload', errMsg);
             sel.find('.file__upload').prop('disabled', false);
