@@ -911,7 +911,7 @@ OpenAssessment.ResponseView.prototype = {
                 div2.appendTo(fileBlock);
             } else {
                 file = $('<a />', {
-                    href: '',
+                    href: url,
                     // text: view.filesDescriptions[filenum]
                 });
                 file.addClass('submission__answer__file submission--file');
