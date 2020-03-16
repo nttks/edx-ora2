@@ -335,7 +335,7 @@ class SubmissionMixin(object):
             return Response(json.dumps({'success': True, 'url': url}), content_type='application/json')
         except FileUploadError:
             logger.exception("Error uploading file.")
-            return {'success': False, 'msg': self._(u"Error uploading file.")}
+            return Response(json.dumps({'success': False, 'msg': self._(u"Error uploading file.")}), content_type='application/json')
 
     @XBlock.json_handler
     def upload_url(self, data, suffix=''):  # pylint: disable=unused-argument
