@@ -388,7 +388,8 @@ class SubmissionMixin(object):
 
         """
         file_num = int(data.get('filenum', 0))
-        return {'success': True, 'url': self._get_download_url(file_num)}
+        # return {'success': True, 'url': self._get_download_url(file_num)}
+        return {'success': True, 'url': self._get_download_url()}
 
     @XBlock.json_handler
     def remove_all_uploaded_files(self, data, suffix=''):  # pylint: disable=unused-argument
