@@ -103,8 +103,8 @@ def _connect_to_s3(waf_proxy_enabled=False):
     # aws_secret_access_key = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
 
     if waf_proxy_enabled:
-        waf_proxy_ip = settings.DISCUSSION_WAF_PROXY_SERVER_IP
-        waf_proxy_port = settings.DISCUSSION_WAF_PROXY_SERVER_PORT
+        waf_proxy_ip = settings.ORA2_WAF_PROXY_SERVER_IP
+        waf_proxy_port = settings.ORA2_WAF_PROXY_SERVER_PORT
         if not waf_proxy_ip or not waf_proxy_port:
             msg = "WAF proxy feature for ORA2 file upload is enabled, but WAF server ip or port is not configured."
             logger.exception(
