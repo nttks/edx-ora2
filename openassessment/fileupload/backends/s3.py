@@ -28,7 +28,8 @@ class Backend(BaseBackend):
             # Note: S3ResponseError(403 Forbidden) raises if WAF proxy detects a virus in setting contents
             s3_key.set_contents_from_file(fp, size=fp.size)
             conn.protocol = 'https'
-            return s3_key.generate_url(expires_in=self.DOWNLOAD_URL_TIMEOUT)
+            # return s3_key.generate_url(expires_in=self.DOWNLOAD_URL_TIMEOUT)
+            return conn.generate_url(expires_in=self.DOWNLOAD_URL_TIMEOUT)
         except S3ResponseError as ex:
             # Check if the specified keyword exists in ex.message
             if waf_proxy_enabled and ex.message and settings.ORA2_WAF_VIRUS_DETECTION_KEYWORD in ex.message:
