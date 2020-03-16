@@ -387,7 +387,7 @@ class SubmissionMixin(object):
             A URL to be used for downloading content related to the submission.
 
         """
-        file_num = int(data.get('filenum', 0))
+        # file_num = int(data.get('filenum', 0))
         # return {'success': True, 'url': self._get_download_url(file_num)}
         return {'success': True, 'url': self._get_download_url()}
 
