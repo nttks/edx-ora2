@@ -811,7 +811,7 @@ OpenAssessment.ResponseView.prototype = {
     /**
      Manages file uploads for submission attachments.
      **/
-    uploadFileAPI: function(view, index, file) {
+    uploadFileAPI: function(view, filenum, file, finalUpload) {
         var sel = $('.step--response', this.element);
         var handleError = function(errMsg) {
             view.baseView.toggleActionError('upload', errMsg);
@@ -826,14 +826,11 @@ OpenAssessment.ResponseView.prototype = {
                 view.fileUploaded = true;
                 // Enable submit button after loading image
                 var file = $('#submission__answer__file', view.element);
-                if (file.prop("tagName") === "IMG") {
-                    file.load(function() {
-                        view.handleResponseChanged();
-                    });
-                } else {
-                    view.handleResponseChanged();
+                if (finalUpload) {
+                    sel.find('input[type=file]').val('');
+                    view.filesUploaded = true;
+                    view.checkSubmissionAbility(true);
                 }
-                $('.submission__answer__display__file.is--hidden', view.element).removeClass('is--hidden');
             }
         ).fail(handleError);
     },
