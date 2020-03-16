@@ -811,7 +811,7 @@ OpenAssessment.ResponseView.prototype = {
     /**
      Manages file uploads for submission attachments.
      **/
-    uploadFileAPI: function(view, index, file,) {
+    uploadFileAPI: function(view, index, file) {
         var sel = $('.step--response', this.element);
         var handleError = function(errMsg) {
             view.baseView.toggleActionError('upload', errMsg);
