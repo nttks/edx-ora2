@@ -821,7 +821,7 @@ OpenAssessment.ResponseView.prototype = {
         // Upload image file via ora2 server
         view.server.uploadFile(file).done(
             function(url) {
-                view.fileUrl(url);
+                view.fileUrl(filenum);
                 view.baseView.toggleActionError('upload', null);
                 view.fileUploaded = true;
                 // Enable submit button after loading image
