@@ -782,8 +782,8 @@ OpenAssessment.ResponseView.prototype = {
         $.each(view.files, function(index, file) {
             promise = promise.then(function() {
                 // return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
-                // return view.uploadFileAPI(view, index, file, fileCount === (index + 1));
-                return view.uploadFileAPI();
+                return view.uploadFileAPI(view, index, file, fileCount === (index + 1));
+                // return view.uploadFileAPI();
             });
         });
 
@@ -811,31 +811,26 @@ OpenAssessment.ResponseView.prototype = {
     /**
      Manages file uploads for submission attachments.
      **/
-    uploadFileAPI: function() {
-        var view = this;
-        view.submitEnabled(false);
-
+    uploadFileAPI: function(view, filenum, file, finalUpload) {
+        var sel = $('.step--response', this.element);
         var handleError = function(errMsg) {
             view.baseView.toggleActionError('upload', errMsg);
-            view.handleResponseChanged();
+            sel.find('.file__upload').prop('disabled', false);
         };
 
         // Upload image file via ora2 server
-        this.server.uploadFile(view.files[0]).done(
+        view.server.uploadFile(file).done(
             function(url) {
-                view.fileUrl(url);
+                view.fileUrl(filenum);
                 view.baseView.toggleActionError('upload', null);
                 view.fileUploaded = true;
                 // Enable submit button after loading image
                 var file = $('#submission__answer__file', view.element);
-                if (file.prop("tagName") === "IMG") {
-                    file.load(function() {
-                        view.handleResponseChanged();
-                    });
-                } else {
-                    view.handleResponseChanged();
+                if (finalUpload) {
+                    sel.find('input[type=file]').val('');
+                    view.filesUploaded = true;
+                    view.checkSubmissionAbility(true);
                 }
-                $('.submission__answer__display__file.is--hidden', view.element).removeClass('is--hidden');
             }
         ).fail(handleError);
     },

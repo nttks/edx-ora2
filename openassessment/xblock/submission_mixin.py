@@ -292,6 +292,9 @@ class SubmissionMixin(object):
             A JSON-formatted response.
 
         """
+        from webob import Response
+        from webob.multidict import MultiDict
+        request_post = MultiDict(data.POST)
         if not data.POST.get('file'):
             logger.exception("No file was found in POST data.")
             return {'success': False, 'msg': self._(u"Error uploading file.")}
@@ -328,7 +331,8 @@ class SubmissionMixin(object):
         try:
             key = self._get_student_item_key()
             url = file_upload_api.upload_file(key, file)
-            return {'success': True, 'url': url}
+            # return {'success': True, 'url': url}
+            return Response(json.dumps({'success': True, 'url': url}), content_type='application/json')
         except FileUploadError:
             logger.exception("Error uploading file.")
             return {'success': False, 'msg': self._(u"Error uploading file.")}
@@ -383,8 +387,9 @@ class SubmissionMixin(object):
             A URL to be used for downloading content related to the submission.
 
         """
-        file_num = int(data.get('filenum', 0))
-        return {'success': True, 'url': self._get_download_url(file_num)}
+        # file_num = int(data.get('filenum', 0))
+        # return {'success': True, 'url': self._get_download_url(file_num)}
+        return {'success': True, 'url': self._get_download_url()}
 
     @XBlock.json_handler
     def remove_all_uploaded_files(self, data, suffix=''):  # pylint: disable=unused-argument
