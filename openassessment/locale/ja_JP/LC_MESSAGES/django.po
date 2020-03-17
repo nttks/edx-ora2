@@ -551,7 +551,7 @@ msgstr "レポート提出"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html:41
 msgid "Your Upload"
-msgstr "あなたのアップロード"
+msgstr "提出ファイル"
 
 #: openassessment/templates/openassessmentblock/grade/oa_grade_complete.html:46
 msgid "Assessments of Your Response"
@@ -862,7 +862,7 @@ msgid ""
 "Caution: These files were uploaded by another course learner and have not "
 "been verified, screened, approved, reviewed, or endorsed by the site "
 "administrator. If you access the files, you do so at your own risk.)"
-msgstr "注意: これらのファイルは別の講座の受講者によってアップロードされ、サイト管理者による認証、保護、承認、審査、推奨はされていません。ファイルにアクセスする場合は、ご自身の責任でお願いします。)"
+msgstr "注意：他の受講者によって提出されたファイルです。お客様の安全のためにご使用の端末のセキュリティ対策を実施いただくことを推奨いたします。また、ファイルの安全性については当社では一切の責任を負わないものとします。"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html:26
 msgid "Assess Peers"
@@ -913,7 +913,7 @@ msgstr "以下にある他の受講者の回答を読んで評価してくださ
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html:27
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html:49
 msgid "Associated Files"
-msgstr "関連ファイル"
+msgstr "提出ファイル"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_assessment.html:91
 #: openassessment/templates/openassessmentblock/peer/oa_peer_turbo_mode.html:70
@@ -989,7 +989,7 @@ msgstr "提出済の他の受講者の回答を全て評価しました。後ほ
 #: openassessment/xblock/staff_assessment_mixin.py:99
 #: openassessment/xblock/staff_assessment_mixin.py:123
 msgid "Not Available"
-msgstr "未完了"
+msgstr "未採点"
 
 #: openassessment/templates/openassessmentblock/peer/oa_peer_waiting.html:20
 #, python-format
@@ -1343,7 +1343,7 @@ msgstr "\n                %(ungraded)s件可能で%(in_progress)s件チェック
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html:6
 msgid "Override this learner's current grade using the problem's rubric."
-msgstr "問題のルーブリックを使用して、この受講者の現在の成績を無効にする。"
+msgstr "こちらからレポート課題の再採点を実施できます。相互採点の結果が存在する場合も、受講者の最終成績はスタッフ採点の内容で上書きされ、元に戻すことはできません。スタッフ採点のやり直しは可能です。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_staff_override_assessment.html:15
 #, python-format
@@ -1472,7 +1472,7 @@ msgstr "注意: この操作は取消できません"
 msgid ""
 "Removing a learner's submission cannot be undone and should be done with "
 "caution."
-msgstr "受講者の提出物を削除すると元には戻せませんので、慎重に行ってください。"
+msgstr "回答を削除すると、受講者の回答はキャンセル状態になり、また受講者には以下に入力されたメッセージが表示されます。削除の取り消し、および受講者による課題の再投稿はできません。"
 
 #: openassessment/templates/openassessmentblock/staff_area/oa_student_info.html:198
 msgid "Comments:"
@@ -2052,3 +2052,11 @@ msgstr "動画ファイル"
 #: openassessment/templates/openassessmentblock/oa_uploaded_file.html
 msgid "View the file associated with this submission."
 msgstr "内容を確認する"
+
+#: openassessment/xblock/submission_mixin.py
+msgid "Error uploading file."
+msgstr "ファイルアップロードに失敗しました。"
+
+#: openassessment/xblock/submission_mixin.py
+msgid "Content type must be MP4 or MOV."
+msgstr "動画ファイルを指定してください。MP4 または MOV"
