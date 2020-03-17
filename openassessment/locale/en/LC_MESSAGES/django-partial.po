@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-11 10:54+0000\n"
+"POT-Creation-Date: 2020-03-17 01:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -848,11 +848,8 @@ msgid "The question for this section"
 msgstr ""
 
 #: openassessment/templates/openassessmentblock/oa_uploaded_file.html
-msgid "View the file associated with this submission."
-msgstr ""
-
 #: openassessment/templates/openassessmentblock/oa_uploaded_file.html
-msgid "View the files associated with this submission:"
+msgid "View the file associated with this submission."
 msgstr ""
 
 #: openassessment/templates/openassessmentblock/oa_uploaded_file.html
