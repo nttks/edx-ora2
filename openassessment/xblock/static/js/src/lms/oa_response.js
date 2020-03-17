@@ -781,11 +781,58 @@ OpenAssessment.ResponseView.prototype = {
 
         $.each(view.files, function(index, file) {
             promise = promise.then(function() {
-                return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
+                // return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
+                return view.uploadFileAPI(view, index, file, fileCount === (index + 1));
+                // return view.uploadFileAPI();
             });
         });
 
         return promise;
+    },
+
+    // uploadFileAPI: function(view, filenum, file, finalUpload) {
+    //     var sel = $('.step--response', this.element);
+    //     var handleError = function(errMsg) {
+    //         view.baseView.toggleActionError('upload', errMsg);
+    //         sel.find('.file__upload').prop('disabled', false);
+    //     };
+    //     return view.server.uploadFile(file).done(
+    //         function(url) {
+    //             view.fileUrl(filenum);
+    //             if (finalUpload) {
+    //                 sel.find('input[type=file]').val('');
+    //                 view.filesUploaded = true;
+    //                 view.checkSubmissionAbility(true);
+    //             }
+    //         }
+    //     ).fail(handleError);
+    // },
+
+    /**
+     Manages file uploads for submission attachments.
+     **/
+    uploadFileAPI: function(view, filenum, file, finalUpload) {
+        var sel = $('.step--response', this.element);
+        var handleError = function(errMsg) {
+            view.baseView.toggleActionError('upload', errMsg);
+            sel.find('.file__upload').prop('disabled', false);
+        };
+
+        // Upload image file via ora2 server
+        view.server.uploadFile(file).done(
+            function(url) {
+                view.fileUrl(filenum);
+                view.baseView.toggleActionError('upload', null);
+                view.fileUploaded = true;
+                // Enable submit button after loading image
+                var file = $('#submission__answer__file', view.element);
+                if (finalUpload) {
+                    sel.find('input[type=file]').val('');
+                    view.filesUploaded = true;
+                    view.checkSubmissionAbility(true);
+                }
+            }
+        ).fail(handleError);
     },
 
     /**
@@ -864,7 +911,7 @@ OpenAssessment.ResponseView.prototype = {
                 div2.appendTo(fileBlock);
             } else {
                 file = $('<a />', {
-                    href: '',
+                    href: url,
                     // text: view.filesDescriptions[filenum]
                 });
                 file.addClass('submission__answer__file submission--file');
