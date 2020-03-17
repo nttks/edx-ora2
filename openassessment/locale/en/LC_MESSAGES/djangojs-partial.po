@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-11 10:54+0000\n"
+"POT-Creation-Date: 2020-03-17 01:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,12 @@ msgstr ""
 #: openassessment/xblock/static/js/openassessment-studio.min.js
 #: openassessment/xblock/static/js/src/oa_server.js
 msgid "The server could not be contacted."
+msgstr ""
+
+#: openassessment/xblock/static/js/openassessment-lms.min.js
+#: openassessment/xblock/static/js/openassessment-studio.min.js
+#: openassessment/xblock/static/js/src/oa_server.js
+msgid "Could not upload file. Try again later."
 msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
@@ -280,6 +286,12 @@ msgid "Thumbnail view of "
 msgstr ""
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+#: openassessment/xblock/static/js/src/lms/oa_response.js
+msgid "View the file associated with this submission."
+msgstr ""
+
+#: openassessment/xblock/static/js/openassessment-lms.min.js
 #: openassessment/xblock/static/js/src/lms/oa_self.js
 msgid ""
 "If you leave this page without submitting your self assessment, you will "
@@ -436,12 +448,4 @@ msgstr ""
 #: openassessment/xblock/static/js/openassessment-studio.min.js
 #: openassessment/xblock/static/js/src/studio/oa_edit_settings.js
 msgid "The following file types are not allowed: "
-msgstr ""
-
-#: openassessment/xblock/static/js/src/lms/oa_response.js
-msgid "View the file associated with this submission."
-msgstr ""
-
-#: openassessment/xblock/static/js/src/oa_server.js
-msgid "Could not upload file. Try again later."
 msgstr ""
