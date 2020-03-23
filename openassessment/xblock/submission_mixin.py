@@ -297,7 +297,7 @@ class SubmissionMixin(object):
         request_post = MultiDict(data.POST)
         if not data.POST.get('file'):
             logger.exception("No file was found in POST data.")
-            return {'success': False, 'msg': self._(u"Error uploading file.")}
+            return Response(json.dumps({'success': False, 'msg': self._(u"Error uploading file.")}), content_type='application/json')
         file = data.POST.get('file').file
 
         if hasattr(settings, 'FEATURES') and settings.FEATURES.get('ENABLE_ORA2_FILE_TYPE_STRICT_CHECK', False):
@@ -307,26 +307,26 @@ class SubmissionMixin(object):
             content_type = file.content_type
 
         if self.file_upload_type == 'image' and content_type not in self.ALLOWED_IMAGE_MIME_TYPES:
-            return {'success': False, 'msg': self._(u"Content type must be GIF, PNG or JPG.")}
+            return Response(json.dumps({'success': False, 'msg': self._(u"Content type must be GIF, PNG or JPG.")}), content_type='application/json')
 
         if self.file_upload_type == 'pdf-and-image' and content_type not in self.ALLOWED_FILE_MIME_TYPES:
-            return {'success': False, 'msg': self._(u"Content type must be PDF, GIF, PNG or JPG.")}
+            return Response(json.dumps({'success': False, 'msg': self._(u"Content type must be PDF, GIF, PNG or JPG.")}), content_type='application/json')
 
         if self.file_upload_type == 'video' and content_type not in self.ALLOWED_VIDEO_MIME_TYPES:
-            return {'success': False, 'msg': self._(u"Content type must be MP4 or MOV.")}
+            return Response(json.dumps({'success': False, 'msg': self._(u"Content type must be MP4 or MOV.")}), content_type='application/json')
 
         file_name_parts = file.name.split('.')
         file_ext = file_name_parts[-1] if len(file_name_parts) > 1 else None
-        if self.file_upload_type == 'custom' and file_ext not in self.white_listed_file_types:
-            return {'success': False, 'msg': self._(u"File type must be one of the following types: {}").format(
-                ', '.join(self.white_listed_file_types))}
+        if self.file_upload_type == 'custom' and file_ext.lower() not in self.white_listed_file_types:
+            return Response(json.dumps({'success': False, 'msg': self._(u"File type must be one of the following types: {}").format(
+                ', '.join(self.white_listed_file_types))}), content_type='application/json')
 
         # validate content type for only pdf file
         if self.file_upload_type == 'custom' and self.white_listed_file_types == ['pdf'] and content_type not in self.ALLOWED_PDF_MIME_TYPES:
-            return {'success': False, 'msg': self._(u"Content type must be PDF.")}
+            return Response(json.dumps({'success': False, 'msg': self._(u"Content type must be PDF.")}), content_type='application/json')
 
         if file_ext in self.FILE_EXT_BLACK_LIST:
-            return {'success': False, 'msg': self._(u"File type is not allowed.")}
+            return Response(json.dumps({'success': False, 'msg': self._(u"File type is not allowed.")}), content_type='application/json')
 
         try:
             key = self._get_student_item_key()
