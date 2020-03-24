@@ -651,21 +651,9 @@ OpenAssessment.ResponseView.prototype = {
 
             divLabel = $('<div/>');
             divLabel.addClass('submission__file__description__label');
-            divLabel.text(gettext("Describe ") + files[i].name + ' ' + gettext("(required):"));
             divLabel.appendTo(mainDiv);
 
-            divTextarea = $('<div/>');
-            divTextarea.addClass('submission__file__description');
-            textarea = $('<textarea />', {
-                'aria-label': gettext("Describe ") + files[i].name
-            });
-            if ((this.filesDescriptions.indexOf(i) !== -1) && (this.filesDescriptions[i] !== '')) {
-                textarea.val(this.filesDescriptions[i]);
-            } else {
-                descriptionsExists = false;
-            }
-            textarea.addClass('file__description file__description__' + i);
-            textarea.appendTo(divTextarea);
+            descriptionsExists = true;
 
             if (uploadType === "image") {
                 img = $('<img/>', {
@@ -676,17 +664,15 @@ OpenAssessment.ResponseView.prototype = {
                 img.onload = function() {
                     window.URL.revokeObjectURL(this.src);
                 };
-
                 divImage = $('<div/>');
+                divImage.css('display', 'contents');
                 divImage.addClass('submission__img__preview');
                 img.appendTo(divImage);
                 divImage.appendTo(mainDiv);
             }
 
-            divTextarea.appendTo(mainDiv);
-
             mainDiv.appendTo(filesDescriptions);
-            textarea.on("change keyup drop paste", $.proxy(this, "checkFilesDescriptions"));
+            $.proxy(this, "checkFilesDescriptions");
         }
 
         $(this.element).find('.file__upload').prop('disabled', !descriptionsExists);
@@ -700,15 +686,6 @@ OpenAssessment.ResponseView.prototype = {
     checkFilesDescriptions: function() {
         var isError = false;
         var filesDescriptions = [];
-
-        $(this.element).find('.file__description').each(function() {
-            var filesDescriptionVal = $.trim($(this).val());
-            if (filesDescriptionVal) {
-                filesDescriptions.push(filesDescriptionVal);
-            } else {
-                isError = true;
-            }
-        });
 
         $(this.element).find('.file__upload').prop('disabled', isError);
         if (!isError) {
@@ -752,14 +729,7 @@ OpenAssessment.ResponseView.prototype = {
         var view = this;
         var sel = $('.step--response', this.element);
 
-        return this.server.saveFilesDescriptions(this.filesDescriptions).done(
-            function() {
-                view.removeFilesDescriptions();
-            }
-        ).fail(function(errMsg) {
-            view.baseView.toggleActionError('upload', errMsg);
-            sel.find('.file__upload').prop('disabled', false);
-        });
+        sel.find('.file__upload').prop('disabled', false);
     },
 
     /**
@@ -775,9 +745,6 @@ OpenAssessment.ResponseView.prototype = {
         sel.find('.file__upload').prop('disabled', true);
 
         promise = view.removeUploadedFiles();
-        promise = promise.then(function() {
-            return view.saveFilesDescriptions();
-        });
 
         $.each(view.files, function(index, file) {
             promise = promise.then(function() {
@@ -831,6 +798,7 @@ OpenAssessment.ResponseView.prototype = {
                     view.filesUploaded = true;
                     view.checkSubmissionAbility(true);
                 }
+                $('.files__descriptions').first().hide().html('');
             }
         ).fail(handleError);
     },
@@ -894,13 +862,6 @@ OpenAssessment.ResponseView.prototype = {
             if (view.filesType === 'image') {
                 ariaLabelledBy = 'file_description_' + Math.random().toString(36).substr(2, 9);
 
-                div1 = $('<div/>', {
-                    id: ariaLabelledBy
-                });
-                div1.addClass('submission__file__description__label');
-                div1.text(view.filesDescriptions[filenum] + ':');
-                div1.appendTo(fileBlock);
-
                 img = $('<img />');
                 img.addClass('submission__answer__file submission--image');
                 img.attr('aria-labelledby', ariaLabelledBy);
@@ -928,3 +889,4 @@ OpenAssessment.ResponseView.prototype = {
         });
     }
 };
+
