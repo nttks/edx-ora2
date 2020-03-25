@@ -188,13 +188,13 @@ OpenAssessment.ResponseView.prototype = {
         var readyToSubmit = true;
 
         if ((this.textResponse === 'required') && !textFieldsIsNotBlank) {
-            readyToSubmit = false;
+            readyToSubmit = true;
         }
         if ((this.fileUploadResponse === 'required') && !filesFiledIsNotBlank) {
             readyToSubmit = false;
         }
         if ((this.textResponse === 'optional') && (this.fileUploadResponse === 'optional') &&
-            !textFieldsIsNotBlank && !filesFiledIsNotBlank) {
+            !filesFiledIsNotBlank) {
             readyToSubmit = false;
         }
         this.submitEnabled(readyToSubmit);
