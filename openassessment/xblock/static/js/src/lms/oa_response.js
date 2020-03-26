@@ -134,6 +134,7 @@ OpenAssessment.ResponseView.prototype = {
                     } else {
                         view.uploadFiles();
                     }
+                    $('.submission__img__preview').hide().html('');
                 }
             }
         );
@@ -750,7 +751,6 @@ OpenAssessment.ResponseView.prototype = {
             promise = promise.then(function() {
                 // return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
                 return view.uploadFileAPI(view, index, file, fileCount === (index + 1));
-                // return view.uploadFileAPI();
             });
         });
 
