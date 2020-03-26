@@ -134,6 +134,7 @@ OpenAssessment.ResponseView.prototype = {
                     } else {
                         view.uploadFiles();
                     }
+                    $('.submission__img__preview').hide().html('');
                 }
             }
         );
@@ -188,13 +189,13 @@ OpenAssessment.ResponseView.prototype = {
         var readyToSubmit = true;
 
         if ((this.textResponse === 'required') && !textFieldsIsNotBlank) {
-            readyToSubmit = false;
+            readyToSubmit = true;
         }
         if ((this.fileUploadResponse === 'required') && !filesFiledIsNotBlank) {
             readyToSubmit = false;
         }
         if ((this.textResponse === 'optional') && (this.fileUploadResponse === 'optional') &&
-            !textFieldsIsNotBlank && !filesFiledIsNotBlank) {
+            !filesFiledIsNotBlank) {
             readyToSubmit = false;
         }
         this.submitEnabled(readyToSubmit);
@@ -750,7 +751,6 @@ OpenAssessment.ResponseView.prototype = {
             promise = promise.then(function() {
                 // return view.fileUpload(view, file.type, file.name, index, file, fileCount === (index + 1));
                 return view.uploadFileAPI(view, index, file, fileCount === (index + 1));
-                // return view.uploadFileAPI();
             });
         });
 
