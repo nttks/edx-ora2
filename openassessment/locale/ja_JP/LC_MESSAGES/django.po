@@ -2060,3 +2060,7 @@ msgstr "ファイルアップロードに失敗しました。"
 #: openassessment/xblock/submission_mixin.py
 msgid "Content type must be MP4 or MOV."
 msgstr "動画ファイルを指定してください。MP4 または MOV"
+
+#: openassessment/xblock/validation.py
+msgid "Peer Assessment and Staff Assessment cannot be used at the same time."
+msgstr "相互採点とスタッフ採点は同時に設定できません。"

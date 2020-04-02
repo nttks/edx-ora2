@@ -362,6 +362,9 @@ class StudioMixin(object):
         ]
         effective_order = self._subset_in_relative_order(effective_order, enabled_ordered_assessments)
 
+        if not self.runtime.service(self, 'optional').is_available(self, 'ora2-staff-assessment'):
+            effective_order.remove('staff-assessment')
+
         return effective_order
 
     def _subset_in_relative_order(self, superset, subset):
