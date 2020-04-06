@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-23 09:18+0000\n"
+"POT-Creation-Date: 2020-04-02 09:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1955,6 +1955,10 @@ msgstr ""
 
 #: openassessment/xblock/validation.py
 msgid "The assessment order you selected is invalid."
+msgstr ""
+
+#: openassessment/xblock/validation.py
+msgid "Peer Assessment and Staff Assessment cannot be used at the same time."
 msgstr ""
 
 #: openassessment/xblock/validation.py
