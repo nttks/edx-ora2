@@ -2,7 +2,7 @@
 # edX translation file
 # Copyright (C) 2018 edX
 # This file is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
-# 
+#
 # Translators:
 # わたカフェの店長, 2014-2015
 # ayokose <ayokose.gacco@gmail.com>, 2014
@@ -268,7 +268,7 @@ msgstr "なし"
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html:55
 #: openassessment/xblock/studio_mixin.py:46
 msgid "Optional"
-msgstr "オプション"
+msgstr "任意"
 
 #: openassessment/templates/openassessmentblock/edit/oa_edit_criterion.html:56
 #: openassessment/templates/openassessmentblock/oa_rubric.html:13
