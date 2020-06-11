@@ -272,7 +272,7 @@ class OpenAssessmentBlock(MessageMixin,
         'text_response' and 'file_upload_response_raw' fields.
         """
         if not self.file_upload_response_raw and (self.file_upload_type_raw is not None or self.allow_file_upload):
-            return 'optional'
+            return ''
         else:
             return self.file_upload_response_raw
 
