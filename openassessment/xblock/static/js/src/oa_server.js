@@ -258,6 +258,38 @@ if (typeof OpenAssessment.Server === "undefined" || !OpenAssessment.Server) {
                     type: "POST", url: url, data: JSON.stringify(payload), contentType: jsonContentType
                 }).done(function(data) {
                     if (data.success) {
+                        if (assessmentType === 'self_assess') {
+                            if (data.restricted_list !== 'undefined') {
+                            $('.progress_restriction_info .restricted').data('list', data.restricted_list);
+                          }
+                          var restricted_chapters = data.restricted_chapters;
+                          if (restricted_chapters !== 'undefined'){
+                            $('.section-name').prop('disabled', false);
+                            for (var chapter_idx in restricted_chapters){
+                              if( restricted_chapters.hasOwnProperty(chapter_idx) ) {
+                                $($('.section-name')[restricted_chapters[chapter_idx]]).prop('disabled', true);
+                              }
+                            }
+                          }
+                          var restricted_sections = data.restricted_sections;
+                          if (restricted_sections !== 'undefined'){
+                            $('.subsection-text').prop('disabled', false);
+                            for (var sections in restricted_sections){
+                              if( restricted_sections.hasOwnProperty(sections) ) {
+                                $($('.subsection-text')[restricted_sections[sections]]).prop('disabled', true);
+                              }
+                            }
+                          }
+                          var restricted_verticals = data.restricted_verticals;
+                          $('.vertical-name').removeClass('vertical_restricted');
+                          if (restricted_verticals !== 'undefined') {
+                            for (var vertical_idx in restricted_verticals) {
+                              if (restricted_verticals.hasOwnProperty(vertical_idx)) {
+                                $($('.vertical-name')[restricted_verticals[vertical_idx]]).addClass('vertical_restricted');
+                              }
+                            }
+                          }
+                        }
                         defer.resolve();
                     }
                     else {
@@ -662,3 +694,4 @@ if (typeof OpenAssessment.Server === "undefined" || !OpenAssessment.Server) {
         }
     };
 }
+
