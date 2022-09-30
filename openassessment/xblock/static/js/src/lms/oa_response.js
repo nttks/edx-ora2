@@ -189,14 +189,15 @@ OpenAssessment.ResponseView.prototype = {
         var readyToSubmit = true;
 
         if ((this.textResponse === 'required') && !textFieldsIsNotBlank) {
-            readyToSubmit = true;
+            readyToSubmit = false;
         }
         if ((this.fileUploadResponse === 'required') && !filesFiledIsNotBlank) {
             readyToSubmit = false;
         }
-        if ((this.textResponse === 'optional') && (this.fileUploadResponse === 'optional') &&
-            !filesFiledIsNotBlank) {
-            readyToSubmit = false;
+        if ((this.textResponse === 'optional') && (this.fileUploadResponse === 'optional')){
+            if (!filesFiledIsNotBlank && !textFieldsIsNotBlank) {
+                readyToSubmit = false;
+            }
         }
         this.submitEnabled(readyToSubmit);
     },
