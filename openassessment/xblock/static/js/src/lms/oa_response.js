@@ -346,6 +346,12 @@ OpenAssessment.ResponseView.prototype = {
         });
 
     },
+    checkInitialChanged: function() {
+        var savedResponse = this.savedResponse;
+        return this.response().some(function(element, index) {
+            return element === savedResponse[index];
+        });
+    },
 
     /**
      Automatically save the user's response if certain conditions are met.
@@ -377,7 +383,7 @@ OpenAssessment.ResponseView.prototype = {
 
         // Update the save button, save status, and "unsaved changes" warning
         // only if the response has changed
-        if (this.responseChanged()) {
+        if (this.responseChanged() || this.checkInitialChanged()) {
             var saveAbility = this.checkSaveAbility();
             this.saveEnabled(saveAbility);
             this.previewEnabled(saveAbility);
