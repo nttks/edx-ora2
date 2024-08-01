@@ -264,6 +264,11 @@ msgid "File size must be 5MB or less."
 msgstr "アップロードできるファイルサイズは5MB以下です。"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
+#: openassessment/xblock/static/js/src/lms/oa_response.js:574
+msgid "File size must be 30MB or less."
+msgstr "アップロードできるファイルサイズは30MB以下です。"
+
+#: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:581
 #: openassessment/xblock/static/js/src/lms/oa_response.js:588
 #: openassessment/xblock/static/js/src/lms/oa_response.js:595
