@@ -14,6 +14,7 @@ from validation import validate_submission
 from .resolve_dates import DISTANT_FUTURE
 from .user_data import get_user_preferences
 
+from opaque_keys.edx.locator import CourseKey
 from openedx.core.djangoapps.ga_optional.api import is_available
 from openedx.core.djangoapps.ga_optional.models import ORA2_FILE_UPLOAD_SIZE_UP
 
@@ -567,7 +568,7 @@ class SubmissionMixin(object):
             "text_response": self.text_response,
             "file_upload_response": self.file_upload_response,
             "prompts_type": self.prompts_type,
-            'file_size_up': is_available(ORA2_FILE_UPLOAD_SIZE_UP, self.course_id)
+            'file_size_up': is_available(ORA2_FILE_UPLOAD_SIZE_UP, CourseKey.from_string(self.course_id))
         }
 
         # Due dates can default to the distant future, in which case
