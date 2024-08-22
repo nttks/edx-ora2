@@ -583,7 +583,7 @@ OpenAssessment.ResponseView.prototype = {
             fileType = files[i].type;
             fileName = files[i].name;
 
-            if (totalSize > this.MAX_FILES_SIZE) {
+            if (totalSize > this.MAX_FILES_SIZE()) {
                 var file_size = $('.submission__answer__upload').data('file_size_up'),
                     _text = '';
                 if (file_size) {
