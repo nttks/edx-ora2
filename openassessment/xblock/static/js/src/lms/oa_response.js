@@ -43,7 +43,7 @@ OpenAssessment.ResponseView.prototype = {
 
     // Maximum size (5 MB) for all attached files.
     MAX_FILES_SIZE: function() {
-        let file_size = $('#submission__answer__upload').data('file_size_up');
+        var file_size = $('#submission__answer__upload').data('file_size_up');
         if (file_size) {
             return 30 * 1024 * 1024
         } else {
@@ -584,7 +584,7 @@ OpenAssessment.ResponseView.prototype = {
             fileName = files[i].name;
 
             if (totalSize > this.MAX_FILES_SIZE) {
-                let file_size = $('#submission__answer__upload').data('file_size_up'),
+                var file_size = $('#submission__answer__upload').data('file_size_up'),
                     _text = '';
                 if (file_size) {
                     _text = gettext("File size must be 30MB or less.")
