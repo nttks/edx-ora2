@@ -261,7 +261,12 @@ msgstr "レポートを提出します。提出した後は、再提出ができ
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:574
 msgid "File size must be 5MB or less."
-msgstr "アップロードできるファイルサイズは5MB以下です。"
+msgstr "次に示すファイルサイズであればアップロードできます：5MB以下"
+
+#: openassessment/xblock/static/js/openassessment-lms.min.js:1
+#: openassessment/xblock/static/js/src/lms/oa_response.js:574
+msgid "File size must be 30MB or less."
+msgstr "次に示すファイルサイズであればアップロードできます: 30MB以下"
 
 #: openassessment/xblock/static/js/openassessment-lms.min.js:1
 #: openassessment/xblock/static/js/src/lms/oa_response.js:581

@@ -42,7 +42,14 @@ OpenAssessment.ResponseView.prototype = {
     AUTO_SAVE_WAIT: 30000,
 
     // Maximum size (5 MB) for all attached files.
-    MAX_FILES_SIZE: 5242880,
+    MAX_FILES_SIZE: function() {
+        var file_size = $('.submission__answer__upload').data('file_size_up');
+        if (file_size) {
+            return 30 * 1024 * 1024
+        } else {
+            return 5242880
+        }
+    },
 
     UNSAVED_WARNING_KEY: "learner-response",
 
@@ -576,10 +583,17 @@ OpenAssessment.ResponseView.prototype = {
             fileType = files[i].type;
             fileName = files[i].name;
 
-            if (totalSize > this.MAX_FILES_SIZE) {
+            if (totalSize > this.MAX_FILES_SIZE()) {
+                var file_size = $('.submission__answer__upload').data('file_size_up'),
+                    _text = '';
+                if (file_size) {
+                    _text = gettext("File size must be 30MB or less.")
+                } else {
+                    _text = gettext("File size must be 5MB or less.")
+                }
                 this.baseView.toggleActionError(
                     'upload',
-                    gettext("File size must be 5MB or less.")
+                    _text
                 );
                 errorCheckerTriggered = true;
                 break;
